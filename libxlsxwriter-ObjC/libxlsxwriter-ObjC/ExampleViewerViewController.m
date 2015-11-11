@@ -13,10 +13,12 @@
 static NSTimeInterval const kMinLoadingTime = 0.3;
 
 
-@interface ExampleViewerViewController () <UIWebViewDelegate>
+@interface ExampleViewerViewController () <UIWebViewDelegate, UIDocumentInteractionControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicatorView;
+
+@property (strong, nonatomic) UIDocumentInteractionController *documentInteractionController;
 
 @end
 
@@ -86,8 +88,17 @@ static NSTimeInterval const kMinLoadingTime = 0.3;
 - (IBAction)didTapActionButton:(UIBarButtonItem *)sender {
     // show default options for the output Excel file
     NSURL *fileURL = [NSURL fileURLWithPath:self.example.outputFilePath];
-    UIDocumentInteractionController *controller = [UIDocumentInteractionController interactionControllerWithURL:fileURL];
-    [controller presentOptionsMenuFromBarButtonItem:sender animated:YES];
+    self.documentInteractionController = [UIDocumentInteractionController interactionControllerWithURL:fileURL];
+    self.documentInteractionController.delegate = self;
+    [self.documentInteractionController presentOptionsMenuFromBarButtonItem:sender animated:YES];
+}
+
+#pragma mark - Document Interaction Controller Delegate
+
+- (void)documentInteractionControllerDidDismissOptionsMenu:(UIDocumentInteractionController *)controller {
+    if (self.documentInteractionController == controller) {
+        self.documentInteractionController = nil;
+    }
 }
 
 @end
