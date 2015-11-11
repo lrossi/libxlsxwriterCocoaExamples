@@ -97,6 +97,13 @@
                             </mask>
                         </variation>
                     </view>
+                    <navigationItem key="navigationItem" id="aqb-D9-qkh">
+                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="QiR-4S-gaw">
+                            <connections>
+                                <action selector="didTapActionButton:" destination="ZqL-Hj-vdL" id="8yv-Jt-hL0"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="webView" destination="K4U-lU-UW5" id="1st-eC-i1v"/>
                     </connections>

@@ -18,6 +18,8 @@
 
 @implementation ExampleViewerViewController
 
+#pragma mark - View Lifecycle
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
@@ -37,6 +39,14 @@
             }
         });
     });
+}
+
+#pragma mark - Action Button
+
+- (IBAction)didTapActionButton:(UIBarButtonItem *)sender {
+    NSURL *fileURL = [NSURL fileURLWithPath:self.example.outputFilePath];
+    UIDocumentInteractionController *controller = [UIDocumentInteractionController interactionControllerWithURL:fileURL];
+    [controller presentOptionsMenuFromBarButtonItem:sender animated:YES];
 }
 
 @end
