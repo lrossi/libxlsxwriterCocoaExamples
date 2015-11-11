@@ -41,6 +41,12 @@ static NSString * const kExampleCellIdentifier = @"ExampleCell";
     return cell;
 }
 
+#pragma mark - View Online
+
+- (IBAction)openWebpage {
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://libxlsxwriter.github.io/examples.html"]];
+}
+
 #pragma mark - Example Manager
 
 - (NSArray *)examples {

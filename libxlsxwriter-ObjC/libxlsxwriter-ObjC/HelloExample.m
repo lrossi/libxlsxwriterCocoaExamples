@@ -9,7 +9,6 @@
 #import <libxlsxwriter/xlsxwriter.h>
 #import "HelloExample.h"
 
-
 @implementation HelloExample
 
 - (NSString *)title {
