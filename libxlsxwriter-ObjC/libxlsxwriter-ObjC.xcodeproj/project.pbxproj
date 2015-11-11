@@ -15,6 +15,7 @@
 		82B62ACD1BF34AC000FE079F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 82B62ACB1BF34AC000FE079F /* LaunchScreen.storyboard */; };
 		82B62AD71BF34B9300FE079F /* ExamplePickerTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82B62AD61BF34B9300FE079F /* ExamplePickerTableViewController.m */; };
 		82B62ADB1BF34BB500FE079F /* ExampleViewerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82B62ADA1BF34BB500FE079F /* ExampleViewerViewController.m */; };
+		82B62AE01BF3504700FE079F /* ExampleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 82B62ADF1BF3504700FE079F /* ExampleManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +34,8 @@
 		82B62AD61BF34B9300FE079F /* ExamplePickerTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExamplePickerTableViewController.m; sourceTree = "<group>"; };
 		82B62AD91BF34BB500FE079F /* ExampleViewerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleViewerViewController.h; sourceTree = "<group>"; };
 		82B62ADA1BF34BB500FE079F /* ExampleViewerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleViewerViewController.m; sourceTree = "<group>"; };
+		82B62ADE1BF3504700FE079F /* ExampleManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleManager.h; sourceTree = "<group>"; };
+		82B62ADF1BF3504700FE079F /* ExampleManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +84,7 @@
 				82B62AD41BF34B4300FE079F /* App Delegate */,
 				82B62AD81BF34B9A00FE079F /* Example Picker */,
 				82B62ADC1BF34BBD00FE079F /* Example Viewer */,
+				82B62ADD1BF3503200FE079F /* Example Manager */,
 				82B62ABD1BF34AC000FE079F /* Supporting Files */,
 			);
 			path = "libxlsxwriter-ObjC";
@@ -122,6 +126,15 @@
 				82B62ADA1BF34BB500FE079F /* ExampleViewerViewController.m */,
 			);
 			name = "Example Viewer";
+			sourceTree = "<group>";
+		};
+		82B62ADD1BF3503200FE079F /* Example Manager */ = {
+			isa = PBXGroup;
+			children = (
+				82B62ADE1BF3504700FE079F /* ExampleManager.h */,
+				82B62ADF1BF3504700FE079F /* ExampleManager.m */,
+			);
+			name = "Example Manager";
 			sourceTree = "<group>";
 		};
 		92A93BC495E2706DB1DF5B85 /* Frameworks */ = {
@@ -256,6 +269,7 @@
 				82B62AD71BF34B9300FE079F /* ExamplePickerTableViewController.m in Sources */,
 				82B62ADB1BF34BB500FE079F /* ExampleViewerViewController.m in Sources */,
 				82B62AC21BF34AC000FE079F /* AppDelegate.m in Sources */,
+				82B62AE01BF3504700FE079F /* ExampleManager.m in Sources */,
 				82B62ABF1BF34AC000FE079F /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

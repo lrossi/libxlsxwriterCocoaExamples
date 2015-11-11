@@ -7,19 +7,47 @@
 //
 
 #import "ExamplePickerTableViewController.h"
+#import "ExampleManager.h"
+
+static NSString * const kExampleCellIdentifier = @"ExampleCell";
+
+
+@interface ExamplePickerTableViewController ()
+
+@property (readonly, nonatomic) ExampleManager *exampleManager;
+
+@end
+
 
 @implementation ExamplePickerTableViewController
+@synthesize exampleManager=_exampleManager;
 
 #pragma mark - Table View Data Source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Incomplete implementation, return the number of sections
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of rows
-    return 0;
+    return self.exampleManager.numberOfExamples;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kExampleCellIdentifier];
+    cell.textLabel.text = [self.exampleManager titleOfExampleAtIndex:indexPath.row];
+    cell.detailTextLabel.text = [self.exampleManager descriptionOfExampleAtIndex:indexPath.row];
+
+    return cell;
+}
+
+#pragma mark - Example Manager
+
+- (ExampleManager *)exampleManager {
+    if (!_exampleManager) {
+        _exampleManager = [[ExampleManager alloc] init];
+    }
+    
+    return _exampleManager;
 }
 
 @end
