@@ -17,6 +17,7 @@ static NSTimeInterval const kMinLoadingTime = 0.3;
 
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicatorView;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *actionButton;
 
 @property (strong, nonatomic) UIDocumentInteractionController *documentInteractionController;
 
@@ -35,6 +36,7 @@ static NSTimeInterval const kMinLoadingTime = 0.3;
     
     // start activity indicator
     self.view.userInteractionEnabled = NO;
+    self.actionButton.enabled = NO;
     [self.activityIndicatorView startAnimating];
     
     // store current time interval before running the example
@@ -70,6 +72,7 @@ static NSTimeInterval const kMinLoadingTime = 0.3;
     // stop activity indicator
     [self.activityIndicatorView stopAnimating];
     self.view.userInteractionEnabled = YES;
+    self.actionButton.enabled = YES;
 }
 
 - (BOOL)webView:(UIWebView *)inWeb shouldStartLoadWithRequest:(NSURLRequest *)inRequest navigationType:(UIWebViewNavigationType)inType {

@@ -115,6 +115,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="actionButton" destination="QiR-4S-gaw" id="WqW-BY-1JS"/>
                         <outlet property="activityIndicatorView" destination="x3O-U3-zIo" id="Uyh-cX-6ro"/>
                         <outlet property="view" destination="tj5-Sn-qcO" id="zwu-tv-5gv"/>
                         <outlet property="webView" destination="K4U-lU-UW5" id="1st-eC-i1v"/>
