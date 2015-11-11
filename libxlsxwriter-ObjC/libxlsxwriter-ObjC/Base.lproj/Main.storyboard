@@ -80,12 +80,22 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <animations/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
+                                <connections>
+                                    <outlet property="delegate" destination="ZqL-Hj-vdL" id="PLt-K4-iBr"/>
+                                </connections>
                             </webView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="x3O-U3-zIo">
+                                <rect key="frame" x="282" y="281" width="37" height="37"/>
+                                <animations/>
+                                <color key="color" white="0.49614762931034484" alpha="1" colorSpace="calibratedWhite"/>
+                            </activityIndicatorView>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="K4U-lU-UW5" secondAttribute="trailing" id="9ks-0D-yTu"/>
+                            <constraint firstItem="x3O-U3-zIo" firstAttribute="centerY" secondItem="tj5-Sn-qcO" secondAttribute="centerY" id="Lav-4Y-sGI"/>
+                            <constraint firstItem="x3O-U3-zIo" firstAttribute="centerX" secondItem="tj5-Sn-qcO" secondAttribute="centerX" id="RIu-uW-Th5"/>
                             <constraint firstItem="K4U-lU-UW5" firstAttribute="top" secondItem="tj5-Sn-qcO" secondAttribute="top" id="g7w-xT-gTW"/>
                             <constraint firstItem="cU5-pn-YxS" firstAttribute="top" secondItem="K4U-lU-UW5" secondAttribute="bottom" id="khc-xN-Mkv"/>
                             <constraint firstItem="K4U-lU-UW5" firstAttribute="top" secondItem="xPc-OK-fB1" secondAttribute="bottom" id="rjm-Kd-JXk"/>
@@ -105,6 +115,8 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="activityIndicatorView" destination="x3O-U3-zIo" id="Uyh-cX-6ro"/>
+                        <outlet property="view" destination="tj5-Sn-qcO" id="zwu-tv-5gv"/>
                         <outlet property="webView" destination="K4U-lU-UW5" id="1st-eC-i1v"/>
                     </connections>
                 </viewController>
