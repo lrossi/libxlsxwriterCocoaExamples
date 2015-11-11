@@ -72,7 +72,7 @@ static NSTimeInterval const kMinLoadingTime = 0.3;
     self.view.userInteractionEnabled = YES;
 }
 
--(BOOL) webView:(UIWebView *)inWeb shouldStartLoadWithRequest:(NSURLRequest *)inRequest navigationType:(UIWebViewNavigationType)inType {
+- (BOOL)webView:(UIWebView *)inWeb shouldStartLoadWithRequest:(NSURLRequest *)inRequest navigationType:(UIWebViewNavigationType)inType {
     if (inType == UIWebViewNavigationTypeLinkClicked) {
         // open each external link in the default app that handles it
         [[UIApplication sharedApplication] openURL:[inRequest URL]];
