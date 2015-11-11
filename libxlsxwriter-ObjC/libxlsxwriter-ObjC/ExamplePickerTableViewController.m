@@ -7,20 +7,20 @@
 //
 
 #import "ExamplePickerTableViewController.h"
-#import "ExampleManager.h"
+#import "DefaultExamples.h"
 
 static NSString * const kExampleCellIdentifier = @"ExampleCell";
 
 
 @interface ExamplePickerTableViewController ()
 
-@property (readonly, nonatomic) ExampleManager *exampleManager;
+@property (readonly, nonatomic) NSArray *examples;
 
 @end
 
 
 @implementation ExamplePickerTableViewController
-@synthesize exampleManager=_exampleManager;
+@synthesize examples=_examples;
 
 #pragma mark - Table View Data Source
 
@@ -29,25 +29,26 @@ static NSString * const kExampleCellIdentifier = @"ExampleCell";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.exampleManager.numberOfExamples;
+    return self.examples.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kExampleCellIdentifier];
-    cell.textLabel.text = [self.exampleManager titleOfExampleAtIndex:indexPath.row];
-    cell.detailTextLabel.text = [self.exampleManager descriptionOfExampleAtIndex:indexPath.row];
+    Example *example = self.examples[indexPath.row];
+    cell.textLabel.text = example.title;
+    cell.detailTextLabel.text = example.subtitle;
 
     return cell;
 }
 
 #pragma mark - Example Manager
 
-- (ExampleManager *)exampleManager {
-    if (!_exampleManager) {
-        _exampleManager = [[ExampleManager alloc] init];
+- (NSArray *)examples {
+    if (!_examples) {
+        _examples = [DefaultExamples createExamples];
     }
     
-    return _exampleManager;
+    return _examples;
 }
 
 @end
