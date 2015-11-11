@@ -7,31 +7,36 @@
 //
 
 #import "ExampleViewerViewController.h"
+#import "Example.h"
 
 @interface ExampleViewerViewController ()
 
+@property (weak, nonatomic) IBOutlet UIWebView *webView;
+
 @end
+
 
 @implementation ExampleViewerViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    self.navigationItem.title = self.example.title;
+    
+    __weak typeof(self) weakSelf = self;
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [weakSelf.example run];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (weakSelf) {
+                NSURL *fileURL = [NSURL fileURLWithPath:weakSelf.example.outputFilePath];
+                NSURLRequest *request = [NSURLRequest requestWithURL:fileURL];
+                
+                [weakSelf.webView loadRequest:request];
+            }
+        });
+    });
 }
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

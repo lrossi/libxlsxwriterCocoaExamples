@@ -42,6 +42,9 @@
                                     <animations/>
                                 </tableViewCellContentView>
                                 <animations/>
+                                <connections>
+                                    <segue destination="ZqL-Hj-vdL" kind="show" identifier="ViewExample" id="rou-8K-xQa"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -60,6 +63,47 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Z4d-Q4-zvL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1562" y="654"/>
+        </scene>
+        <!--Example Viewer View Controller-->
+        <scene sceneID="s1B-OL-Kka">
+            <objects>
+                <viewController id="ZqL-Hj-vdL" customClass="ExampleViewerViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="xPc-OK-fB1"/>
+                        <viewControllerLayoutGuide type="bottom" id="cU5-pn-YxS"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="tj5-Sn-qcO">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K4U-lU-UW5">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <animations/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
+                            </webView>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="K4U-lU-UW5" secondAttribute="trailing" id="9ks-0D-yTu"/>
+                            <constraint firstItem="K4U-lU-UW5" firstAttribute="top" secondItem="tj5-Sn-qcO" secondAttribute="top" id="g7w-xT-gTW"/>
+                            <constraint firstItem="cU5-pn-YxS" firstAttribute="top" secondItem="K4U-lU-UW5" secondAttribute="bottom" id="khc-xN-Mkv"/>
+                            <constraint firstItem="K4U-lU-UW5" firstAttribute="top" secondItem="xPc-OK-fB1" secondAttribute="bottom" id="rjm-Kd-JXk"/>
+                            <constraint firstItem="K4U-lU-UW5" firstAttribute="leading" secondItem="tj5-Sn-qcO" secondAttribute="leading" id="tFx-t0-JLE"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="rjm-Kd-JXk"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="webView" destination="K4U-lU-UW5" id="1st-eC-i1v"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Sah-7N-YCr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2369" y="654"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="7oQ-5j-5Si">

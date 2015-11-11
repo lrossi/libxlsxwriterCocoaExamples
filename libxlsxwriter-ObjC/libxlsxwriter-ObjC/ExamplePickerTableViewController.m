@@ -6,10 +6,13 @@
 //  Copyright © 2015 Ludovico Rossi. All rights reserved.
 //
 
+@import SafariServices;
 #import "ExamplePickerTableViewController.h"
+#import "ExampleViewerViewController.h"
 #import "DefaultExamples.h"
 
 static NSString * const kExampleCellIdentifier = @"ExampleCell";
+static NSString * const kViewExampleSegueIdentifier = @"ViewExample";
 
 
 @interface ExamplePickerTableViewController ()
@@ -41,17 +44,21 @@ static NSString * const kExampleCellIdentifier = @"ExampleCell";
     return cell;
 }
 
-#pragma mark - Table View Delegate
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    Example *example = self.examples[indexPath.row];
-    [example run];
-}
-
 #pragma mark - View Online
 
 - (IBAction)openWebpage {
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://libxlsxwriter.github.io/examples.html"]];
+}
+
+#pragma mark - Segues
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:kViewExampleSegueIdentifier]) {
+        NSIndexPath *indexPath = self.tableView.indexPathForSelectedRow;
+        
+        ExampleViewerViewController *vc = segue.destinationViewController;
+        vc.example = self.examples[indexPath.row];
+    }
 }
 
 #pragma mark - Example Manager
