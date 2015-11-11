@@ -19,6 +19,10 @@
     return @"Create a merged range of cells";
 }
 
+- (NSString *)outputFileName {
+    return @"merge_range";
+}
+
 - (void)run {
     /*
      * An example of merging cells using libxlsxwriter.
@@ -27,7 +31,7 @@
      *
      */
     
-    lxw_workbook  *workbook     = new_workbook("merge_range.xlsx");
+    lxw_workbook  *workbook     = new_workbook([self.outputFilePath cStringUsingEncoding:NSUTF8StringEncoding]);
     lxw_worksheet *worksheet    = workbook_add_worksheet(workbook, NULL);
     lxw_format    *merge_format = workbook_add_format(workbook);
     

@@ -19,6 +19,10 @@
     return @"Demo of some of the libxlsxwriter features";
 }
 
+- (NSString *)outputFileName {
+    return @"demo";
+}
+
 - (void)run {
     /*
      * A simple example of some of the features of the libxlsxwriter library.
@@ -28,7 +32,7 @@
      */
     
     /* Create a new workbook and add a worksheet. */
-    lxw_workbook  *workbook  = new_workbook("demo.xlsx");
+    lxw_workbook  *workbook  = new_workbook([self.outputFilePath cStringUsingEncoding:NSUTF8StringEncoding]);
     lxw_worksheet *worksheet = workbook_add_worksheet(workbook, NULL);
     
     /* Add a format. */

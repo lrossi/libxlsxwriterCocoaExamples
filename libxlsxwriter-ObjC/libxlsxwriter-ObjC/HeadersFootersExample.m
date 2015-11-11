@@ -19,6 +19,10 @@
     return @"Example of adding worksheet headers/footers";
 }
 
+- (NSString *)outputFileName {
+    return @"headers_footers";
+}
+
 - (void)run {
     /*
      * This program shows several examples of how to set up headers and
@@ -52,7 +56,7 @@
      *
      */
     
-    lxw_workbook *workbook  = new_workbook("headers_footers.xlsx");
+    lxw_workbook *workbook  = new_workbook([self.outputFilePath cStringUsingEncoding:NSUTF8StringEncoding]);
     
     char preview[] = "Select Print Preview to see the header and footer";
     

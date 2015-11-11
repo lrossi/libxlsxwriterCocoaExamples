@@ -19,6 +19,10 @@
     return @"A simple hello world example";
 }
 
+- (NSString *)outputFileName {
+    return @"hello_world";
+}
+
 - (void)run {
     /*
      * Example of writing some data to a simple Excel file using libxlsxwriter.
@@ -27,7 +31,7 @@
      *
      */
     
-    lxw_workbook  *workbook  = new_workbook("hello_world.xlsx");
+    lxw_workbook  *workbook  = new_workbook([self.outputFilePath cStringUsingEncoding:NSUTF8StringEncoding]);
     lxw_worksheet *worksheet = workbook_add_worksheet(workbook, NULL);
     
     worksheet_write_string(worksheet, 0, 0, "Hello", NULL);

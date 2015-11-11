@@ -19,6 +19,10 @@
     return @"A example of some UTF-8 text";
 }
 
+- (NSString *)outputFileName {
+    return @"utf8";
+}
+
 - (void)run {
     /*
      * A simple Unicode UTF-8 example using libxlsxwriter.
@@ -29,7 +33,7 @@
      *
      */
     
-    lxw_workbook  *workbook  = new_workbook("utf8.xlsx");
+    lxw_workbook  *workbook  = new_workbook([self.outputFilePath cStringUsingEncoding:NSUTF8StringEncoding]);
     lxw_worksheet *worksheet = workbook_add_worksheet(workbook, NULL);
     
     worksheet_write_string(worksheet, 2, 1, "Это фраза на русском!", NULL);

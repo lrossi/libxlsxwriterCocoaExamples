@@ -19,6 +19,10 @@
     return @"The anatomy of a libxlsxwriter program";
 }
 
+- (NSString *)outputFileName {
+    return @"anatomy";
+}
+
 - (void)run {
     /*
      * Anatomy of a simple libxlsxwriter program.
@@ -28,7 +32,7 @@
      */
     
     /* Create a new workbook. */
-    lxw_workbook  *workbook   = new_workbook("anatomy.xlsx");
+    lxw_workbook  *workbook   = new_workbook([self.outputFilePath cStringUsingEncoding:NSUTF8StringEncoding]);
     
     /* Add a worksheet with a user defined sheet name. */
     lxw_worksheet *worksheet1 = workbook_add_worksheet(workbook, "Demo");

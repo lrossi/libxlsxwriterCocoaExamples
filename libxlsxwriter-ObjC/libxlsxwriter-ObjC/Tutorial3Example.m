@@ -19,6 +19,10 @@
     return @"Tutorial 3 from the documentation";
 }
 
+- (NSString *)outputFileName {
+    return @"tutorial03";
+}
+
 - (void)run {
     /*
      * A simple program to write some data to an Excel file using the
@@ -45,7 +49,7 @@
     };
     
     /* Create a workbook and add a worksheet. */
-    lxw_workbook  *workbook  = new_workbook("tutorial03.xlsx");
+    lxw_workbook  *workbook  = new_workbook([self.outputFilePath cStringUsingEncoding:NSUTF8StringEncoding]);
     lxw_worksheet *worksheet = workbook_add_worksheet(workbook, NULL);
     int row = 0;
     int col = 0;

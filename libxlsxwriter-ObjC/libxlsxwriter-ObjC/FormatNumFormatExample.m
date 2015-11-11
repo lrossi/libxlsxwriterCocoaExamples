@@ -19,6 +19,10 @@
     return @"Example of writing data with number formatting";
 }
 
+- (NSString *)outputFileName {
+    return @"format_num_format";
+}
+
 - (void)run {
     /*
      * Example of writing some data with numeric formatting to a simple Excel file
@@ -29,7 +33,7 @@
      */
     
     /* Create a new workbook and add a worksheet. */
-    lxw_workbook  *workbook  = new_workbook("format_num_format.xlsx");
+    lxw_workbook  *workbook  = new_workbook([self.outputFilePath cStringUsingEncoding:NSUTF8StringEncoding]);
     lxw_worksheet *worksheet = workbook_add_worksheet(workbook, NULL);
     
     /* Widen the first column to make the text clearer. */

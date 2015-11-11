@@ -19,6 +19,10 @@
     return @"Example of how to create defined names";
 }
 
+- (NSString *)outputFileName {
+    return @"defined_name";
+}
+
 - (void)run {
     /*
      * Example of how to create defined names using libxlsxwriter. This method is
@@ -29,7 +33,7 @@
      *
      */
     
-    lxw_workbook  *workbook   = new_workbook("defined_name.xlsx");
+    lxw_workbook  *workbook   = new_workbook([self.outputFilePath cStringUsingEncoding:NSUTF8StringEncoding]);
     lxw_worksheet *worksheet;
     
     /* We don't use the returned worksheets in this example and use a generic

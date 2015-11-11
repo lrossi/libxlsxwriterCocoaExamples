@@ -19,6 +19,10 @@
     return @"Dates and times with different formats";
 }
 
+- (NSString *)outputFileName {
+    return @"date_and_times03";
+}
+
 - (void)run {
     /*
      * Example of writing dates and times in Excel using different date formats.
@@ -54,7 +58,7 @@
     };
     
     /* Create a new workbook and add a worksheet. */
-    lxw_workbook  *workbook  = new_workbook("date_and_times03.xlsx");
+    lxw_workbook  *workbook  = new_workbook([self.outputFilePath cStringUsingEncoding:NSUTF8StringEncoding]);
     lxw_worksheet *worksheet = workbook_add_worksheet(workbook, NULL);
     
     /* Add a bold format. */

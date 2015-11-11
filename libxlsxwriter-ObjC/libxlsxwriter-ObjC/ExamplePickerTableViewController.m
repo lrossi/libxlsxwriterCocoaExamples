@@ -41,6 +41,13 @@ static NSString * const kExampleCellIdentifier = @"ExampleCell";
     return cell;
 }
 
+#pragma mark - Table View Delegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    Example *example = self.examples[indexPath.row];
+    [example run];
+}
+
 #pragma mark - View Online
 
 - (IBAction)openWebpage {

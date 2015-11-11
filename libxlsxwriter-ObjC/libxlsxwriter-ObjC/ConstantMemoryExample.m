@@ -19,6 +19,10 @@
     return @"Write a large file with constant memory usage";
 }
 
+- (NSString *)outputFileName {
+    return @"constant_memory";
+}
+
 - (void)run {
     lxw_row_t row;
     lxw_col_t col;
@@ -30,7 +34,7 @@
     options.constant_memory = 1;
     
     /* Create a new workbook with options. */
-    lxw_workbook  *workbook  = new_workbook_opt("constant_memory.xlsx", &options);
+    lxw_workbook  *workbook  = new_workbook_opt([self.outputFilePath cStringUsingEncoding:NSUTF8StringEncoding], &options);
     lxw_worksheet *worksheet = workbook_add_worksheet(workbook, NULL);
     
     for (row = 0; row < max_row; row++) {

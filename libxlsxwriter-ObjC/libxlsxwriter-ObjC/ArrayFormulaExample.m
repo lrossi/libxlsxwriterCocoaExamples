@@ -19,6 +19,10 @@
     return @"A example of using array formulas";
 }
 
+- (NSString *)outputFileName {
+    return @"array_formula";
+}
+
 - (void)run {
     /*
      * Example of how to use the libxlsxwriter library to write simple
@@ -29,7 +33,7 @@
      */
     
     /* Create a new workbook and add a worksheet. */
-    lxw_workbook  *workbook  = new_workbook("array_formula.xlsx");
+    lxw_workbook  *workbook  = new_workbook([self.outputFilePath cStringUsingEncoding:NSUTF8StringEncoding]);
     lxw_worksheet *worksheet = workbook_add_worksheet(workbook, NULL);
     
     /* Write some data for the formulas. */

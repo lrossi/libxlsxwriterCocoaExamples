@@ -13,9 +13,10 @@
 
 @property (readonly, nonatomic) NSString *title;
 @property (readonly, nonatomic) NSString *subtitle;
-@property (readonly, nonatomic) NSString *generatedFilePath;
+@property (readonly, nonatomic) NSString *outputFileName;
+
+- (NSString *)outputFilePath;
 
 - (void)run;
 
 @end
-

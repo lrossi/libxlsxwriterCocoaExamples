@@ -19,6 +19,10 @@
     return @"Writing dates and times with datetime";
 }
 
+- (NSString *)outputFileName {
+    return @"date_and_times02";
+}
+
 - (void)run {
     /*
      * Example of writing dates and times in Excel using an lxw_datetime struct
@@ -32,7 +36,7 @@
     lxw_datetime datetime = {2013, 2, 28, 12, 0, 0.0};
     
     /* Create a new workbook and add a worksheet. */
-    lxw_workbook  *workbook  = new_workbook("date_and_times02.xlsx");
+    lxw_workbook  *workbook  = new_workbook([self.outputFilePath cStringUsingEncoding:NSUTF8StringEncoding]);
     lxw_worksheet *worksheet = workbook_add_worksheet(workbook, NULL);
     
     /* Add a format with date formatting. */

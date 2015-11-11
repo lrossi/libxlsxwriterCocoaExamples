@@ -19,6 +19,10 @@
     return @"An example of a worksheet autofilter";
 }
 
+- (NSString *)outputFileName {
+    return @"autofilter";
+}
+
 - (void)run {
     /*
      * Example of adding an autofilter to a worksheet in Excel using
@@ -28,7 +32,7 @@
      *
      */
     
-    lxw_workbook  *workbook  = new_workbook("autofilter.xlsx");
+    lxw_workbook  *workbook  = new_workbook([self.outputFilePath cStringUsingEncoding:NSUTF8StringEncoding]);
     lxw_worksheet *worksheet = workbook_add_worksheet(workbook, NULL);
     uint16_t i;
     

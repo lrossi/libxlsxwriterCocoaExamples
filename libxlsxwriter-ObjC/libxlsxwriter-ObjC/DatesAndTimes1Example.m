@@ -19,6 +19,10 @@
     return @"Writing dates and times with numbers";
 }
 
+- (NSString *)outputFileName {
+    return @"date_and_times01";
+}
+
 - (void)run {
     /*
      * Example of writing a dates and time in Excel using a number with date
@@ -36,7 +40,7 @@
     double number = 41333.5;
     
     /* Create a new workbook and add a worksheet. */
-    lxw_workbook  *workbook  = new_workbook("date_and_times01.xlsx");
+    lxw_workbook  *workbook  = new_workbook([self.outputFilePath cStringUsingEncoding:NSUTF8StringEncoding]);
     lxw_worksheet *worksheet = workbook_add_worksheet(workbook, NULL);
     
     /* Add a format with date formatting. */

@@ -19,6 +19,10 @@
     return @"A example of writing urls/hyperlinks";
 }
 
+- (NSString *)outputFileName {
+    return @"hyperlinks.xlsx";
+}
+
 - (void)run {
     /*
      * Example of writing urls/hyperlinks with the libxlsxwriter library.
@@ -28,7 +32,7 @@
      */
     
     /* Create a new workbook. */
-    lxw_workbook *workbook   = new_workbook("hyperlinks.xlsx");
+    lxw_workbook *workbook   = new_workbook([self.outputFilePath cStringUsingEncoding:NSUTF8StringEncoding]);
     
     /* Add a worksheet. */
     lxw_worksheet *worksheet = workbook_add_worksheet(workbook, NULL);
