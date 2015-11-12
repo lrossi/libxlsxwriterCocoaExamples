@@ -13,7 +13,7 @@ class ExamplePickerTableViewController: UITableViewController {
     private static let kViewExampleSegueIdentifier = "ViewExample"
     
     private lazy var swiftExample = SwiftAnatomyExample()
-    private lazy var defaultExamples = DefaultExamples.createExamples() as! [Example]
+    private lazy var defaultExamples = DefaultExamples.createExamples()
     
     // MARK: - Table View Data Source
     

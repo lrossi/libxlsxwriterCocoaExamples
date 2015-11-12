@@ -11,10 +11,10 @@
 
 @interface Example : NSObject
 
-@property (readonly, nonatomic) NSString *title;
-@property (readonly, nonatomic) NSString *subtitle;
-@property (readonly, nonatomic) NSString *outputFileName;
-@property (readonly, nonatomic) NSString *outputFilePath;
+@property (readonly, nonatomic, nonnull) NSString *title;
+@property (readonly, nonatomic, nonnull) NSString *subtitle;
+@property (readonly, nonatomic, nonnull) NSString *outputFileName;
+@property (readonly, nonatomic, nonnull) NSString *outputFilePath;
 
 - (void)run;
 

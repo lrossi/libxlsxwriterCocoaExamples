@@ -30,7 +30,7 @@
 
 @implementation DefaultExamples
 
-+ (NSArray *)createExamples {
++ (NSArray<Example *> *)createExamples {
     return @[[HelloExample new],
              [AnatomyExample new],
              [DemoExample new],

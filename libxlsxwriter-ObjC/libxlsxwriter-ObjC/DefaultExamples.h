@@ -10,6 +10,6 @@
 
 @interface DefaultExamples : NSObject
 
-+ (NSArray *)createExamples;
++ (NSArray<Example *> *)createExamples;
 
 @end
