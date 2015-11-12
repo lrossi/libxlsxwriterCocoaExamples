@@ -12,21 +12,23 @@ class ExamplePickerTableViewController: UITableViewController {
     private static let kExampleCellIdentifier = "ExampleCell"
     private static let kViewExampleSegueIdentifier = "ViewExample"
     
-    private lazy var examples = DefaultExamples.createExamples() as! [Example]
+    private lazy var swiftExample = SwiftAnatomyExample()
+    private lazy var defaultExamples = DefaultExamples.createExamples() as! [Example]
     
     // MARK: - Table View Data Source
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return examples.count
+        // the first section displays the Anatomy Example written in Swift, the second section all the other examples
+        return section == 0 ? 1 : defaultExamples.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(ExamplePickerTableViewController.kExampleCellIdentifier)!
-        let example = examples[indexPath.row]
+        let example = exampleAtIndexPath(indexPath)
         cell.textLabel!.text = example.title
         cell.detailTextLabel!.text = example.subtitle
         
@@ -45,7 +47,14 @@ class ExamplePickerTableViewController: UITableViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == ExamplePickerTableViewController.kViewExampleSegueIdentifier {
             let vc = segue.destinationViewController as! ExampleViewerViewController
-            vc.example = examples[tableView.indexPathForSelectedRow!.row]
+            vc.example = exampleAtIndexPath(tableView.indexPathForSelectedRow!)
         }
+    }
+    
+    // MARK: Obtain Example
+    
+    private func exampleAtIndexPath(indexPath: NSIndexPath) -> Example {
+        // the first section displays the Anatomy Example written in Swift, the second section all the other examples
+        return indexPath.section == 0 ? swiftExample : defaultExamples[indexPath.row]
     }
 }

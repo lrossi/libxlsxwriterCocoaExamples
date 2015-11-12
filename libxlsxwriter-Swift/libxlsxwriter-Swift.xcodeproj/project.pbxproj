@@ -35,6 +35,7 @@
 		8227CEDF1BF4D7F2003202E4 /* HeadersFootersExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 8227CEC61BF4D7F2003202E4 /* HeadersFootersExample.m */; };
 		8227CEE01BF4D7F2003202E4 /* DefinedNameExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 8227CEC81BF4D7F2003202E4 /* DefinedNameExample.m */; };
 		8227CEE21BF4D9F7003202E4 /* ExampleViewerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8227CEE11BF4D9F7003202E4 /* ExampleViewerViewController.swift */; };
+		8227CEE61BF4E45B003202E4 /* SwiftAnatomyExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8227CEE51BF4E45B003202E4 /* SwiftAnatomyExample.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -91,6 +92,7 @@
 		8227CEC71BF4D7F2003202E4 /* DefinedNameExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefinedNameExample.h; sourceTree = "<group>"; };
 		8227CEC81BF4D7F2003202E4 /* DefinedNameExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefinedNameExample.m; sourceTree = "<group>"; };
 		8227CEE11BF4D9F7003202E4 /* ExampleViewerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleViewerViewController.swift; sourceTree = "<group>"; };
+		8227CEE51BF4E45B003202E4 /* SwiftAnatomyExample.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftAnatomyExample.swift; sourceTree = "<group>"; };
 		EB9B9CE96F5F81DCEF9ACCA3 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -147,7 +149,8 @@
 				821D41DD1BF4B9C4006A0F95 /* libxlsxwriter-Swift-Bridging-Header.h */,
 				821D41CB1BF4B8F9006A0F95 /* AppDelegate.swift */,
 				8227CEE31BF4E366003202E4 /* UI */,
-				8227CECB1BF4D7F2003202E4 /* Examples */,
+				8227CEE41BF4E428003202E4 /* Swift Example */,
+				8227CECB1BF4D7F2003202E4 /* Obj-C Examples */,
 				821D41E31BF4BCD2006A0F95 /* Supporting Filed */,
 			);
 			path = "libxlsxwriter-Swift";
@@ -218,14 +221,14 @@
 			name = "Default Examples";
 			sourceTree = "<group>";
 		};
-		8227CECB1BF4D7F2003202E4 /* Examples */ = {
+		8227CECB1BF4D7F2003202E4 /* Obj-C Examples */ = {
 			isa = PBXGroup;
 			children = (
 				8227CE9F1BF4D7F2003202E4 /* Example.h */,
 				8227CEA01BF4D7F2003202E4 /* Example.m */,
 				8227CECA1BF4D7F2003202E4 /* Default Examples */,
 			);
-			name = Examples;
+			name = "Obj-C Examples";
 			path = "../../libxlsxwriter-ObjC/libxlsxwriter-ObjC";
 			sourceTree = "<group>";
 		};
@@ -237,6 +240,14 @@
 				8227CEE11BF4D9F7003202E4 /* ExampleViewerViewController.swift */,
 			);
 			name = UI;
+			sourceTree = "<group>";
+		};
+		8227CEE41BF4E428003202E4 /* Swift Example */ = {
+			isa = PBXGroup;
+			children = (
+				8227CEE51BF4E45B003202E4 /* SwiftAnatomyExample.swift */,
+			);
+			name = "Swift Example";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -366,6 +377,7 @@
 				8227CECF1BF4D7F2003202E4 /* AnatomyExample.m in Sources */,
 				8227CED91BF4D7F2003202E4 /* HyperlinksExample.m in Sources */,
 				8227CECD1BF4D7F2003202E4 /* DefaultExamples.m in Sources */,
+				8227CEE61BF4E45B003202E4 /* SwiftAnatomyExample.swift in Sources */,
 				8227CE9B1BF4BDC2003202E4 /* ExamplePickerTableViewController.swift in Sources */,
 				8227CED51BF4D7F2003202E4 /* FormatNumFormatExample.m in Sources */,
 				8227CEDC1BF4D7F2003202E4 /* ConstantMemoryExample.m in Sources */,
