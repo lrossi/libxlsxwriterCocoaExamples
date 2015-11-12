@@ -8,6 +8,27 @@
 
 /* Begin PBXBuildFile section */
 		31C6DA31B314E12B96B45F05 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CF2CF7D8FB495DDCAE2C88D /* libPods.a */; };
+		8227CF141BF4F27D003202E4 /* DefaultExamples.m in Sources */ = {isa = PBXBuildFile; fileRef = 8227CEEA1BF4F27D003202E4 /* DefaultExamples.m */; };
+		8227CF151BF4F27D003202E4 /* AnatomyExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 8227CEED1BF4F27D003202E4 /* AnatomyExample.m */; };
+		8227CF161BF4F27D003202E4 /* ArrayFormulaExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 8227CEEF1BF4F27D003202E4 /* ArrayFormulaExample.m */; };
+		8227CF171BF4F27D003202E4 /* AutofilterExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 8227CEF11BF4F27D003202E4 /* AutofilterExample.m */; };
+		8227CF181BF4F27D003202E4 /* ConstantMemoryExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 8227CEF31BF4F27D003202E4 /* ConstantMemoryExample.m */; };
+		8227CF191BF4F27D003202E4 /* DatesAndTimes1Example.m in Sources */ = {isa = PBXBuildFile; fileRef = 8227CEF51BF4F27D003202E4 /* DatesAndTimes1Example.m */; };
+		8227CF1A1BF4F27D003202E4 /* DatesAndTimes2Example.m in Sources */ = {isa = PBXBuildFile; fileRef = 8227CEF71BF4F27D003202E4 /* DatesAndTimes2Example.m */; };
+		8227CF1B1BF4F27D003202E4 /* DatesAndTimes3Example.m in Sources */ = {isa = PBXBuildFile; fileRef = 8227CEF91BF4F27D003202E4 /* DatesAndTimes3Example.m */; };
+		8227CF1C1BF4F27D003202E4 /* DefinedNameExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 8227CEFB1BF4F27D003202E4 /* DefinedNameExample.m */; };
+		8227CF1D1BF4F27D003202E4 /* DemoExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 8227CEFD1BF4F27D003202E4 /* DemoExample.m */; };
+		8227CF1E1BF4F27D003202E4 /* FormatFontExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 8227CEFF1BF4F27D003202E4 /* FormatFontExample.m */; };
+		8227CF1F1BF4F27D003202E4 /* FormatNumFormatExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 8227CF011BF4F27D003202E4 /* FormatNumFormatExample.m */; };
+		8227CF201BF4F27D003202E4 /* HeadersFootersExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 8227CF031BF4F27D003202E4 /* HeadersFootersExample.m */; };
+		8227CF211BF4F27D003202E4 /* HelloExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 8227CF051BF4F27D003202E4 /* HelloExample.m */; };
+		8227CF221BF4F27D003202E4 /* HyperlinksExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 8227CF071BF4F27D003202E4 /* HyperlinksExample.m */; };
+		8227CF231BF4F27D003202E4 /* MergeRangeExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 8227CF091BF4F27D003202E4 /* MergeRangeExample.m */; };
+		8227CF241BF4F27D003202E4 /* Tutorial1Example.m in Sources */ = {isa = PBXBuildFile; fileRef = 8227CF0B1BF4F27D003202E4 /* Tutorial1Example.m */; };
+		8227CF251BF4F27D003202E4 /* Tutorial2Example.m in Sources */ = {isa = PBXBuildFile; fileRef = 8227CF0D1BF4F27D003202E4 /* Tutorial2Example.m */; };
+		8227CF261BF4F27D003202E4 /* Tutorial3Example.m in Sources */ = {isa = PBXBuildFile; fileRef = 8227CF0F1BF4F27D003202E4 /* Tutorial3Example.m */; };
+		8227CF271BF4F27D003202E4 /* UTF8Example.m in Sources */ = {isa = PBXBuildFile; fileRef = 8227CF111BF4F27D003202E4 /* UTF8Example.m */; };
+		8227CF281BF4F27D003202E4 /* Example.m in Sources */ = {isa = PBXBuildFile; fileRef = 8227CF131BF4F27D003202E4 /* Example.m */; };
 		82B62ABF1BF34AC000FE079F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 82B62ABE1BF34AC000FE079F /* main.m */; };
 		82B62AC21BF34AC000FE079F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 82B62AC11BF34AC000FE079F /* AppDelegate.m */; };
 		82B62AC81BF34AC000FE079F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 82B62AC61BF34AC000FE079F /* Main.storyboard */; };
@@ -15,33 +36,54 @@
 		82B62ACD1BF34AC000FE079F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 82B62ACB1BF34AC000FE079F /* LaunchScreen.storyboard */; };
 		82B62AD71BF34B9300FE079F /* ExamplePickerTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82B62AD61BF34B9300FE079F /* ExamplePickerTableViewController.m */; };
 		82B62ADB1BF34BB500FE079F /* ExampleViewerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82B62ADA1BF34BB500FE079F /* ExampleViewerViewController.m */; };
-		82B62AE31BF3629100FE079F /* Example.m in Sources */ = {isa = PBXBuildFile; fileRef = 82B62AE21BF3629100FE079F /* Example.m */; };
-		82B62AE61BF362FC00FE079F /* HelloExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 82B62AE51BF362FC00FE079F /* HelloExample.m */; };
-		82B62AE91BF365A500FE079F /* AnatomyExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 82B62AE81BF365A500FE079F /* AnatomyExample.m */; };
-		82B62AEC1BF365D200FE079F /* DemoExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 82B62AEB1BF365D200FE079F /* DemoExample.m */; };
-		82B62AEF1BF365EE00FE079F /* Tutorial1Example.m in Sources */ = {isa = PBXBuildFile; fileRef = 82B62AEE1BF365EE00FE079F /* Tutorial1Example.m */; };
-		82B62AF21BF3661100FE079F /* Tutorial2Example.m in Sources */ = {isa = PBXBuildFile; fileRef = 82B62AF11BF3661100FE079F /* Tutorial2Example.m */; };
-		82B62AF51BF3664000FE079F /* Tutorial3Example.m in Sources */ = {isa = PBXBuildFile; fileRef = 82B62AF41BF3664000FE079F /* Tutorial3Example.m */; };
-		82B62AF81BF3666100FE079F /* FormatFontExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 82B62AF71BF3666100FE079F /* FormatFontExample.m */; };
-		82B62AFB1BF3668200FE079F /* FormatNumFormatExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 82B62AFA1BF3668200FE079F /* FormatNumFormatExample.m */; };
-		82B62AFE1BF3669E00FE079F /* DatesAndTimes1Example.m in Sources */ = {isa = PBXBuildFile; fileRef = 82B62AFD1BF3669E00FE079F /* DatesAndTimes1Example.m */; };
-		82B62B011BF366C300FE079F /* DatesAndTimes2Example.m in Sources */ = {isa = PBXBuildFile; fileRef = 82B62B001BF366C300FE079F /* DatesAndTimes2Example.m */; };
-		82B62B041BF366EB00FE079F /* DatesAndTimes3Example.m in Sources */ = {isa = PBXBuildFile; fileRef = 82B62B031BF366EB00FE079F /* DatesAndTimes3Example.m */; };
-		82B62B071BF3670600FE079F /* HyperlinksExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 82B62B061BF3670600FE079F /* HyperlinksExample.m */; };
-		82B62B0A1BF3673000FE079F /* ArrayFormulaExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 82B62B091BF3673000FE079F /* ArrayFormulaExample.m */; };
-		82B62B0D1BF3674F00FE079F /* UTF8Example.m in Sources */ = {isa = PBXBuildFile; fileRef = 82B62B0C1BF3674F00FE079F /* UTF8Example.m */; };
-		82B62B101BF3676D00FE079F /* ConstantMemoryExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 82B62B0F1BF3676D00FE079F /* ConstantMemoryExample.m */; };
-		82B62B131BF3678700FE079F /* MergeRangeExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 82B62B121BF3678700FE079F /* MergeRangeExample.m */; };
-		82B62B161BF367A200FE079F /* AutofilterExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 82B62B151BF367A200FE079F /* AutofilterExample.m */; };
-		82B62B191BF367C400FE079F /* HeadersFootersExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 82B62B181BF367C400FE079F /* HeadersFootersExample.m */; };
-		82B62B1C1BF367DF00FE079F /* DefinedNameExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 82B62B1B1BF367DF00FE079F /* DefinedNameExample.m */; };
-		82B62B241BF368B400FE079F /* DefaultExamples.m in Sources */ = {isa = PBXBuildFile; fileRef = 82B62B231BF368B400FE079F /* DefaultExamples.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		1CF2CF7D8FB495DDCAE2C88D /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BDFA6C66521817294BA7A11 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		4F3D92EECA23A9AABD8F4E73 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		8227CEE91BF4F27D003202E4 /* DefaultExamples.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefaultExamples.h; sourceTree = "<group>"; };
+		8227CEEA1BF4F27D003202E4 /* DefaultExamples.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefaultExamples.m; sourceTree = "<group>"; };
+		8227CEEC1BF4F27D003202E4 /* AnatomyExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnatomyExample.h; sourceTree = "<group>"; };
+		8227CEED1BF4F27D003202E4 /* AnatomyExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnatomyExample.m; sourceTree = "<group>"; };
+		8227CEEE1BF4F27D003202E4 /* ArrayFormulaExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArrayFormulaExample.h; sourceTree = "<group>"; };
+		8227CEEF1BF4F27D003202E4 /* ArrayFormulaExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArrayFormulaExample.m; sourceTree = "<group>"; };
+		8227CEF01BF4F27D003202E4 /* AutofilterExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutofilterExample.h; sourceTree = "<group>"; };
+		8227CEF11BF4F27D003202E4 /* AutofilterExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutofilterExample.m; sourceTree = "<group>"; };
+		8227CEF21BF4F27D003202E4 /* ConstantMemoryExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConstantMemoryExample.h; sourceTree = "<group>"; };
+		8227CEF31BF4F27D003202E4 /* ConstantMemoryExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConstantMemoryExample.m; sourceTree = "<group>"; };
+		8227CEF41BF4F27D003202E4 /* DatesAndTimes1Example.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatesAndTimes1Example.h; sourceTree = "<group>"; };
+		8227CEF51BF4F27D003202E4 /* DatesAndTimes1Example.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatesAndTimes1Example.m; sourceTree = "<group>"; };
+		8227CEF61BF4F27D003202E4 /* DatesAndTimes2Example.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatesAndTimes2Example.h; sourceTree = "<group>"; };
+		8227CEF71BF4F27D003202E4 /* DatesAndTimes2Example.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatesAndTimes2Example.m; sourceTree = "<group>"; };
+		8227CEF81BF4F27D003202E4 /* DatesAndTimes3Example.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatesAndTimes3Example.h; sourceTree = "<group>"; };
+		8227CEF91BF4F27D003202E4 /* DatesAndTimes3Example.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatesAndTimes3Example.m; sourceTree = "<group>"; };
+		8227CEFA1BF4F27D003202E4 /* DefinedNameExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefinedNameExample.h; sourceTree = "<group>"; };
+		8227CEFB1BF4F27D003202E4 /* DefinedNameExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefinedNameExample.m; sourceTree = "<group>"; };
+		8227CEFC1BF4F27D003202E4 /* DemoExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoExample.h; sourceTree = "<group>"; };
+		8227CEFD1BF4F27D003202E4 /* DemoExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoExample.m; sourceTree = "<group>"; };
+		8227CEFE1BF4F27D003202E4 /* FormatFontExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormatFontExample.h; sourceTree = "<group>"; };
+		8227CEFF1BF4F27D003202E4 /* FormatFontExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormatFontExample.m; sourceTree = "<group>"; };
+		8227CF001BF4F27D003202E4 /* FormatNumFormatExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormatNumFormatExample.h; sourceTree = "<group>"; };
+		8227CF011BF4F27D003202E4 /* FormatNumFormatExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormatNumFormatExample.m; sourceTree = "<group>"; };
+		8227CF021BF4F27D003202E4 /* HeadersFootersExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeadersFootersExample.h; sourceTree = "<group>"; };
+		8227CF031BF4F27D003202E4 /* HeadersFootersExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeadersFootersExample.m; sourceTree = "<group>"; };
+		8227CF041BF4F27D003202E4 /* HelloExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelloExample.h; sourceTree = "<group>"; };
+		8227CF051BF4F27D003202E4 /* HelloExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelloExample.m; sourceTree = "<group>"; };
+		8227CF061BF4F27D003202E4 /* HyperlinksExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HyperlinksExample.h; sourceTree = "<group>"; };
+		8227CF071BF4F27D003202E4 /* HyperlinksExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HyperlinksExample.m; sourceTree = "<group>"; };
+		8227CF081BF4F27D003202E4 /* MergeRangeExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MergeRangeExample.h; sourceTree = "<group>"; };
+		8227CF091BF4F27D003202E4 /* MergeRangeExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MergeRangeExample.m; sourceTree = "<group>"; };
+		8227CF0A1BF4F27D003202E4 /* Tutorial1Example.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tutorial1Example.h; sourceTree = "<group>"; };
+		8227CF0B1BF4F27D003202E4 /* Tutorial1Example.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tutorial1Example.m; sourceTree = "<group>"; };
+		8227CF0C1BF4F27D003202E4 /* Tutorial2Example.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tutorial2Example.h; sourceTree = "<group>"; };
+		8227CF0D1BF4F27D003202E4 /* Tutorial2Example.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tutorial2Example.m; sourceTree = "<group>"; };
+		8227CF0E1BF4F27D003202E4 /* Tutorial3Example.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tutorial3Example.h; sourceTree = "<group>"; };
+		8227CF0F1BF4F27D003202E4 /* Tutorial3Example.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tutorial3Example.m; sourceTree = "<group>"; };
+		8227CF101BF4F27D003202E4 /* UTF8Example.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UTF8Example.h; sourceTree = "<group>"; };
+		8227CF111BF4F27D003202E4 /* UTF8Example.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UTF8Example.m; sourceTree = "<group>"; };
+		8227CF121BF4F27D003202E4 /* Example.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Example.h; sourceTree = "<group>"; };
+		8227CF131BF4F27D003202E4 /* Example.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Example.m; sourceTree = "<group>"; };
 		82B62ABA1BF34AC000FE079F /* libxlsxwriter-ObjC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "libxlsxwriter-ObjC.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		82B62ABE1BF34AC000FE079F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		82B62AC01BF34AC000FE079F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -54,48 +96,6 @@
 		82B62AD61BF34B9300FE079F /* ExamplePickerTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExamplePickerTableViewController.m; sourceTree = "<group>"; };
 		82B62AD91BF34BB500FE079F /* ExampleViewerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleViewerViewController.h; sourceTree = "<group>"; };
 		82B62ADA1BF34BB500FE079F /* ExampleViewerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleViewerViewController.m; sourceTree = "<group>"; };
-		82B62AE11BF3629100FE079F /* Example.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Example.h; sourceTree = "<group>"; };
-		82B62AE21BF3629100FE079F /* Example.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Example.m; sourceTree = "<group>"; };
-		82B62AE41BF362FC00FE079F /* HelloExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelloExample.h; sourceTree = "<group>"; };
-		82B62AE51BF362FC00FE079F /* HelloExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelloExample.m; sourceTree = "<group>"; };
-		82B62AE71BF365A500FE079F /* AnatomyExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnatomyExample.h; sourceTree = "<group>"; };
-		82B62AE81BF365A500FE079F /* AnatomyExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnatomyExample.m; sourceTree = "<group>"; };
-		82B62AEA1BF365D200FE079F /* DemoExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoExample.h; sourceTree = "<group>"; };
-		82B62AEB1BF365D200FE079F /* DemoExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoExample.m; sourceTree = "<group>"; };
-		82B62AED1BF365EE00FE079F /* Tutorial1Example.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tutorial1Example.h; sourceTree = "<group>"; };
-		82B62AEE1BF365EE00FE079F /* Tutorial1Example.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tutorial1Example.m; sourceTree = "<group>"; };
-		82B62AF01BF3661100FE079F /* Tutorial2Example.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tutorial2Example.h; sourceTree = "<group>"; };
-		82B62AF11BF3661100FE079F /* Tutorial2Example.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tutorial2Example.m; sourceTree = "<group>"; };
-		82B62AF31BF3664000FE079F /* Tutorial3Example.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tutorial3Example.h; sourceTree = "<group>"; };
-		82B62AF41BF3664000FE079F /* Tutorial3Example.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tutorial3Example.m; sourceTree = "<group>"; };
-		82B62AF61BF3666100FE079F /* FormatFontExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormatFontExample.h; sourceTree = "<group>"; };
-		82B62AF71BF3666100FE079F /* FormatFontExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormatFontExample.m; sourceTree = "<group>"; };
-		82B62AF91BF3668200FE079F /* FormatNumFormatExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormatNumFormatExample.h; sourceTree = "<group>"; };
-		82B62AFA1BF3668200FE079F /* FormatNumFormatExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormatNumFormatExample.m; sourceTree = "<group>"; };
-		82B62AFC1BF3669E00FE079F /* DatesAndTimes1Example.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatesAndTimes1Example.h; sourceTree = "<group>"; };
-		82B62AFD1BF3669E00FE079F /* DatesAndTimes1Example.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatesAndTimes1Example.m; sourceTree = "<group>"; };
-		82B62AFF1BF366C300FE079F /* DatesAndTimes2Example.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatesAndTimes2Example.h; sourceTree = "<group>"; };
-		82B62B001BF366C300FE079F /* DatesAndTimes2Example.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatesAndTimes2Example.m; sourceTree = "<group>"; };
-		82B62B021BF366EB00FE079F /* DatesAndTimes3Example.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatesAndTimes3Example.h; sourceTree = "<group>"; };
-		82B62B031BF366EB00FE079F /* DatesAndTimes3Example.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatesAndTimes3Example.m; sourceTree = "<group>"; };
-		82B62B051BF3670600FE079F /* HyperlinksExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HyperlinksExample.h; sourceTree = "<group>"; };
-		82B62B061BF3670600FE079F /* HyperlinksExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HyperlinksExample.m; sourceTree = "<group>"; };
-		82B62B081BF3673000FE079F /* ArrayFormulaExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArrayFormulaExample.h; sourceTree = "<group>"; };
-		82B62B091BF3673000FE079F /* ArrayFormulaExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArrayFormulaExample.m; sourceTree = "<group>"; };
-		82B62B0B1BF3674F00FE079F /* UTF8Example.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UTF8Example.h; sourceTree = "<group>"; };
-		82B62B0C1BF3674F00FE079F /* UTF8Example.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UTF8Example.m; sourceTree = "<group>"; };
-		82B62B0E1BF3676D00FE079F /* ConstantMemoryExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConstantMemoryExample.h; sourceTree = "<group>"; };
-		82B62B0F1BF3676D00FE079F /* ConstantMemoryExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConstantMemoryExample.m; sourceTree = "<group>"; };
-		82B62B111BF3678700FE079F /* MergeRangeExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MergeRangeExample.h; sourceTree = "<group>"; };
-		82B62B121BF3678700FE079F /* MergeRangeExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MergeRangeExample.m; sourceTree = "<group>"; };
-		82B62B141BF367A200FE079F /* AutofilterExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutofilterExample.h; sourceTree = "<group>"; };
-		82B62B151BF367A200FE079F /* AutofilterExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutofilterExample.m; sourceTree = "<group>"; };
-		82B62B171BF367C400FE079F /* HeadersFootersExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeadersFootersExample.h; sourceTree = "<group>"; };
-		82B62B181BF367C400FE079F /* HeadersFootersExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeadersFootersExample.m; sourceTree = "<group>"; };
-		82B62B1A1BF367DF00FE079F /* DefinedNameExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefinedNameExample.h; sourceTree = "<group>"; };
-		82B62B1B1BF367DF00FE079F /* DefinedNameExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefinedNameExample.m; sourceTree = "<group>"; };
-		82B62B221BF368B400FE079F /* DefaultExamples.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefaultExamples.h; sourceTree = "<group>"; };
-		82B62B231BF368B400FE079F /* DefaultExamples.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefaultExamples.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +117,72 @@
 				3BDFA6C66521817294BA7A11 /* Pods.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		8227CEE71BF4F27D003202E4 /* Examples */ = {
+			isa = PBXGroup;
+			children = (
+				8227CF121BF4F27D003202E4 /* Example.h */,
+				8227CF131BF4F27D003202E4 /* Example.m */,
+				8227CEE81BF4F27D003202E4 /* DefaultExamples */,
+			);
+			name = Examples;
+			path = ../../Common/Examples;
+			sourceTree = "<group>";
+		};
+		8227CEE81BF4F27D003202E4 /* DefaultExamples */ = {
+			isa = PBXGroup;
+			children = (
+				8227CEE91BF4F27D003202E4 /* DefaultExamples.h */,
+				8227CEEA1BF4F27D003202E4 /* DefaultExamples.m */,
+				8227CEEB1BF4F27D003202E4 /* Examples */,
+			);
+			path = DefaultExamples;
+			sourceTree = "<group>";
+		};
+		8227CEEB1BF4F27D003202E4 /* Examples */ = {
+			isa = PBXGroup;
+			children = (
+				8227CF041BF4F27D003202E4 /* HelloExample.h */,
+				8227CF051BF4F27D003202E4 /* HelloExample.m */,
+				8227CEEC1BF4F27D003202E4 /* AnatomyExample.h */,
+				8227CEED1BF4F27D003202E4 /* AnatomyExample.m */,
+				8227CEFC1BF4F27D003202E4 /* DemoExample.h */,
+				8227CEFD1BF4F27D003202E4 /* DemoExample.m */,
+				8227CF0A1BF4F27D003202E4 /* Tutorial1Example.h */,
+				8227CF0B1BF4F27D003202E4 /* Tutorial1Example.m */,
+				8227CF0C1BF4F27D003202E4 /* Tutorial2Example.h */,
+				8227CF0D1BF4F27D003202E4 /* Tutorial2Example.m */,
+				8227CF0E1BF4F27D003202E4 /* Tutorial3Example.h */,
+				8227CF0F1BF4F27D003202E4 /* Tutorial3Example.m */,
+				8227CEFE1BF4F27D003202E4 /* FormatFontExample.h */,
+				8227CEFF1BF4F27D003202E4 /* FormatFontExample.m */,
+				8227CF001BF4F27D003202E4 /* FormatNumFormatExample.h */,
+				8227CF011BF4F27D003202E4 /* FormatNumFormatExample.m */,
+				8227CEF41BF4F27D003202E4 /* DatesAndTimes1Example.h */,
+				8227CEF51BF4F27D003202E4 /* DatesAndTimes1Example.m */,
+				8227CEF61BF4F27D003202E4 /* DatesAndTimes2Example.h */,
+				8227CEF71BF4F27D003202E4 /* DatesAndTimes2Example.m */,
+				8227CEF81BF4F27D003202E4 /* DatesAndTimes3Example.h */,
+				8227CEF91BF4F27D003202E4 /* DatesAndTimes3Example.m */,
+				8227CF061BF4F27D003202E4 /* HyperlinksExample.h */,
+				8227CF071BF4F27D003202E4 /* HyperlinksExample.m */,
+				8227CEEE1BF4F27D003202E4 /* ArrayFormulaExample.h */,
+				8227CEEF1BF4F27D003202E4 /* ArrayFormulaExample.m */,
+				8227CF101BF4F27D003202E4 /* UTF8Example.h */,
+				8227CF111BF4F27D003202E4 /* UTF8Example.m */,
+				8227CEF21BF4F27D003202E4 /* ConstantMemoryExample.h */,
+				8227CEF31BF4F27D003202E4 /* ConstantMemoryExample.m */,
+				8227CF081BF4F27D003202E4 /* MergeRangeExample.h */,
+				8227CF091BF4F27D003202E4 /* MergeRangeExample.m */,
+				8227CEF01BF4F27D003202E4 /* AutofilterExample.h */,
+				8227CEF11BF4F27D003202E4 /* AutofilterExample.m */,
+				8227CF021BF4F27D003202E4 /* HeadersFootersExample.h */,
+				8227CF031BF4F27D003202E4 /* HeadersFootersExample.m */,
+				8227CEFA1BF4F27D003202E4 /* DefinedNameExample.h */,
+				8227CEFB1BF4F27D003202E4 /* DefinedNameExample.m */,
+			);
+			path = Examples;
 			sourceTree = "<group>";
 		};
 		82B62AB11BF34AC000FE079F = {
@@ -144,7 +210,7 @@
 				82B62AD41BF34B4300FE079F /* App Delegate */,
 				82B62AD81BF34B9A00FE079F /* Example Picker */,
 				82B62ADC1BF34BBD00FE079F /* Example Viewer */,
-				82B62ADD1BF3503200FE079F /* Examples */,
+				8227CEE71BF4F27D003202E4 /* Examples */,
 				82B62ABD1BF34AC000FE079F /* Supporting Files */,
 			);
 			path = "libxlsxwriter-ObjC";
@@ -186,71 +252,6 @@
 				82B62ADA1BF34BB500FE079F /* ExampleViewerViewController.m */,
 			);
 			name = "Example Viewer";
-			sourceTree = "<group>";
-		};
-		82B62ADD1BF3503200FE079F /* Examples */ = {
-			isa = PBXGroup;
-			children = (
-				82B62AE11BF3629100FE079F /* Example.h */,
-				82B62AE21BF3629100FE079F /* Example.m */,
-				82B62B1D1BF3684F00FE079F /* Default Examples */,
-			);
-			name = Examples;
-			sourceTree = "<group>";
-		};
-		82B62B1D1BF3684F00FE079F /* Default Examples */ = {
-			isa = PBXGroup;
-			children = (
-				82B62B221BF368B400FE079F /* DefaultExamples.h */,
-				82B62B231BF368B400FE079F /* DefaultExamples.m */,
-				82B62B251BF368C500FE079F /* Examples */,
-			);
-			name = "Default Examples";
-			sourceTree = "<group>";
-		};
-		82B62B251BF368C500FE079F /* Examples */ = {
-			isa = PBXGroup;
-			children = (
-				82B62AE41BF362FC00FE079F /* HelloExample.h */,
-				82B62AE51BF362FC00FE079F /* HelloExample.m */,
-				82B62AE71BF365A500FE079F /* AnatomyExample.h */,
-				82B62AE81BF365A500FE079F /* AnatomyExample.m */,
-				82B62AEA1BF365D200FE079F /* DemoExample.h */,
-				82B62AEB1BF365D200FE079F /* DemoExample.m */,
-				82B62AED1BF365EE00FE079F /* Tutorial1Example.h */,
-				82B62AEE1BF365EE00FE079F /* Tutorial1Example.m */,
-				82B62AF01BF3661100FE079F /* Tutorial2Example.h */,
-				82B62AF11BF3661100FE079F /* Tutorial2Example.m */,
-				82B62AF31BF3664000FE079F /* Tutorial3Example.h */,
-				82B62AF41BF3664000FE079F /* Tutorial3Example.m */,
-				82B62AF61BF3666100FE079F /* FormatFontExample.h */,
-				82B62AF71BF3666100FE079F /* FormatFontExample.m */,
-				82B62AF91BF3668200FE079F /* FormatNumFormatExample.h */,
-				82B62AFA1BF3668200FE079F /* FormatNumFormatExample.m */,
-				82B62AFC1BF3669E00FE079F /* DatesAndTimes1Example.h */,
-				82B62AFD1BF3669E00FE079F /* DatesAndTimes1Example.m */,
-				82B62AFF1BF366C300FE079F /* DatesAndTimes2Example.h */,
-				82B62B001BF366C300FE079F /* DatesAndTimes2Example.m */,
-				82B62B021BF366EB00FE079F /* DatesAndTimes3Example.h */,
-				82B62B031BF366EB00FE079F /* DatesAndTimes3Example.m */,
-				82B62B051BF3670600FE079F /* HyperlinksExample.h */,
-				82B62B061BF3670600FE079F /* HyperlinksExample.m */,
-				82B62B081BF3673000FE079F /* ArrayFormulaExample.h */,
-				82B62B091BF3673000FE079F /* ArrayFormulaExample.m */,
-				82B62B0B1BF3674F00FE079F /* UTF8Example.h */,
-				82B62B0C1BF3674F00FE079F /* UTF8Example.m */,
-				82B62B0E1BF3676D00FE079F /* ConstantMemoryExample.h */,
-				82B62B0F1BF3676D00FE079F /* ConstantMemoryExample.m */,
-				82B62B111BF3678700FE079F /* MergeRangeExample.h */,
-				82B62B121BF3678700FE079F /* MergeRangeExample.m */,
-				82B62B141BF367A200FE079F /* AutofilterExample.h */,
-				82B62B151BF367A200FE079F /* AutofilterExample.m */,
-				82B62B171BF367C400FE079F /* HeadersFootersExample.h */,
-				82B62B181BF367C400FE079F /* HeadersFootersExample.m */,
-				82B62B1A1BF367DF00FE079F /* DefinedNameExample.h */,
-				82B62B1B1BF367DF00FE079F /* DefinedNameExample.m */,
-			);
-			name = Examples;
 			sourceTree = "<group>";
 		};
 		92A93BC495E2706DB1DF5B85 /* Frameworks */ = {
@@ -382,31 +383,31 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				82B62B1C1BF367DF00FE079F /* DefinedNameExample.m in Sources */,
-				82B62B0A1BF3673000FE079F /* ArrayFormulaExample.m in Sources */,
-				82B62B131BF3678700FE079F /* MergeRangeExample.m in Sources */,
-				82B62B041BF366EB00FE079F /* DatesAndTimes3Example.m in Sources */,
-				82B62B071BF3670600FE079F /* HyperlinksExample.m in Sources */,
-				82B62AE91BF365A500FE079F /* AnatomyExample.m in Sources */,
-				82B62AFB1BF3668200FE079F /* FormatNumFormatExample.m in Sources */,
+				8227CF1F1BF4F27D003202E4 /* FormatNumFormatExample.m in Sources */,
+				8227CF191BF4F27D003202E4 /* DatesAndTimes1Example.m in Sources */,
+				8227CF251BF4F27D003202E4 /* Tutorial2Example.m in Sources */,
+				8227CF1E1BF4F27D003202E4 /* FormatFontExample.m in Sources */,
+				8227CF271BF4F27D003202E4 /* UTF8Example.m in Sources */,
+				8227CF151BF4F27D003202E4 /* AnatomyExample.m in Sources */,
+				8227CF181BF4F27D003202E4 /* ConstantMemoryExample.m in Sources */,
+				8227CF221BF4F27D003202E4 /* HyperlinksExample.m in Sources */,
+				8227CF281BF4F27D003202E4 /* Example.m in Sources */,
+				8227CF201BF4F27D003202E4 /* HeadersFootersExample.m in Sources */,
 				82B62AD71BF34B9300FE079F /* ExamplePickerTableViewController.m in Sources */,
-				82B62AEF1BF365EE00FE079F /* Tutorial1Example.m in Sources */,
+				8227CF1B1BF4F27D003202E4 /* DatesAndTimes3Example.m in Sources */,
 				82B62ADB1BF34BB500FE079F /* ExampleViewerViewController.m in Sources */,
-				82B62AFE1BF3669E00FE079F /* DatesAndTimes1Example.m in Sources */,
-				82B62B011BF366C300FE079F /* DatesAndTimes2Example.m in Sources */,
-				82B62B241BF368B400FE079F /* DefaultExamples.m in Sources */,
-				82B62B161BF367A200FE079F /* AutofilterExample.m in Sources */,
-				82B62B191BF367C400FE079F /* HeadersFootersExample.m in Sources */,
-				82B62B101BF3676D00FE079F /* ConstantMemoryExample.m in Sources */,
-				82B62AF51BF3664000FE079F /* Tutorial3Example.m in Sources */,
-				82B62AE31BF3629100FE079F /* Example.m in Sources */,
-				82B62AF21BF3661100FE079F /* Tutorial2Example.m in Sources */,
+				8227CF241BF4F27D003202E4 /* Tutorial1Example.m in Sources */,
+				8227CF1C1BF4F27D003202E4 /* DefinedNameExample.m in Sources */,
+				8227CF211BF4F27D003202E4 /* HelloExample.m in Sources */,
+				8227CF261BF4F27D003202E4 /* Tutorial3Example.m in Sources */,
+				8227CF1D1BF4F27D003202E4 /* DemoExample.m in Sources */,
+				8227CF231BF4F27D003202E4 /* MergeRangeExample.m in Sources */,
+				8227CF1A1BF4F27D003202E4 /* DatesAndTimes2Example.m in Sources */,
 				82B62AC21BF34AC000FE079F /* AppDelegate.m in Sources */,
-				82B62AEC1BF365D200FE079F /* DemoExample.m in Sources */,
-				82B62AF81BF3666100FE079F /* FormatFontExample.m in Sources */,
+				8227CF161BF4F27D003202E4 /* ArrayFormulaExample.m in Sources */,
+				8227CF141BF4F27D003202E4 /* DefaultExamples.m in Sources */,
+				8227CF171BF4F27D003202E4 /* AutofilterExample.m in Sources */,
 				82B62ABF1BF34AC000FE079F /* main.m in Sources */,
-				82B62AE61BF362FC00FE079F /* HelloExample.m in Sources */,
-				82B62B0D1BF3674F00FE079F /* UTF8Example.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
