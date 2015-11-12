@@ -40,7 +40,7 @@ static NSTimeInterval const kMinLoadingTime = 0.3;
     [self.activityIndicatorView startAnimating];
     
     // store current time interval before running the example
-    NSTimeInterval beforeRun = [NSDate timeIntervalSinceReferenceDate];
+    NSTimeInterval timeBeforeRun = [NSDate timeIntervalSinceReferenceDate];
     
     __weak typeof(self) weakSelf = self;
     
@@ -49,7 +49,7 @@ static NSTimeInterval const kMinLoadingTime = 0.3;
         [weakSelf.example run];
         
         // calculate time elapsed while running the example
-        NSTimeInterval elapsedTime = [NSDate timeIntervalSinceReferenceDate] - beforeRun;
+        NSTimeInterval elapsedTime = [NSDate timeIntervalSinceReferenceDate] - timeBeforeRun;
         
         // calculate time we still need to wait (if any) before displaying the output Excel file
         NSTimeInterval timeToWaitFor = MAX(kMinLoadingTime - elapsedTime, 0.0);

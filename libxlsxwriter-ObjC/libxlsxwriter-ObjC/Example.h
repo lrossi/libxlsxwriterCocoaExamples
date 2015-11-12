@@ -14,8 +14,7 @@
 @property (readonly, nonatomic) NSString *title;
 @property (readonly, nonatomic) NSString *subtitle;
 @property (readonly, nonatomic) NSString *outputFileName;
-
-- (NSString *)outputFilePath;
+@property (readonly, nonatomic) NSString *outputFilePath;
 
 - (void)run;
 

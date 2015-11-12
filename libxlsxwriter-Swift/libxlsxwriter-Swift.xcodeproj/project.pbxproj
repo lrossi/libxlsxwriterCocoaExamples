@@ -9,10 +9,32 @@
 /* Begin PBXBuildFile section */
 		1547E4D170F0AB57A435F533 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EB9B9CE96F5F81DCEF9ACCA3 /* libPods.a */; };
 		821D41CC1BF4B8F9006A0F95 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821D41CB1BF4B8F9006A0F95 /* AppDelegate.swift */; };
-		821D41CE1BF4B8F9006A0F95 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821D41CD1BF4B8F9006A0F95 /* ViewController.swift */; };
-		821D41D11BF4B8F9006A0F95 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 821D41CF1BF4B8F9006A0F95 /* Main.storyboard */; };
 		821D41D31BF4B8F9006A0F95 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 821D41D21BF4B8F9006A0F95 /* Assets.xcassets */; };
 		821D41D61BF4B8F9006A0F95 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 821D41D41BF4B8F9006A0F95 /* LaunchScreen.storyboard */; };
+		8227CE9B1BF4BDC2003202E4 /* ExamplePickerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8227CE9A1BF4BDC2003202E4 /* ExamplePickerTableViewController.swift */; };
+		8227CE9E1BF4D772003202E4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8227CE9C1BF4D772003202E4 /* Main.storyboard */; };
+		8227CECC1BF4D7F2003202E4 /* Example.m in Sources */ = {isa = PBXBuildFile; fileRef = 8227CEA01BF4D7F2003202E4 /* Example.m */; };
+		8227CECD1BF4D7F2003202E4 /* DefaultExamples.m in Sources */ = {isa = PBXBuildFile; fileRef = 8227CEA21BF4D7F2003202E4 /* DefaultExamples.m */; };
+		8227CECE1BF4D7F2003202E4 /* HelloExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 8227CEA41BF4D7F2003202E4 /* HelloExample.m */; };
+		8227CECF1BF4D7F2003202E4 /* AnatomyExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 8227CEA61BF4D7F2003202E4 /* AnatomyExample.m */; };
+		8227CED01BF4D7F2003202E4 /* DemoExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 8227CEA81BF4D7F2003202E4 /* DemoExample.m */; };
+		8227CED11BF4D7F2003202E4 /* Tutorial1Example.m in Sources */ = {isa = PBXBuildFile; fileRef = 8227CEAA1BF4D7F2003202E4 /* Tutorial1Example.m */; };
+		8227CED21BF4D7F2003202E4 /* Tutorial2Example.m in Sources */ = {isa = PBXBuildFile; fileRef = 8227CEAC1BF4D7F2003202E4 /* Tutorial2Example.m */; };
+		8227CED31BF4D7F2003202E4 /* Tutorial3Example.m in Sources */ = {isa = PBXBuildFile; fileRef = 8227CEAE1BF4D7F2003202E4 /* Tutorial3Example.m */; };
+		8227CED41BF4D7F2003202E4 /* FormatFontExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 8227CEB01BF4D7F2003202E4 /* FormatFontExample.m */; };
+		8227CED51BF4D7F2003202E4 /* FormatNumFormatExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 8227CEB21BF4D7F2003202E4 /* FormatNumFormatExample.m */; };
+		8227CED61BF4D7F2003202E4 /* DatesAndTimes1Example.m in Sources */ = {isa = PBXBuildFile; fileRef = 8227CEB41BF4D7F2003202E4 /* DatesAndTimes1Example.m */; };
+		8227CED71BF4D7F2003202E4 /* DatesAndTimes2Example.m in Sources */ = {isa = PBXBuildFile; fileRef = 8227CEB61BF4D7F2003202E4 /* DatesAndTimes2Example.m */; };
+		8227CED81BF4D7F2003202E4 /* DatesAndTimes3Example.m in Sources */ = {isa = PBXBuildFile; fileRef = 8227CEB81BF4D7F2003202E4 /* DatesAndTimes3Example.m */; };
+		8227CED91BF4D7F2003202E4 /* HyperlinksExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 8227CEBA1BF4D7F2003202E4 /* HyperlinksExample.m */; };
+		8227CEDA1BF4D7F2003202E4 /* ArrayFormulaExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 8227CEBC1BF4D7F2003202E4 /* ArrayFormulaExample.m */; };
+		8227CEDB1BF4D7F2003202E4 /* UTF8Example.m in Sources */ = {isa = PBXBuildFile; fileRef = 8227CEBE1BF4D7F2003202E4 /* UTF8Example.m */; };
+		8227CEDC1BF4D7F2003202E4 /* ConstantMemoryExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 8227CEC01BF4D7F2003202E4 /* ConstantMemoryExample.m */; };
+		8227CEDD1BF4D7F2003202E4 /* MergeRangeExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 8227CEC21BF4D7F2003202E4 /* MergeRangeExample.m */; };
+		8227CEDE1BF4D7F2003202E4 /* AutofilterExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 8227CEC41BF4D7F2003202E4 /* AutofilterExample.m */; };
+		8227CEDF1BF4D7F2003202E4 /* HeadersFootersExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 8227CEC61BF4D7F2003202E4 /* HeadersFootersExample.m */; };
+		8227CEE01BF4D7F2003202E4 /* DefinedNameExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 8227CEC81BF4D7F2003202E4 /* DefinedNameExample.m */; };
+		8227CEE21BF4D9F7003202E4 /* ExampleViewerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8227CEE11BF4D9F7003202E4 /* ExampleViewerViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,12 +42,55 @@
 		641E17192712152436FF6FA4 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		821D41C81BF4B8F9006A0F95 /* libxlsxwriter-Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "libxlsxwriter-Swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		821D41CB1BF4B8F9006A0F95 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		821D41CD1BF4B8F9006A0F95 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		821D41D01BF4B8F9006A0F95 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		821D41D21BF4B8F9006A0F95 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		821D41D51BF4B8F9006A0F95 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		821D41D71BF4B8F9006A0F95 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		821D41DD1BF4B9C4006A0F95 /* libxlsxwriter-Swift-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "libxlsxwriter-Swift-Bridging-Header.h"; sourceTree = "<group>"; };
+		8227CE9A1BF4BDC2003202E4 /* ExamplePickerTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExamplePickerTableViewController.swift; sourceTree = "<group>"; };
+		8227CE9D1BF4D772003202E4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		8227CE9F1BF4D7F2003202E4 /* Example.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Example.h; sourceTree = "<group>"; };
+		8227CEA01BF4D7F2003202E4 /* Example.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Example.m; sourceTree = "<group>"; };
+		8227CEA11BF4D7F2003202E4 /* DefaultExamples.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefaultExamples.h; sourceTree = "<group>"; };
+		8227CEA21BF4D7F2003202E4 /* DefaultExamples.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefaultExamples.m; sourceTree = "<group>"; };
+		8227CEA31BF4D7F2003202E4 /* HelloExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelloExample.h; sourceTree = "<group>"; };
+		8227CEA41BF4D7F2003202E4 /* HelloExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelloExample.m; sourceTree = "<group>"; };
+		8227CEA51BF4D7F2003202E4 /* AnatomyExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnatomyExample.h; sourceTree = "<group>"; };
+		8227CEA61BF4D7F2003202E4 /* AnatomyExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnatomyExample.m; sourceTree = "<group>"; };
+		8227CEA71BF4D7F2003202E4 /* DemoExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoExample.h; sourceTree = "<group>"; };
+		8227CEA81BF4D7F2003202E4 /* DemoExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoExample.m; sourceTree = "<group>"; };
+		8227CEA91BF4D7F2003202E4 /* Tutorial1Example.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tutorial1Example.h; sourceTree = "<group>"; };
+		8227CEAA1BF4D7F2003202E4 /* Tutorial1Example.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tutorial1Example.m; sourceTree = "<group>"; };
+		8227CEAB1BF4D7F2003202E4 /* Tutorial2Example.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tutorial2Example.h; sourceTree = "<group>"; };
+		8227CEAC1BF4D7F2003202E4 /* Tutorial2Example.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tutorial2Example.m; sourceTree = "<group>"; };
+		8227CEAD1BF4D7F2003202E4 /* Tutorial3Example.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tutorial3Example.h; sourceTree = "<group>"; };
+		8227CEAE1BF4D7F2003202E4 /* Tutorial3Example.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tutorial3Example.m; sourceTree = "<group>"; };
+		8227CEAF1BF4D7F2003202E4 /* FormatFontExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormatFontExample.h; sourceTree = "<group>"; };
+		8227CEB01BF4D7F2003202E4 /* FormatFontExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormatFontExample.m; sourceTree = "<group>"; };
+		8227CEB11BF4D7F2003202E4 /* FormatNumFormatExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormatNumFormatExample.h; sourceTree = "<group>"; };
+		8227CEB21BF4D7F2003202E4 /* FormatNumFormatExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormatNumFormatExample.m; sourceTree = "<group>"; };
+		8227CEB31BF4D7F2003202E4 /* DatesAndTimes1Example.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatesAndTimes1Example.h; sourceTree = "<group>"; };
+		8227CEB41BF4D7F2003202E4 /* DatesAndTimes1Example.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatesAndTimes1Example.m; sourceTree = "<group>"; };
+		8227CEB51BF4D7F2003202E4 /* DatesAndTimes2Example.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatesAndTimes2Example.h; sourceTree = "<group>"; };
+		8227CEB61BF4D7F2003202E4 /* DatesAndTimes2Example.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatesAndTimes2Example.m; sourceTree = "<group>"; };
+		8227CEB71BF4D7F2003202E4 /* DatesAndTimes3Example.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatesAndTimes3Example.h; sourceTree = "<group>"; };
+		8227CEB81BF4D7F2003202E4 /* DatesAndTimes3Example.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatesAndTimes3Example.m; sourceTree = "<group>"; };
+		8227CEB91BF4D7F2003202E4 /* HyperlinksExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HyperlinksExample.h; sourceTree = "<group>"; };
+		8227CEBA1BF4D7F2003202E4 /* HyperlinksExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HyperlinksExample.m; sourceTree = "<group>"; };
+		8227CEBB1BF4D7F2003202E4 /* ArrayFormulaExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArrayFormulaExample.h; sourceTree = "<group>"; };
+		8227CEBC1BF4D7F2003202E4 /* ArrayFormulaExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArrayFormulaExample.m; sourceTree = "<group>"; };
+		8227CEBD1BF4D7F2003202E4 /* UTF8Example.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UTF8Example.h; sourceTree = "<group>"; };
+		8227CEBE1BF4D7F2003202E4 /* UTF8Example.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UTF8Example.m; sourceTree = "<group>"; };
+		8227CEBF1BF4D7F2003202E4 /* ConstantMemoryExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConstantMemoryExample.h; sourceTree = "<group>"; };
+		8227CEC01BF4D7F2003202E4 /* ConstantMemoryExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConstantMemoryExample.m; sourceTree = "<group>"; };
+		8227CEC11BF4D7F2003202E4 /* MergeRangeExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MergeRangeExample.h; sourceTree = "<group>"; };
+		8227CEC21BF4D7F2003202E4 /* MergeRangeExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MergeRangeExample.m; sourceTree = "<group>"; };
+		8227CEC31BF4D7F2003202E4 /* AutofilterExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutofilterExample.h; sourceTree = "<group>"; };
+		8227CEC41BF4D7F2003202E4 /* AutofilterExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutofilterExample.m; sourceTree = "<group>"; };
+		8227CEC51BF4D7F2003202E4 /* HeadersFootersExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeadersFootersExample.h; sourceTree = "<group>"; };
+		8227CEC61BF4D7F2003202E4 /* HeadersFootersExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeadersFootersExample.m; sourceTree = "<group>"; };
+		8227CEC71BF4D7F2003202E4 /* DefinedNameExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefinedNameExample.h; sourceTree = "<group>"; };
+		8227CEC81BF4D7F2003202E4 /* DefinedNameExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefinedNameExample.m; sourceTree = "<group>"; };
+		8227CEE11BF4D9F7003202E4 /* ExampleViewerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleViewerViewController.swift; sourceTree = "<group>"; };
 		EB9B9CE96F5F81DCEF9ACCA3 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -79,15 +144,99 @@
 		821D41CA1BF4B8F9006A0F95 /* libxlsxwriter-Swift */ = {
 			isa = PBXGroup;
 			children = (
+				821D41DD1BF4B9C4006A0F95 /* libxlsxwriter-Swift-Bridging-Header.h */,
 				821D41CB1BF4B8F9006A0F95 /* AppDelegate.swift */,
-				821D41CD1BF4B8F9006A0F95 /* ViewController.swift */,
-				821D41CF1BF4B8F9006A0F95 /* Main.storyboard */,
+				8227CEE31BF4E366003202E4 /* UI */,
+				8227CECB1BF4D7F2003202E4 /* Examples */,
+				821D41E31BF4BCD2006A0F95 /* Supporting Filed */,
+			);
+			path = "libxlsxwriter-Swift";
+			sourceTree = "<group>";
+		};
+		821D41E31BF4BCD2006A0F95 /* Supporting Filed */ = {
+			isa = PBXGroup;
+			children = (
 				821D41D21BF4B8F9006A0F95 /* Assets.xcassets */,
 				821D41D41BF4B8F9006A0F95 /* LaunchScreen.storyboard */,
 				821D41D71BF4B8F9006A0F95 /* Info.plist */,
-				821D41DD1BF4B9C4006A0F95 /* libxlsxwriter-Swift-Bridging-Header.h */,
 			);
-			path = "libxlsxwriter-Swift";
+			name = "Supporting Filed";
+			sourceTree = "<group>";
+		};
+		8227CEC91BF4D7F2003202E4 /* Examples */ = {
+			isa = PBXGroup;
+			children = (
+				8227CEA31BF4D7F2003202E4 /* HelloExample.h */,
+				8227CEA41BF4D7F2003202E4 /* HelloExample.m */,
+				8227CEA51BF4D7F2003202E4 /* AnatomyExample.h */,
+				8227CEA61BF4D7F2003202E4 /* AnatomyExample.m */,
+				8227CEA71BF4D7F2003202E4 /* DemoExample.h */,
+				8227CEA81BF4D7F2003202E4 /* DemoExample.m */,
+				8227CEA91BF4D7F2003202E4 /* Tutorial1Example.h */,
+				8227CEAA1BF4D7F2003202E4 /* Tutorial1Example.m */,
+				8227CEAB1BF4D7F2003202E4 /* Tutorial2Example.h */,
+				8227CEAC1BF4D7F2003202E4 /* Tutorial2Example.m */,
+				8227CEAD1BF4D7F2003202E4 /* Tutorial3Example.h */,
+				8227CEAE1BF4D7F2003202E4 /* Tutorial3Example.m */,
+				8227CEAF1BF4D7F2003202E4 /* FormatFontExample.h */,
+				8227CEB01BF4D7F2003202E4 /* FormatFontExample.m */,
+				8227CEB11BF4D7F2003202E4 /* FormatNumFormatExample.h */,
+				8227CEB21BF4D7F2003202E4 /* FormatNumFormatExample.m */,
+				8227CEB31BF4D7F2003202E4 /* DatesAndTimes1Example.h */,
+				8227CEB41BF4D7F2003202E4 /* DatesAndTimes1Example.m */,
+				8227CEB51BF4D7F2003202E4 /* DatesAndTimes2Example.h */,
+				8227CEB61BF4D7F2003202E4 /* DatesAndTimes2Example.m */,
+				8227CEB71BF4D7F2003202E4 /* DatesAndTimes3Example.h */,
+				8227CEB81BF4D7F2003202E4 /* DatesAndTimes3Example.m */,
+				8227CEB91BF4D7F2003202E4 /* HyperlinksExample.h */,
+				8227CEBA1BF4D7F2003202E4 /* HyperlinksExample.m */,
+				8227CEBB1BF4D7F2003202E4 /* ArrayFormulaExample.h */,
+				8227CEBC1BF4D7F2003202E4 /* ArrayFormulaExample.m */,
+				8227CEBD1BF4D7F2003202E4 /* UTF8Example.h */,
+				8227CEBE1BF4D7F2003202E4 /* UTF8Example.m */,
+				8227CEBF1BF4D7F2003202E4 /* ConstantMemoryExample.h */,
+				8227CEC01BF4D7F2003202E4 /* ConstantMemoryExample.m */,
+				8227CEC11BF4D7F2003202E4 /* MergeRangeExample.h */,
+				8227CEC21BF4D7F2003202E4 /* MergeRangeExample.m */,
+				8227CEC31BF4D7F2003202E4 /* AutofilterExample.h */,
+				8227CEC41BF4D7F2003202E4 /* AutofilterExample.m */,
+				8227CEC51BF4D7F2003202E4 /* HeadersFootersExample.h */,
+				8227CEC61BF4D7F2003202E4 /* HeadersFootersExample.m */,
+				8227CEC71BF4D7F2003202E4 /* DefinedNameExample.h */,
+				8227CEC81BF4D7F2003202E4 /* DefinedNameExample.m */,
+			);
+			name = Examples;
+			sourceTree = "<group>";
+		};
+		8227CECA1BF4D7F2003202E4 /* Default Examples */ = {
+			isa = PBXGroup;
+			children = (
+				8227CEA11BF4D7F2003202E4 /* DefaultExamples.h */,
+				8227CEA21BF4D7F2003202E4 /* DefaultExamples.m */,
+				8227CEC91BF4D7F2003202E4 /* Examples */,
+			);
+			name = "Default Examples";
+			sourceTree = "<group>";
+		};
+		8227CECB1BF4D7F2003202E4 /* Examples */ = {
+			isa = PBXGroup;
+			children = (
+				8227CE9F1BF4D7F2003202E4 /* Example.h */,
+				8227CEA01BF4D7F2003202E4 /* Example.m */,
+				8227CECA1BF4D7F2003202E4 /* Default Examples */,
+			);
+			name = Examples;
+			path = "../../libxlsxwriter-ObjC/libxlsxwriter-ObjC";
+			sourceTree = "<group>";
+		};
+		8227CEE31BF4E366003202E4 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				8227CE9C1BF4D772003202E4 /* Main.storyboard */,
+				8227CE9A1BF4BDC2003202E4 /* ExamplePickerTableViewController.swift */,
+				8227CEE11BF4D9F7003202E4 /* ExampleViewerViewController.swift */,
+			);
+			name = UI;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -151,9 +300,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8227CE9E1BF4D772003202E4 /* Main.storyboard in Resources */,
 				821D41D61BF4B8F9006A0F95 /* LaunchScreen.storyboard in Resources */,
 				821D41D31BF4B8F9006A0F95 /* Assets.xcassets in Resources */,
-				821D41D11BF4B8F9006A0F95 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -212,28 +361,50 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				821D41CE1BF4B8F9006A0F95 /* ViewController.swift in Sources */,
+				8227CED21BF4D7F2003202E4 /* Tutorial2Example.m in Sources */,
+				8227CED01BF4D7F2003202E4 /* DemoExample.m in Sources */,
+				8227CECF1BF4D7F2003202E4 /* AnatomyExample.m in Sources */,
+				8227CED91BF4D7F2003202E4 /* HyperlinksExample.m in Sources */,
+				8227CECD1BF4D7F2003202E4 /* DefaultExamples.m in Sources */,
+				8227CE9B1BF4BDC2003202E4 /* ExamplePickerTableViewController.swift in Sources */,
+				8227CED51BF4D7F2003202E4 /* FormatNumFormatExample.m in Sources */,
+				8227CEDC1BF4D7F2003202E4 /* ConstantMemoryExample.m in Sources */,
 				821D41CC1BF4B8F9006A0F95 /* AppDelegate.swift in Sources */,
+				8227CECC1BF4D7F2003202E4 /* Example.m in Sources */,
+				8227CEDB1BF4D7F2003202E4 /* UTF8Example.m in Sources */,
+				8227CEDD1BF4D7F2003202E4 /* MergeRangeExample.m in Sources */,
+				8227CEDF1BF4D7F2003202E4 /* HeadersFootersExample.m in Sources */,
+				8227CED11BF4D7F2003202E4 /* Tutorial1Example.m in Sources */,
+				8227CED31BF4D7F2003202E4 /* Tutorial3Example.m in Sources */,
+				8227CEDE1BF4D7F2003202E4 /* AutofilterExample.m in Sources */,
+				8227CECE1BF4D7F2003202E4 /* HelloExample.m in Sources */,
+				8227CEDA1BF4D7F2003202E4 /* ArrayFormulaExample.m in Sources */,
+				8227CED81BF4D7F2003202E4 /* DatesAndTimes3Example.m in Sources */,
+				8227CEE21BF4D9F7003202E4 /* ExampleViewerViewController.swift in Sources */,
+				8227CED61BF4D7F2003202E4 /* DatesAndTimes1Example.m in Sources */,
+				8227CED71BF4D7F2003202E4 /* DatesAndTimes2Example.m in Sources */,
+				8227CEE01BF4D7F2003202E4 /* DefinedNameExample.m in Sources */,
+				8227CED41BF4D7F2003202E4 /* FormatFontExample.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		821D41CF1BF4B8F9006A0F95 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				821D41D01BF4B8F9006A0F95 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		821D41D41BF4B8F9006A0F95 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				821D41D51BF4B8F9006A0F95 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		8227CE9C1BF4D772003202E4 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8227CE9D1BF4D772003202E4 /* Base */,
+			);
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
