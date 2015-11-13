@@ -4,6 +4,8 @@ This repository provides iOS and Mac examples—written in Objective-C and Swift
 
 The provided examples are iOS and Mac adaptations of the examples [distributed](http://libxlsxwriter.github.io/examples.html) with the libxlsxwriter library itself.
 
+![demo video](README-demo.gif)
+
 ## About the Example Projects
 
 This repository contains four sub-folders:
