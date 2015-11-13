@@ -1,8 +1,8 @@
 //
 //  main.m
-//  libxlsxwriter-Mac
+//  libxlsxwriter-OSX
 //
-//  Created by Ludovico Rossi on 12/11/15.
+//  Created by Ludovico Rossi on 13/11/15.
 //  Copyright © 2015 Ludovico Rossi. All rights reserved.
 //
 

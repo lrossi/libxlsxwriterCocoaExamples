@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:libxlsxwriter-Mac.xcodeproj">
+      location = "self:libxlsxwriter-OSX.xcodeproj">
    </FileRef>
 </Workspace>

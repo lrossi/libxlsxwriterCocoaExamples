@@ -14,7 +14,7 @@ This repository contains four sub-folders:
 
 - `libxlsxwriter-iOS-Swift`: contains an iOS project written in Swift that runs the examples implemented by the files in the `Common` folder. Furthermore, this project provides an additional implementation of the [*Anatomy*](http://libxlsxwriter.github.io/anatomy_8c-example.html) example rewritten in Swift (i.e. by calling functions of libxlsxwriter directly from Swift instead of using an Objective-C wrapper).
 
-- `libxlsxwriter-Mac`: contains a Mac example written in Objective-C that runs the examples implemented by the files in the `Common` folder.
+- `libxlsxwriter-OSX`: contains a Mac example written in Objective-C that runs the examples implemented by the files in the `Common` folder.
 
 ### Requirements
 
@@ -22,7 +22,7 @@ This repository contains four sub-folders:
 
 - The Xcode example projects have been created with Xcode 7.1 on OS X El Capitan‎.
 
-- The iOS project have a minimum deployment target of iOS 8.0, while the Mac project has a minimum deployment target of OS X 10.10 (Yosemite).
+- The iOS project have a minimum deployment target of iOS 8.0, while the OS X project has a minimum deployment target of OS X 10.10 (Yosemite).
 
 - Since the libxlsxwriter library itself is written in C, there should be no problems in running it on previous versions of iOS and OS X as well.
 
