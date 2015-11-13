@@ -30,7 +30,7 @@ This repository contains four sub-folders:
 
 ### License
 
-These example projects are released under a license of the same kind of libxlsxwriter ([FreeBSD](LICENSE)).
+These example projects are released under a license of the same kind of libxlsxwriter ([FreeBSD](LICENSE.md)).
 
 ## About libxlsxwriter
 
