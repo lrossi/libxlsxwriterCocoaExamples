@@ -61,7 +61,7 @@ static NSString * const kViewExampleSegueIdentifier = @"ViewExample";
     }
 }
 
-#pragma mark - Example Manager
+#pragma mark - Examples
 
 - (NSArray *)examples {
     if (!_examples) {

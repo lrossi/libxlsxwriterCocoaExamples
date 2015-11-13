@@ -1,0 +1,572 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0648DFA6EBD873B0EE91EC7C25D292A3 /* queue.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CCBB39B607ED6317BD6EE558253886D /* queue.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0756626BDD39F3B641164D3279150591 /* app.h in Headers */ = {isa = PBXBuildFile; fileRef = 88CEB64316D519CAEED6F4133D1F9519 /* app.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0B7DE0A878B9DCC74C91EF281025C37A /* content_types.c in Sources */ = {isa = PBXBuildFile; fileRef = 14BFAE5012F20448EABEC17B5877F9A6 /* content_types.c */; settings = {COMPILER_FLAGS = "-DNOCRYPT=1 -DNOUNCRYPT=1"; }; };
+		0E670B60EF95D6B5924E8C2B7392F0A2 /* relationships.c in Sources */ = {isa = PBXBuildFile; fileRef = 8784CE4D9880F5C7F0D3800494BABA98 /* relationships.c */; settings = {COMPILER_FLAGS = "-DNOCRYPT=1 -DNOUNCRYPT=1"; }; };
+		0F7B5E2F0EF144512A0593E522B741E7 /* common.h in Headers */ = {isa = PBXBuildFile; fileRef = 5AE9018CE1AA382FAFA364EE6EF37B57 /* common.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		103C3DCAA8B375BA68D0A601D98B840A /* ioapi.h in Headers */ = {isa = PBXBuildFile; fileRef = E00E79B083E922C23B02311605E35734 /* ioapi.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1518AE3E6D396FB326166A566DFC2EDE /* core.h in Headers */ = {isa = PBXBuildFile; fileRef = 8922052D8FC35559846106C812370FAA /* core.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1B14CD81658BFFC73A9D7053D090E3F7 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CA6EBC2E57D96052268211209D6AA52 /* Cocoa.framework */; };
+		1D531FE0D8FE89044662CC9BBA4DE615 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CA6EBC2E57D96052268211209D6AA52 /* Cocoa.framework */; };
+		209386FC94768FD759909D1F6F3669B6 /* xmlwriter.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F83AA584044F674CBE7168A526C897E /* xmlwriter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		224359D80D052DF119545B527D81ABB1 /* theme.h in Headers */ = {isa = PBXBuildFile; fileRef = 55DD6094B74D8C797B80CB12EF01F6BC /* theme.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		37308321F9AC4C6F8A5FD29599712B7C /* app.c in Sources */ = {isa = PBXBuildFile; fileRef = B5AB30ADBD37BE02223B1BA91BE1521C /* app.c */; settings = {COMPILER_FLAGS = "-DNOCRYPT=1 -DNOUNCRYPT=1"; }; };
+		3CBFD528755756EFBB29E9BC8EFE4CFE /* xlsxwriter.h in Headers */ = {isa = PBXBuildFile; fileRef = 4769FA7D1D4DAE19D316FB7DDDB50F83 /* xlsxwriter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4A21BB524CF8EF79E4F73CC348DB9C9B /* worksheet.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E7DB0BDDCF51DD5F12133A1E947A81F /* worksheet.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		55CD7AF3154E0F837D1E1E47B3BE4A2A /* theme.c in Sources */ = {isa = PBXBuildFile; fileRef = F807907E3A2957A93F3C947693D6C753 /* theme.c */; settings = {COMPILER_FLAGS = "-DNOCRYPT=1 -DNOUNCRYPT=1"; }; };
+		58B358C39F6BFC31112075E275F78234 /* utility.c in Sources */ = {isa = PBXBuildFile; fileRef = 2F88512B0EC0E1F8F1639B5AEC4F3BED /* utility.c */; settings = {COMPILER_FLAGS = "-DNOCRYPT=1 -DNOUNCRYPT=1"; }; };
+		58E11225C4FA6A47C490E668BF133DA2 /* content_types.h in Headers */ = {isa = PBXBuildFile; fileRef = 14F61D2D68A371AFC92A20F1D86EB0BF /* content_types.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5D00277979DF124D7BE82F66AEDD59C4 /* format.c in Sources */ = {isa = PBXBuildFile; fileRef = B010D33EBA72BAC1FAA7B1259B45346C /* format.c */; settings = {COMPILER_FLAGS = "-DNOCRYPT=1 -DNOUNCRYPT=1"; }; };
+		6CBD7D073AB6A297A11166E1B833D0D3 /* relationships.h in Headers */ = {isa = PBXBuildFile; fileRef = 685C836F5E369ACF341AE55FE8B6A130 /* relationships.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		765C472C1A12EAE1635774DCB42C9F00 /* shared_strings.c in Sources */ = {isa = PBXBuildFile; fileRef = 57D890E6F0F44A047AACAFD093C9BB17 /* shared_strings.c */; settings = {COMPILER_FLAGS = "-DNOCRYPT=1 -DNOUNCRYPT=1"; }; };
+		76FC76F48497126CED1D9D1FBE4914AF /* shared_strings.h in Headers */ = {isa = PBXBuildFile; fileRef = F2F665F0147FA630ADEC339DA36B6615 /* shared_strings.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7F6A193E25FC2740E1C19CCB9B55B720 /* utility.h in Headers */ = {isa = PBXBuildFile; fileRef = AD917CDAD261416489373D0904507C27 /* utility.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8504FFE5B568601E7E11EBF20129E6DE /* libxlsxwriter-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = C6A96736CC52FCF2EF5F2829C1674AED /* libxlsxwriter-dummy.m */; };
+		99DF8BA48EC87B684009F105CA169E5D /* core.c in Sources */ = {isa = PBXBuildFile; fileRef = 5A91C14F85DF737F068E41B13A6B9D97 /* core.c */; settings = {COMPILER_FLAGS = "-DNOCRYPT=1 -DNOUNCRYPT=1"; }; };
+		9DAA213BF0393A1FF603BFA5082018E4 /* styles.h in Headers */ = {isa = PBXBuildFile; fileRef = B18063EFEDAAF3E54054D8D86FE7115F /* styles.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A233336EC330700551A657BBF9AA593C /* hash_table.c in Sources */ = {isa = PBXBuildFile; fileRef = 3C37803AC0030BFE004F9E76427F12D4 /* hash_table.c */; settings = {COMPILER_FLAGS = "-DNOCRYPT=1 -DNOUNCRYPT=1"; }; };
+		A2A4776024C5B5D0AAC2E901ABBCC8CE /* xmlwriter.c in Sources */ = {isa = PBXBuildFile; fileRef = 2AAF825B3C049B81ED0E5C3BBEE79A50 /* xmlwriter.c */; settings = {COMPILER_FLAGS = "-DNOCRYPT=1 -DNOUNCRYPT=1"; }; };
+		B47C30E6B5C95F7DC18B2EA2540F063C /* format.h in Headers */ = {isa = PBXBuildFile; fileRef = 83EFF5B662D2DA723C89A60447017665 /* format.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BDA0CD06D7946B821793958B9CA49729 /* workbook.h in Headers */ = {isa = PBXBuildFile; fileRef = BD1672C9175ED455F60A6E8156168607 /* workbook.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BDD4FF514E922B05C6FCFF1A51FE9510 /* packager.c in Sources */ = {isa = PBXBuildFile; fileRef = 4734860AFC5B91CB1D52C1D54F8C5533 /* packager.c */; settings = {COMPILER_FLAGS = "-DNOCRYPT=1 -DNOUNCRYPT=1"; }; };
+		C9B4CEEE2033B0E04D7DA97BE1188454 /* ioapi.c in Sources */ = {isa = PBXBuildFile; fileRef = 05CD1C7C68E704B9003AC90591E1677B /* ioapi.c */; settings = {COMPILER_FLAGS = "-DNOCRYPT=1 -DNOUNCRYPT=1"; }; };
+		D3836402A03F70A53DAF368D5B9E4E0E /* styles.c in Sources */ = {isa = PBXBuildFile; fileRef = 07A6219E790B8F002869F52A9C601623 /* styles.c */; settings = {COMPILER_FLAGS = "-DNOCRYPT=1 -DNOUNCRYPT=1"; }; };
+		E075D5C57A6F80EC3F3B41BBE40E026C /* worksheet.c in Sources */ = {isa = PBXBuildFile; fileRef = 02D4D67ABB4E12095C18C0DDF5E1689D /* worksheet.c */; settings = {COMPILER_FLAGS = "-DNOCRYPT=1 -DNOUNCRYPT=1"; }; };
+		E8725F04A622AC25D83E358029C31123 /* hash_table.h in Headers */ = {isa = PBXBuildFile; fileRef = 3DDEA4EF6887114509D23E2A2809CF3F /* hash_table.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F3046F485E1D2A5A49BEB3CF3FB8408C /* packager.h in Headers */ = {isa = PBXBuildFile; fileRef = 17C6A9F37BF24E8516F24CDB97E8058A /* packager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F6355D8CD2D0D22D66F57F7374A25DA1 /* zip.h in Headers */ = {isa = PBXBuildFile; fileRef = D592DFD66B45D4A6C7DC0E95A9FDBF74 /* zip.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F65CDE4B47FCF0823E62FB011105826B /* zip.c in Sources */ = {isa = PBXBuildFile; fileRef = B29AE31BBAF7C15D305CF06059DD1B11 /* zip.c */; settings = {COMPILER_FLAGS = "-DNOCRYPT=1 -DNOUNCRYPT=1"; }; };
+		F92821349E34AAEFA62A5A7995B4C2A0 /* workbook.c in Sources */ = {isa = PBXBuildFile; fileRef = 9FBCF3C5E4E47D4B95E0CA31A6EAD7C4 /* workbook.c */; settings = {COMPILER_FLAGS = "-DNOCRYPT=1 -DNOUNCRYPT=1"; }; };
+		FD6BC46CC28A7607910F084522E9A7DD /* Pods-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 272643F56613CA0D336AE3DBF19DC404 /* Pods-dummy.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F54826AAFB41F92B13A319665CFF430D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 520E56C71BD1F81D565A019E87AB8FDD;
+			remoteInfo = libxlsxwriter;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		02D4D67ABB4E12095C18C0DDF5E1689D /* worksheet.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = worksheet.c; path = src/worksheet.c; sourceTree = "<group>"; };
+		05CD1C7C68E704B9003AC90591E1677B /* ioapi.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = ioapi.c; path = third_party/minizip/ioapi.c; sourceTree = "<group>"; };
+		07A6219E790B8F002869F52A9C601623 /* styles.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = styles.c; path = src/styles.c; sourceTree = "<group>"; };
+		10834806BD7B412BC24F347361FA2C8E /* Pods-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-acknowledgements.plist"; sourceTree = "<group>"; };
+		14BFAE5012F20448EABEC17B5877F9A6 /* content_types.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = content_types.c; path = src/content_types.c; sourceTree = "<group>"; };
+		14F61D2D68A371AFC92A20F1D86EB0BF /* content_types.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = content_types.h; path = include/xlsxwriter/content_types.h; sourceTree = "<group>"; };
+		17C6A9F37BF24E8516F24CDB97E8058A /* packager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = packager.h; path = include/xlsxwriter/packager.h; sourceTree = "<group>"; };
+		1CA6EBC2E57D96052268211209D6AA52 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
+		272643F56613CA0D336AE3DBF19DC404 /* Pods-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-dummy.m"; sourceTree = "<group>"; };
+		2AAF825B3C049B81ED0E5C3BBEE79A50 /* xmlwriter.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = xmlwriter.c; path = src/xmlwriter.c; sourceTree = "<group>"; };
+		2F88512B0EC0E1F8F1639B5AEC4F3BED /* utility.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = utility.c; path = src/utility.c; sourceTree = "<group>"; };
+		37DB56D75062CC75FCB0966E1C6E8A8E /* Pods-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-acknowledgements.markdown"; sourceTree = "<group>"; };
+		3C37803AC0030BFE004F9E76427F12D4 /* hash_table.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = hash_table.c; path = src/hash_table.c; sourceTree = "<group>"; };
+		3CCBB39B607ED6317BD6EE558253886D /* queue.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = queue.h; path = include/xlsxwriter/third_party/queue.h; sourceTree = "<group>"; };
+		3DDEA4EF6887114509D23E2A2809CF3F /* hash_table.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = hash_table.h; path = include/xlsxwriter/hash_table.h; sourceTree = "<group>"; };
+		46E8B5693359361904D03F71AD92388C /* libxlsxwriter.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = libxlsxwriter.xcconfig; sourceTree = "<group>"; };
+		4734860AFC5B91CB1D52C1D54F8C5533 /* packager.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = packager.c; path = src/packager.c; sourceTree = "<group>"; };
+		4769FA7D1D4DAE19D316FB7DDDB50F83 /* xlsxwriter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = xlsxwriter.h; path = include/xlsxwriter.h; sourceTree = "<group>"; };
+		4E762F23EC34ED4A6FF3312D84E33A40 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Pods.debug.xcconfig; sourceTree = "<group>"; };
+		4E7DB0BDDCF51DD5F12133A1E947A81F /* worksheet.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = worksheet.h; path = include/xlsxwriter/worksheet.h; sourceTree = "<group>"; };
+		50A6DF4854DC1E19610794A657ABE5DD /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		55DD6094B74D8C797B80CB12EF01F6BC /* theme.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = theme.h; path = include/xlsxwriter/theme.h; sourceTree = "<group>"; };
+		57D890E6F0F44A047AACAFD093C9BB17 /* shared_strings.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = shared_strings.c; path = src/shared_strings.c; sourceTree = "<group>"; };
+		5A91C14F85DF737F068E41B13A6B9D97 /* core.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = core.c; path = src/core.c; sourceTree = "<group>"; };
+		5AE9018CE1AA382FAFA364EE6EF37B57 /* common.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = common.h; path = include/xlsxwriter/common.h; sourceTree = "<group>"; };
+		685C836F5E369ACF341AE55FE8B6A130 /* relationships.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = relationships.h; path = include/xlsxwriter/relationships.h; sourceTree = "<group>"; };
+		6911BECA35E7518D864239B7E898EEF3 /* Pods-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-frameworks.sh"; sourceTree = "<group>"; };
+		7F83AA584044F674CBE7168A526C897E /* xmlwriter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = xmlwriter.h; path = include/xlsxwriter/xmlwriter.h; sourceTree = "<group>"; };
+		7F85931881ED3FF9BBBB46975793CC09 /* libxlsxwriter-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "libxlsxwriter-prefix.pch"; sourceTree = "<group>"; };
+		83EFF5B662D2DA723C89A60447017665 /* format.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = format.h; path = include/xlsxwriter/format.h; sourceTree = "<group>"; };
+		8784CE4D9880F5C7F0D3800494BABA98 /* relationships.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = relationships.c; path = src/relationships.c; sourceTree = "<group>"; };
+		88CEB64316D519CAEED6F4133D1F9519 /* app.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = app.h; path = include/xlsxwriter/app.h; sourceTree = "<group>"; };
+		8922052D8FC35559846106C812370FAA /* core.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = core.h; path = include/xlsxwriter/core.h; sourceTree = "<group>"; };
+		98C98CDFB3F20F2925F6CD1F141BB14F /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Pods.release.xcconfig; sourceTree = "<group>"; };
+		9FBCF3C5E4E47D4B95E0CA31A6EAD7C4 /* workbook.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = workbook.c; path = src/workbook.c; sourceTree = "<group>"; };
+		A1A36D34413696BE466E2CA0AFF194DA /* Pods-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-resources.sh"; sourceTree = "<group>"; };
+		AD917CDAD261416489373D0904507C27 /* utility.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = utility.h; path = include/xlsxwriter/utility.h; sourceTree = "<group>"; };
+		B010D33EBA72BAC1FAA7B1259B45346C /* format.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = format.c; path = src/format.c; sourceTree = "<group>"; };
+		B18063EFEDAAF3E54054D8D86FE7115F /* styles.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = styles.h; path = include/xlsxwriter/styles.h; sourceTree = "<group>"; };
+		B29AE31BBAF7C15D305CF06059DD1B11 /* zip.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = zip.c; path = third_party/minizip/zip.c; sourceTree = "<group>"; };
+		B5AB30ADBD37BE02223B1BA91BE1521C /* app.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = app.c; path = src/app.c; sourceTree = "<group>"; };
+		BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		BD1672C9175ED455F60A6E8156168607 /* workbook.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = workbook.h; path = include/xlsxwriter/workbook.h; sourceTree = "<group>"; };
+		C6A96736CC52FCF2EF5F2829C1674AED /* libxlsxwriter-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "libxlsxwriter-dummy.m"; sourceTree = "<group>"; };
+		D592DFD66B45D4A6C7DC0E95A9FDBF74 /* zip.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = zip.h; path = include/xlsxwriter/third_party/minizip/zip.h; sourceTree = "<group>"; };
+		D68D2BD1146824BAA548B63B96273E7E /* liblibxlsxwriter.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = liblibxlsxwriter.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		E00E79B083E922C23B02311605E35734 /* ioapi.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ioapi.h; path = include/xlsxwriter/third_party/minizip/ioapi.h; sourceTree = "<group>"; };
+		F2F665F0147FA630ADEC339DA36B6615 /* shared_strings.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = shared_strings.h; path = include/xlsxwriter/shared_strings.h; sourceTree = "<group>"; };
+		F807907E3A2957A93F3C947693D6C753 /* theme.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = theme.c; path = src/theme.c; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		9EA6044E4741CB03FFEBC8BB2AE1A065 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1D531FE0D8FE89044662CC9BBA4DE615 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E7BB42E6807558DF862A72DA64BA32E6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1B14CD81658BFFC73A9D7053D090E3F7 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		037C0CA694176A3C0915F62C9D20B3E6 /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				B3D1D13E0C6553800746CB8FD61CF946 /* Pods */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		0ACD83F8205F5E6FE29C70C9B4F5D2A3 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				0EF7658BDB323D3EAD238BC7D25E80D3 /* libxlsxwriter */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		0EF7658BDB323D3EAD238BC7D25E80D3 /* libxlsxwriter */ = {
+			isa = PBXGroup;
+			children = (
+				B5AB30ADBD37BE02223B1BA91BE1521C /* app.c */,
+				88CEB64316D519CAEED6F4133D1F9519 /* app.h */,
+				5AE9018CE1AA382FAFA364EE6EF37B57 /* common.h */,
+				14BFAE5012F20448EABEC17B5877F9A6 /* content_types.c */,
+				14F61D2D68A371AFC92A20F1D86EB0BF /* content_types.h */,
+				5A91C14F85DF737F068E41B13A6B9D97 /* core.c */,
+				8922052D8FC35559846106C812370FAA /* core.h */,
+				B010D33EBA72BAC1FAA7B1259B45346C /* format.c */,
+				83EFF5B662D2DA723C89A60447017665 /* format.h */,
+				3C37803AC0030BFE004F9E76427F12D4 /* hash_table.c */,
+				3DDEA4EF6887114509D23E2A2809CF3F /* hash_table.h */,
+				05CD1C7C68E704B9003AC90591E1677B /* ioapi.c */,
+				E00E79B083E922C23B02311605E35734 /* ioapi.h */,
+				4734860AFC5B91CB1D52C1D54F8C5533 /* packager.c */,
+				17C6A9F37BF24E8516F24CDB97E8058A /* packager.h */,
+				3CCBB39B607ED6317BD6EE558253886D /* queue.h */,
+				8784CE4D9880F5C7F0D3800494BABA98 /* relationships.c */,
+				685C836F5E369ACF341AE55FE8B6A130 /* relationships.h */,
+				57D890E6F0F44A047AACAFD093C9BB17 /* shared_strings.c */,
+				F2F665F0147FA630ADEC339DA36B6615 /* shared_strings.h */,
+				07A6219E790B8F002869F52A9C601623 /* styles.c */,
+				B18063EFEDAAF3E54054D8D86FE7115F /* styles.h */,
+				F807907E3A2957A93F3C947693D6C753 /* theme.c */,
+				55DD6094B74D8C797B80CB12EF01F6BC /* theme.h */,
+				2F88512B0EC0E1F8F1639B5AEC4F3BED /* utility.c */,
+				AD917CDAD261416489373D0904507C27 /* utility.h */,
+				9FBCF3C5E4E47D4B95E0CA31A6EAD7C4 /* workbook.c */,
+				BD1672C9175ED455F60A6E8156168607 /* workbook.h */,
+				02D4D67ABB4E12095C18C0DDF5E1689D /* worksheet.c */,
+				4E7DB0BDDCF51DD5F12133A1E947A81F /* worksheet.h */,
+				4769FA7D1D4DAE19D316FB7DDDB50F83 /* xlsxwriter.h */,
+				2AAF825B3C049B81ED0E5C3BBEE79A50 /* xmlwriter.c */,
+				7F83AA584044F674CBE7168A526C897E /* xmlwriter.h */,
+				B29AE31BBAF7C15D305CF06059DD1B11 /* zip.c */,
+				D592DFD66B45D4A6C7DC0E95A9FDBF74 /* zip.h */,
+				19AF9A399D3B746704CAA7F64FE1B4B3 /* Support Files */,
+			);
+			path = libxlsxwriter;
+			sourceTree = "<group>";
+		};
+		19AF9A399D3B746704CAA7F64FE1B4B3 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				46E8B5693359361904D03F71AD92388C /* libxlsxwriter.xcconfig */,
+				C6A96736CC52FCF2EF5F2829C1674AED /* libxlsxwriter-dummy.m */,
+				7F85931881ED3FF9BBBB46975793CC09 /* libxlsxwriter-prefix.pch */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/libxlsxwriter";
+			sourceTree = "<group>";
+		};
+		28C17CEF104526ACA07B6EEE217EC43E /* OS X */ = {
+			isa = PBXGroup;
+			children = (
+				1CA6EBC2E57D96052268211209D6AA52 /* Cocoa.framework */,
+			);
+			name = "OS X";
+			sourceTree = "<group>";
+		};
+		39E9EE8210D861DFD82346C1F5EB7218 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				28C17CEF104526ACA07B6EEE217EC43E /* OS X */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7DB346D0F39D3F0E887471402A8071AB = {
+			isa = PBXGroup;
+			children = (
+				BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */,
+				39E9EE8210D861DFD82346C1F5EB7218 /* Frameworks */,
+				0ACD83F8205F5E6FE29C70C9B4F5D2A3 /* Pods */,
+				C636185C3DC3B18BC807D6219767688C /* Products */,
+				037C0CA694176A3C0915F62C9D20B3E6 /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		B3D1D13E0C6553800746CB8FD61CF946 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				37DB56D75062CC75FCB0966E1C6E8A8E /* Pods-acknowledgements.markdown */,
+				10834806BD7B412BC24F347361FA2C8E /* Pods-acknowledgements.plist */,
+				272643F56613CA0D336AE3DBF19DC404 /* Pods-dummy.m */,
+				6911BECA35E7518D864239B7E898EEF3 /* Pods-frameworks.sh */,
+				A1A36D34413696BE466E2CA0AFF194DA /* Pods-resources.sh */,
+				4E762F23EC34ED4A6FF3312D84E33A40 /* Pods.debug.xcconfig */,
+				98C98CDFB3F20F2925F6CD1F141BB14F /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			path = "Target Support Files/Pods";
+			sourceTree = "<group>";
+		};
+		C636185C3DC3B18BC807D6219767688C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D68D2BD1146824BAA548B63B96273E7E /* liblibxlsxwriter.a */,
+				50A6DF4854DC1E19610794A657ABE5DD /* libPods.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		42B2B1D2627485E16F1B64D97E19D33A /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0756626BDD39F3B641164D3279150591 /* app.h in Headers */,
+				0F7B5E2F0EF144512A0593E522B741E7 /* common.h in Headers */,
+				58E11225C4FA6A47C490E668BF133DA2 /* content_types.h in Headers */,
+				1518AE3E6D396FB326166A566DFC2EDE /* core.h in Headers */,
+				B47C30E6B5C95F7DC18B2EA2540F063C /* format.h in Headers */,
+				E8725F04A622AC25D83E358029C31123 /* hash_table.h in Headers */,
+				103C3DCAA8B375BA68D0A601D98B840A /* ioapi.h in Headers */,
+				F3046F485E1D2A5A49BEB3CF3FB8408C /* packager.h in Headers */,
+				0648DFA6EBD873B0EE91EC7C25D292A3 /* queue.h in Headers */,
+				6CBD7D073AB6A297A11166E1B833D0D3 /* relationships.h in Headers */,
+				76FC76F48497126CED1D9D1FBE4914AF /* shared_strings.h in Headers */,
+				9DAA213BF0393A1FF603BFA5082018E4 /* styles.h in Headers */,
+				224359D80D052DF119545B527D81ABB1 /* theme.h in Headers */,
+				7F6A193E25FC2740E1C19CCB9B55B720 /* utility.h in Headers */,
+				BDA0CD06D7946B821793958B9CA49729 /* workbook.h in Headers */,
+				4A21BB524CF8EF79E4F73CC348DB9C9B /* worksheet.h in Headers */,
+				3CBFD528755756EFBB29E9BC8EFE4CFE /* xlsxwriter.h in Headers */,
+				209386FC94768FD759909D1F6F3669B6 /* xmlwriter.h in Headers */,
+				F6355D8CD2D0D22D66F57F7374A25DA1 /* zip.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		520E56C71BD1F81D565A019E87AB8FDD /* libxlsxwriter */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 33445359D7A039A0A61FB1C6EDFA5CE5 /* Build configuration list for PBXNativeTarget "libxlsxwriter" */;
+			buildPhases = (
+				3C3EE8EC805CF51216FFB69D4BBAE841 /* Sources */,
+				E7BB42E6807558DF862A72DA64BA32E6 /* Frameworks */,
+				42B2B1D2627485E16F1B64D97E19D33A /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = libxlsxwriter;
+			productName = libxlsxwriter;
+			productReference = D68D2BD1146824BAA548B63B96273E7E /* liblibxlsxwriter.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		CA38DDB70FA1DA97C90958EA88FC2C89 /* Pods */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A39536AE061F6EE260E0625E47F6623F /* Build configuration list for PBXNativeTarget "Pods" */;
+			buildPhases = (
+				A7E73D85B3A91662C7FF2F3039F0F9D3 /* Sources */,
+				9EA6044E4741CB03FFEBC8BB2AE1A065 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5F7F1B37B892B5AA385FC09A97D58B37 /* PBXTargetDependency */,
+			);
+			name = Pods;
+			productName = Pods;
+			productReference = 50A6DF4854DC1E19610794A657ABE5DD /* libPods.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D41D8CD98F00B204E9800998ECF8427E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0700;
+				LastUpgradeCheck = 0700;
+			};
+			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
+			productRefGroup = C636185C3DC3B18BC807D6219767688C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				520E56C71BD1F81D565A019E87AB8FDD /* libxlsxwriter */,
+				CA38DDB70FA1DA97C90958EA88FC2C89 /* Pods */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3C3EE8EC805CF51216FFB69D4BBAE841 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				37308321F9AC4C6F8A5FD29599712B7C /* app.c in Sources */,
+				0B7DE0A878B9DCC74C91EF281025C37A /* content_types.c in Sources */,
+				99DF8BA48EC87B684009F105CA169E5D /* core.c in Sources */,
+				5D00277979DF124D7BE82F66AEDD59C4 /* format.c in Sources */,
+				A233336EC330700551A657BBF9AA593C /* hash_table.c in Sources */,
+				C9B4CEEE2033B0E04D7DA97BE1188454 /* ioapi.c in Sources */,
+				8504FFE5B568601E7E11EBF20129E6DE /* libxlsxwriter-dummy.m in Sources */,
+				BDD4FF514E922B05C6FCFF1A51FE9510 /* packager.c in Sources */,
+				0E670B60EF95D6B5924E8C2B7392F0A2 /* relationships.c in Sources */,
+				765C472C1A12EAE1635774DCB42C9F00 /* shared_strings.c in Sources */,
+				D3836402A03F70A53DAF368D5B9E4E0E /* styles.c in Sources */,
+				55CD7AF3154E0F837D1E1E47B3BE4A2A /* theme.c in Sources */,
+				58B358C39F6BFC31112075E275F78234 /* utility.c in Sources */,
+				F92821349E34AAEFA62A5A7995B4C2A0 /* workbook.c in Sources */,
+				E075D5C57A6F80EC3F3B41BBE40E026C /* worksheet.c in Sources */,
+				A2A4776024C5B5D0AAC2E901ABBCC8CE /* xmlwriter.c in Sources */,
+				F65CDE4B47FCF0823E62FB011105826B /* zip.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A7E73D85B3A91662C7FF2F3039F0F9D3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FD6BC46CC28A7607910F084522E9A7DD /* Pods-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		5F7F1B37B892B5AA385FC09A97D58B37 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = libxlsxwriter;
+			target = 520E56C71BD1F81D565A019E87AB8FDD /* libxlsxwriter */;
+			targetProxy = F54826AAFB41F92B13A319665CFF430D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		029B7EAD182A767D5F08BB84994A4411 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 46E8B5693359361904D03F71AD92388C /* libxlsxwriter.xcconfig */;
+			buildSettings = {
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				EXECUTABLE_PREFIX = lib;
+				GCC_PREFIX_HEADER = "Target Support Files/libxlsxwriter/libxlsxwriter-prefix.pch";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		1E621D6BF749EDCE77ACBE7C6D464E29 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				ONLY_ACTIVE_ARCH = YES;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Debug;
+		};
+		4B487C51A954FAD927E2B174F63DEBBD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4E762F23EC34ED4A6FF3312D84E33A40 /* Pods.debug.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				EXECUTABLE_PREFIX = lib;
+				MACH_O_TYPE = staticlib;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		52C8A9BECAB01E81824AFB0A0D6C2F25 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 98C98CDFB3F20F2925F6CD1F141BB14F /* Pods.release.xcconfig */;
+			buildSettings = {
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				EXECUTABLE_PREFIX = lib;
+				MACH_O_TYPE = staticlib;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		5577A3F22A37686E40DB6863D68D476C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PREPROCESSOR_DEFINITIONS = "RELEASE=1";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F785D595D112A10ECB5C9F6675C9B0F6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 46E8B5693359361904D03F71AD92388C /* libxlsxwriter.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				EXECUTABLE_PREFIX = lib;
+				GCC_PREFIX_HEADER = "Target Support Files/libxlsxwriter/libxlsxwriter-prefix.pch";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1E621D6BF749EDCE77ACBE7C6D464E29 /* Debug */,
+				5577A3F22A37686E40DB6863D68D476C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		33445359D7A039A0A61FB1C6EDFA5CE5 /* Build configuration list for PBXNativeTarget "libxlsxwriter" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F785D595D112A10ECB5C9F6675C9B0F6 /* Debug */,
+				029B7EAD182A767D5F08BB84994A4411 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A39536AE061F6EE260E0625E47F6623F /* Build configuration list for PBXNativeTarget "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4B487C51A954FAD927E2B174F63DEBBD /* Debug */,
+				52C8A9BECAB01E81824AFB0A0D6C2F25 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+}

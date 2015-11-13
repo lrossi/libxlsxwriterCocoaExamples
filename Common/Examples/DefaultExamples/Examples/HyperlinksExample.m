@@ -20,7 +20,7 @@
 }
 
 - (NSString *)outputFileName {
-    return @"hyperlinks.xlsx";
+    return @"hyperlinks";
 }
 
 - (void)run {
