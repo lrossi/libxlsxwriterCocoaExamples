@@ -1,3 +1,6 @@
 platform :osx, '10.10'
 
-pod 'libxlsxwriter', '~> 0.3.1'
+target 'libxlsxwriter-OSX' do
+    pod 'libxlsxwriter', '~> 0.3.1'
+end
+

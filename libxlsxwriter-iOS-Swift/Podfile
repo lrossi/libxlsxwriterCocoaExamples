@@ -1,3 +1,6 @@
 platform :ios, '8.0'
 
-pod 'libxlsxwriter', '~> 0.3.1'
+target 'libxlsxwriter-Swift' do
+    pod 'libxlsxwriter', '~> 0.3.1'
+end
+
