@@ -3,7 +3,7 @@
  *
  * Used in conjunction with the libxlsxwriter library.
  *
- * Copyright 2014-2015, John McNamara, jmcnamara@cpan.org. See LICENSE.txt.
+ * Copyright 2014-2016, John McNamara, jmcnamara@cpan.org. See LICENSE.txt.
  *
  */
 
@@ -231,7 +231,7 @@ lxw_get_col_2(const char *col_str)
  * Convert a lxw_datetime struct to an Excel serial date.
  */
 double
-_datetime_to_excel_date(lxw_datetime *datetime, uint8_t date_1904)
+lxw_datetime_to_excel_date(lxw_datetime *datetime, uint8_t date_1904)
 {
     int year = datetime->year;
     int month = datetime->month;
@@ -284,7 +284,7 @@ _datetime_to_excel_date(lxw_datetime *datetime, uint8_t date_1904)
 
     /* We calculate the date by calculating the number of days since the */
     /* epoch and adjust for the number of leap days. We calculate the */
-    /* number of leap days by normalising the year in relation to the */
+    /* number of leap days by normalizing the year in relation to the */
     /* epoch. Thus the year 2000 becomes 100 for 4-year and 100-year */
     /* leapdays and 400 for 400-year leapdays. */
     range = year - epoch;

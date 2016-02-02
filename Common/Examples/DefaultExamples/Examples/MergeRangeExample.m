@@ -43,10 +43,10 @@
     format_set_border(merge_format, LXW_BORDER_THIN);
     
     /* Increase the cell size of the merged cells to highlight the formatting. */
-    worksheet_set_column(worksheet, 1, 3, 12, NULL, NULL);
-    worksheet_set_row(worksheet, 3, 30, NULL, NULL);
-    worksheet_set_row(worksheet, 6, 30, NULL, NULL);
-    worksheet_set_row(worksheet, 7, 30, NULL, NULL);
+    worksheet_set_column(worksheet, 1, 3, 12, NULL);
+    worksheet_set_row(worksheet, 3, 30, NULL);
+    worksheet_set_row(worksheet, 6, 30, NULL);
+    worksheet_set_row(worksheet, 7, 30, NULL);
     
     /* Merge 3 cells. */
     worksheet_merge_range(worksheet, 3, 1, 3, 3, "Merged Range", merge_format);

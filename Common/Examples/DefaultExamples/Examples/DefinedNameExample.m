@@ -24,7 +24,7 @@
 }
 
 - (void)run {
-    /*  r
+    /*
      * Example of how to create defined names using libxlsxwriter. This method is
      * used to define a user friendly name to represent a value, a single cell or
      * a range of cells in a workbook.
@@ -51,7 +51,7 @@
     
     /* Write some text to the worksheets and a defined names in a formula. */
     LXW_FOREACH_WORKSHEET(worksheet, workbook){
-        worksheet_set_column(worksheet, 0, 0, 45, NULL, NULL);
+        worksheet_set_column(worksheet, 0, 0, 45, NULL);
         
         worksheet_write_string(worksheet, 0, 0,
                                "This worksheet contains some defined names.", NULL);

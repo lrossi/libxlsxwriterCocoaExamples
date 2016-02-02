@@ -1,7 +1,7 @@
 # libxlsxwriter
 
 
-A C library for creating Excel XLSX files.
+Libxlsxwriter: A C library for creating Excel XLSX files.
 
 
 ![demo image](http://libxlsxwriter.github.io/demo.png)
@@ -13,19 +13,19 @@ Libxlsxwriter is a C library that can be used to write text, numbers, formulas a
 
 It supports features such as:
 
-- 100% compatible Excel XLSX files
-- Full Excel formatting
-- Merged cells
-- Autofilters
-- Defined names
-- Memory optimisation mode for writing large files
-- Source code available on [GitHub](https://github.com/jmcnamara/libxlsxwriter)
-- FreeBSD license
-- ANSI C
-- Works with GCC 4.4, 4.6, 4.7, 4.8, 4.9, Clang, ICC and TCC.
-- Works on Linux, FreeBSD, OS X and iOS.
-- The only dependency is on `zlib`
-
+- 100% compatible Excel XLSX files.
+- Full Excel formatting.
+- Merged cells.
+- Defined names.
+- Autofilters.
+- Worksheet PNG/JPEG images.
+- Memory optimization mode for writing large files.
+- Source code available on [GitHub](https://github.com/jmcnamara/libxlsxwriter).
+- FreeBSD ref license.
+- ANSI C.
+- Works with GCC 4.x, GCC 5.x, Clang, Xcode, MSVC 2015, ICC and TCC.
+- Works on Linux, FreeBSD, OS X, iOS and Windows.
+- The only dependency is on `zlib`.
 
 Here is an example that was used to create the spreadsheet shown above:
 
@@ -36,7 +36,7 @@ Here is an example that was used to create the spreadsheet shown above:
 int main() {
 
     /* Create a new workbook and add a worksheet. */
-    lxw_workbook  *workbook  = new_workbook("demo.xlsx");
+    lxw_workbook  *workbook  = workbook_new("demo.xlsx");
     lxw_worksheet *worksheet = workbook_add_worksheet(workbook, NULL);
 
     /* Add a format. */
@@ -45,8 +45,8 @@ int main() {
     /* Set the bold property for the format */
     format_set_bold(format);
 
-    /* Widen the first column to make the text clearer. */
-    worksheet_set_column(worksheet, 0, 0, 20, NULL, NULL);
+    /* Change the column width for clarity. */
+    worksheet_set_column(worksheet, 0, 0, 20, NULL);
 
     /* Write some simple text. */
     worksheet_write_string(worksheet, 0, 0, "Hello", NULL);
@@ -57,6 +57,9 @@ int main() {
     /* Writer some numbers. */
     worksheet_write_number(worksheet, 2, 0, 123,     NULL);
     worksheet_write_number(worksheet, 3, 0, 123.456, NULL);
+
+    /* Insert an image. */
+    worksheet_insert_image(worksheet, 1, 2, "logo.png");
 
     workbook_close(workbook);
 

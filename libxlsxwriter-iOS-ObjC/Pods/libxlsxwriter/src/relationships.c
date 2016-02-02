@@ -3,7 +3,7 @@
  *
  * Used in conjunction with the libxlsxwriter library.
  *
- * Copyright 2014-2015, John McNamara, jmcnamara@cpan.org. See LICENSE.txt.
+ * Copyright 2014-2016, John McNamara, jmcnamara@cpan.org. See LICENSE.txt.
  *
  */
 
@@ -26,7 +26,7 @@
  * Create a new relationships object.
  */
 lxw_relationships *
-_new_relationships()
+lxw_relationships_new()
 {
     lxw_relationships *rels = calloc(1, sizeof(lxw_relationships));
     GOTO_LABEL_ON_MEM_ERROR(rels, mem_error);
@@ -38,7 +38,7 @@ _new_relationships()
     return rels;
 
 mem_error:
-    _free_relationships(rels);
+    lxw_free_relationships(rels);
     return NULL;
 }
 
@@ -46,7 +46,7 @@ mem_error:
  * Free a relationships object.
  */
 void
-_free_relationships(lxw_relationships *rels)
+lxw_free_relationships(lxw_relationships *rels)
 {
     lxw_rel_tuple *relationship;
 
@@ -78,7 +78,7 @@ _free_relationships(lxw_relationships *rels)
 STATIC void
 _relationships_xml_declaration(lxw_relationships *self)
 {
-    _xml_declaration(self->file);
+    lxw_xml_declaration(self->file);
 }
 
 /*
@@ -93,19 +93,19 @@ _write_relationship(lxw_relationships *self, const char *type,
     char r_id[MAX_ATTRIBUTE_LENGTH] = { 0 };
 
     self->rel_id++;
-    __builtin_snprintf(r_id, ATTR_32, "rId%d", self->rel_id);
+    lxw_snprintf(r_id, ATTR_32, "rId%d", self->rel_id);
 
-    _INIT_ATTRIBUTES();
-    _PUSH_ATTRIBUTES_STR("Id", r_id);
-    _PUSH_ATTRIBUTES_STR("Type", type);
-    _PUSH_ATTRIBUTES_STR("Target", target);
+    LXW_INIT_ATTRIBUTES();
+    LXW_PUSH_ATTRIBUTES_STR("Id", r_id);
+    LXW_PUSH_ATTRIBUTES_STR("Type", type);
+    LXW_PUSH_ATTRIBUTES_STR("Target", target);
 
     if (target_mode)
-        _PUSH_ATTRIBUTES_STR("TargetMode", target_mode);
+        LXW_PUSH_ATTRIBUTES_STR("TargetMode", target_mode);
 
-    _xml_empty_tag(self->file, "Relationship", &attributes);
+    lxw_xml_empty_tag(self->file, "Relationship", &attributes);
 
-    _FREE_ATTRIBUTES();
+    LXW_FREE_ATTRIBUTES();
 }
 
 /*
@@ -118,16 +118,16 @@ _write_relationships(lxw_relationships *self)
     struct xml_attribute *attribute;
     lxw_rel_tuple *rel;
 
-    _INIT_ATTRIBUTES();
-    _PUSH_ATTRIBUTES_STR("xmlns", LXW_PACKAGE_SCHEMA);
+    LXW_INIT_ATTRIBUTES();
+    LXW_PUSH_ATTRIBUTES_STR("xmlns", LXW_PACKAGE_SCHEMA);
 
-    _xml_start_tag(self->file, "Relationships", &attributes);
+    lxw_xml_start_tag(self->file, "Relationships", &attributes);
 
     STAILQ_FOREACH(rel, self->relationships, list_pointers) {
         _write_relationship(self, rel->type, rel->target, rel->target_mode);
     }
 
-    _FREE_ATTRIBUTES();
+    LXW_FREE_ATTRIBUTES();
 }
 
 /*****************************************************************************
@@ -140,7 +140,7 @@ _write_relationships(lxw_relationships *self)
  * Assemble and write the XML file.
  */
 void
-_relationships_assemble_xml_file(lxw_relationships *self)
+lxw_relationships_assemble_xml_file(lxw_relationships *self)
 {
     /* Write the XML declaration. */
     _relationships_xml_declaration(self);
@@ -148,7 +148,7 @@ _relationships_assemble_xml_file(lxw_relationships *self)
     _write_relationships(self);
 
     /* Close the relationships tag. */
-    _xml_end_tag(self->file, "Relationships");
+    lxw_xml_end_tag(self->file, "Relationships");
 }
 
 /*
@@ -171,8 +171,8 @@ _add_relationship(lxw_relationships *self, const char *schema,
     GOTO_LABEL_ON_MEM_ERROR(relationship->type, mem_error);
 
     /* Add the schema to the relationship type. */
-    __builtin_snprintf(relationship->type, MAX_ATTRIBUTE_LENGTH, "%s%s",
-                       schema, type);
+    lxw_snprintf(relationship->type, MAX_ATTRIBUTE_LENGTH, "%s%s",
+                 schema, type);
 
     relationship->target = lxw_strdup(target);
     GOTO_LABEL_ON_MEM_ERROR(relationship->target, mem_error);
@@ -205,8 +205,8 @@ mem_error:
  * Add a document relationship to XLSX .rels xml files.
  */
 void
-_add_document_relationship(lxw_relationships *self, const char *type,
-                           const char *target)
+lxw_add_document_relationship(lxw_relationships *self, const char *type,
+                              const char *target)
 {
     _add_relationship(self, LXW_DOCUMENT_SCHEMA, type, target, NULL);
 }
@@ -215,8 +215,8 @@ _add_document_relationship(lxw_relationships *self, const char *type,
  * Add a package relationship to XLSX .rels xml files.
  */
 void
-_add_package_relationship(lxw_relationships *self, const char *type,
-                          const char *target)
+lxw_add_package_relationship(lxw_relationships *self, const char *type,
+                             const char *target)
 {
     _add_relationship(self, LXW_PACKAGE_SCHEMA, type, target, NULL);
 }
@@ -225,8 +225,8 @@ _add_package_relationship(lxw_relationships *self, const char *type,
  * Add a MS schema package relationship to XLSX .rels xml files.
  */
 void
-_add_ms_package_relationship(lxw_relationships *self, const char *type,
-                             const char *target)
+lxw_add_ms_package_relationship(lxw_relationships *self, const char *type,
+                                const char *target)
 {
     _add_relationship(self, LXW_MS_SCHEMA, type, target, NULL);
 }
@@ -235,8 +235,8 @@ _add_ms_package_relationship(lxw_relationships *self, const char *type,
  * Add a worksheet relationship to sheet .rels xml files.
  */
 void
-_add_worksheet_relationship(lxw_relationships *self, const char *type,
-                            const char *target, const char *target_mode)
+lxw_add_worksheet_relationship(lxw_relationships *self, const char *type,
+                               const char *target, const char *target_mode)
 {
     _add_relationship(self, LXW_DOCUMENT_SCHEMA, type, target, target_mode);
 }

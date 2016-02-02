@@ -3,7 +3,7 @@
  *
  * Used in conjunction with the libxlsxwriter library.
  *
- * Copyright 2014-2015, John McNamara, jmcnamara@cpan.org. See LICENSE.txt.
+ * Copyright 2014-2016, John McNamara, jmcnamara@cpan.org. See LICENSE.txt.
  *
  */
 
@@ -25,7 +25,7 @@
  * Create a new content_types object.
  */
 lxw_content_types *
-_new_content_types()
+lxw_content_types_new()
 {
     lxw_content_types *content_types = calloc(1, sizeof(lxw_content_types));
     GOTO_LABEL_ON_MEM_ERROR(content_types, mem_error);
@@ -38,25 +38,25 @@ _new_content_types()
     GOTO_LABEL_ON_MEM_ERROR(content_types->overrides, mem_error);
     STAILQ_INIT(content_types->overrides);
 
-    _ct_add_default(content_types, "rels",
-                    LXW_APP_PACKAGE "relationships+xml");
-    _ct_add_default(content_types, "xml", "application/xml");
+    lxw_ct_add_default(content_types, "rels",
+                       LXW_APP_PACKAGE "relationships+xml");
+    lxw_ct_add_default(content_types, "xml", "application/xml");
 
-    _ct_add_override(content_types, "/docProps/app.xml",
-                     LXW_APP_DOCUMENT "extended-properties+xml");
-    _ct_add_override(content_types, "/docProps/core.xml",
-                     LXW_APP_PACKAGE "core-properties+xml");
-    _ct_add_override(content_types, "/xl/styles.xml",
-                     LXW_APP_DOCUMENT "spreadsheetml.styles+xml");
-    _ct_add_override(content_types, "/xl/theme/theme1.xml",
-                     LXW_APP_DOCUMENT "theme+xml");
-    _ct_add_override(content_types, "/xl/workbook.xml",
-                     LXW_APP_DOCUMENT "spreadsheetml.sheet.main+xml");
+    lxw_ct_add_override(content_types, "/docProps/app.xml",
+                        LXW_APP_DOCUMENT "extended-properties+xml");
+    lxw_ct_add_override(content_types, "/docProps/core.xml",
+                        LXW_APP_PACKAGE "core-properties+xml");
+    lxw_ct_add_override(content_types, "/xl/styles.xml",
+                        LXW_APP_DOCUMENT "spreadsheetml.styles+xml");
+    lxw_ct_add_override(content_types, "/xl/theme/theme1.xml",
+                        LXW_APP_DOCUMENT "theme+xml");
+    lxw_ct_add_override(content_types, "/xl/workbook.xml",
+                        LXW_APP_DOCUMENT "spreadsheetml.sheet.main+xml");
 
     return content_types;
 
 mem_error:
-    _free_content_types(content_types);
+    lxw_content_types_free(content_types);
     return NULL;
 }
 
@@ -64,7 +64,7 @@ mem_error:
  * Free a content_types object.
  */
 void
-_free_content_types(lxw_content_types *content_types)
+lxw_content_types_free(lxw_content_types *content_types)
 {
     lxw_tuple *default_type;
     lxw_tuple *override;
@@ -105,7 +105,7 @@ _free_content_types(lxw_content_types *content_types)
 STATIC void
 _content_types_xml_declaration(lxw_content_types *self)
 {
-    _xml_declaration(self->file);
+    lxw_xml_declaration(self->file);
 }
 
 /*
@@ -117,12 +117,12 @@ _write_types(lxw_content_types *self)
     struct xml_attribute_list attributes;
     struct xml_attribute *attribute;
 
-    _INIT_ATTRIBUTES();
-    _PUSH_ATTRIBUTES_STR("xmlns", LXW_CONTENT_TYPE_SCHEMA);
+    LXW_INIT_ATTRIBUTES();
+    LXW_PUSH_ATTRIBUTES_STR("xmlns", LXW_CONTENT_TYPE_SCHEMA);
 
-    _xml_start_tag(self->file, "Types", &attributes);
+    lxw_xml_start_tag(self->file, "Types", &attributes);
 
-    _FREE_ATTRIBUTES();
+    LXW_FREE_ATTRIBUTES();
 }
 
 /*
@@ -134,13 +134,13 @@ _write_default(lxw_content_types *self, const char *ext, const char *type)
     struct xml_attribute_list attributes;
     struct xml_attribute *attribute;
 
-    _INIT_ATTRIBUTES();
-    _PUSH_ATTRIBUTES_STR("Extension", ext);
-    _PUSH_ATTRIBUTES_STR("ContentType", type);
+    LXW_INIT_ATTRIBUTES();
+    LXW_PUSH_ATTRIBUTES_STR("Extension", ext);
+    LXW_PUSH_ATTRIBUTES_STR("ContentType", type);
 
-    _xml_empty_tag(self->file, "Default", &attributes);
+    lxw_xml_empty_tag(self->file, "Default", &attributes);
 
-    _FREE_ATTRIBUTES();
+    LXW_FREE_ATTRIBUTES();
 }
 
 /*
@@ -153,13 +153,13 @@ _write_override(lxw_content_types *self, const char *part_name,
     struct xml_attribute_list attributes;
     struct xml_attribute *attribute;
 
-    _INIT_ATTRIBUTES();
-    _PUSH_ATTRIBUTES_STR("PartName", part_name);
-    _PUSH_ATTRIBUTES_STR("ContentType", type);
+    LXW_INIT_ATTRIBUTES();
+    LXW_PUSH_ATTRIBUTES_STR("PartName", part_name);
+    LXW_PUSH_ATTRIBUTES_STR("ContentType", type);
 
-    _xml_empty_tag(self->file, "Override", &attributes);
+    lxw_xml_empty_tag(self->file, "Override", &attributes);
 
-    _FREE_ATTRIBUTES();
+    LXW_FREE_ATTRIBUTES();
 }
 
 /*****************************************************************************
@@ -198,7 +198,7 @@ _write_overrides(lxw_content_types *self)
  * Assemble and write the XML file.
  */
 void
-_content_types_assemble_xml_file(lxw_content_types *self)
+lxw_content_types_assemble_xml_file(lxw_content_types *self)
 {
     /* Write the XML declaration. */
     _content_types_xml_declaration(self);
@@ -208,7 +208,7 @@ _content_types_assemble_xml_file(lxw_content_types *self)
     _write_overrides(self);
 
     /* Close the content_types tag. */
-    _xml_end_tag(self->file, "Types");
+    lxw_xml_end_tag(self->file, "Types");
 }
 
 /*****************************************************************************
@@ -220,7 +220,8 @@ _content_types_assemble_xml_file(lxw_content_types *self)
  * Add elements to the ContentTypes defaults.
  */
 void
-_ct_add_default(lxw_content_types *self, const char *key, const char *value)
+lxw_ct_add_default(lxw_content_types *self, const char *key,
+                   const char *value)
 {
     lxw_tuple *tuple;
 
@@ -252,7 +253,8 @@ mem_error:
  * Add elements to the ContentTypes overrides.
  */
 void
-_ct_add_override(lxw_content_types *self, const char *key, const char *value)
+lxw_ct_add_override(lxw_content_types *self, const char *key,
+                    const char *value)
 {
     lxw_tuple *tuple;
 
@@ -284,32 +286,37 @@ mem_error:
  * Add the name of a worksheet to the ContentTypes overrides.
  */
 void
-_ct_add_worksheet_name(lxw_content_types *self, const char *str)
+lxw_ct_add_worksheet_name(lxw_content_types *self, const char *name)
 {
-    char name[MAX_ATTRIBUTE_LENGTH];
-    __builtin_snprintf(name, MAX_ATTRIBUTE_LENGTH, "/xl/worksheets/%s.xml",
-                       str);
+    lxw_ct_add_override(self, name,
+                        LXW_APP_DOCUMENT "spreadsheetml.worksheet+xml");
+}
 
-    _ct_add_override(self, name,
-                     LXW_APP_DOCUMENT "spreadsheetml.worksheet+xml");
+/*
+ * Add the name of a drawing to the ContentTypes overrides.
+ */
+void
+lxw_ct_add_drawing_name(lxw_content_types *self, const char *name)
+{
+    lxw_ct_add_override(self, name, LXW_APP_DOCUMENT "drawing+xml");
 }
 
 /*
  * Add the sharedStrings link to the ContentTypes overrides.
  */
 void
-_ct_add_shared_strings(lxw_content_types *self)
+lxw_ct_add_shared_strings(lxw_content_types *self)
 {
-    _ct_add_override(self, "/xl/sharedStrings.xml",
-                     LXW_APP_DOCUMENT "spreadsheetml.sharedStrings+xml");
+    lxw_ct_add_override(self, "/xl/sharedStrings.xml",
+                        LXW_APP_DOCUMENT "spreadsheetml.sharedStrings+xml");
 }
 
 /*
  * Add the calcChain link to the ContentTypes overrides.
  */
 void
-_ct_add_calc_chain(lxw_content_types *self)
+lxw_ct_add_calc_chain(lxw_content_types *self)
 {
-    _ct_add_override(self, "/xl/calcChain.xml",
-                     LXW_APP_DOCUMENT "spreadsheetml.calcChain+xml");
+    lxw_ct_add_override(self, "/xl/calcChain.xml",
+                        LXW_APP_DOCUMENT "spreadsheetml.calcChain+xml");
 }

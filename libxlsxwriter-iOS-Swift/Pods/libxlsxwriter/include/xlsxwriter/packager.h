@@ -1,7 +1,7 @@
 /*
  * libxlsxwriter
- * 
- * Copyright 2014-2015, John McNamara, jmcnamara@cpan.org. See LICENSE.txt.
+ *
+ * Copyright 2014-2016, John McNamara, jmcnamara@cpan.org. See LICENSE.txt.
  *
  * packager - A libxlsxwriter library for creating Excel XLSX packager files.
  *
@@ -10,7 +10,6 @@
 #define __LXW_PACKAGER_H__
 
 #include <stdint.h>
-#include "xlsxwriter/third_party/queue.h"
 #include "xlsxwriter/third_party/minizip/zip.h"
 
 #include "common.h"
@@ -25,7 +24,6 @@
 #include "content_types.h"
 #include "relationships.h"
 
-#define FILENAME_LEN 128
 #define LXW_ZIP_BUFFER_SIZE (16384)
 
 /*
@@ -42,6 +40,8 @@ typedef struct lxw_packager {
     char *filename;
     char *buffer;
 
+    uint16_t drawing_count;
+
 } lxw_packager;
 
 
@@ -51,9 +51,9 @@ extern "C" {
 #endif
 /* *INDENT-ON* */
 
-lxw_packager *_new_packager(const char *filename);
-void _free_packager(lxw_packager *packager);
-uint8_t _create_package(lxw_packager *self);
+lxw_packager *lxw_packager_new(const char *filename);
+void lxw_packager_free(lxw_packager *packager);
+uint8_t lxw_create_package(lxw_packager *self);
 
 /* Declarations required for unit testing. */
 #ifdef TESTING

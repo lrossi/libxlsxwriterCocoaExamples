@@ -3,7 +3,7 @@
  *
  * Used in conjunction with the libxlsxwriter library.
  *
- * Copyright 2014-2015, John McNamara, jmcnamara@cpan.org. See LICENSE.txt.
+ * Copyright 2014-2016, John McNamara, jmcnamara@cpan.org. See LICENSE.txt.
  *
  */
 
@@ -21,7 +21,7 @@
  * Create a new format object.
  */
 lxw_format *
-_new_format()
+lxw_format_new()
 {
     lxw_format *format = calloc(1, sizeof(lxw_format));
     GOTO_LABEL_ON_MEM_ERROR(format, mem_error);
@@ -99,7 +99,7 @@ _new_format()
     return format;
 
 mem_error:
-    _free_format(format);
+    lxw_format_free(format);
     return NULL;
 }
 
@@ -107,7 +107,7 @@ mem_error:
  * Free a format object.
  */
 void
-_free_format(lxw_format *format)
+lxw_format_free(lxw_format *format)
 {
     if (!format)
         return;
@@ -173,7 +173,7 @@ mem_error:
  * Returns a font struct suitable for hashing as a lookup key.
  */
 lxw_font *
-_get_font_key(lxw_format *self)
+lxw_format_get_font_key(lxw_format *self)
 {
     lxw_font *key = calloc(1, sizeof(lxw_font));
     GOTO_LABEL_ON_MEM_ERROR(key, mem_error);
@@ -203,7 +203,7 @@ mem_error:
  * Returns a border struct suitable for hashing as a lookup key.
  */
 lxw_border *
-_get_border_key(lxw_format *self)
+lxw_format_get_border_key(lxw_format *self)
 {
     lxw_border *key = calloc(1, sizeof(lxw_border));
     GOTO_LABEL_ON_MEM_ERROR(key, mem_error);
@@ -230,7 +230,7 @@ mem_error:
  * Returns a pattern fill struct suitable for hashing as a lookup key.
  */
 lxw_fill *
-_get_fill_key(lxw_format *self)
+lxw_format_get_fill_key(lxw_format *self)
 {
     lxw_fill *key = calloc(1, sizeof(lxw_fill));
     GOTO_LABEL_ON_MEM_ERROR(key, mem_error);
@@ -249,7 +249,7 @@ mem_error:
  * Returns the XF index number used by Excel to identify a format.
  */
 int32_t
-_get_xf_index(lxw_format *self)
+lxw_format_get_xf_index(lxw_format *self)
 {
     lxw_format *format_key;
     lxw_format *existing_format;
@@ -277,7 +277,8 @@ _get_xf_index(lxw_format *self)
 
     /* Look up the format in the hash table. */
     hash_element =
-        _hash_key_exists(formats_hash_table, format_key, sizeof(lxw_format));
+        lxw_hash_key_exists(formats_hash_table, format_key,
+                            sizeof(lxw_format));
 
     if (hash_element) {
         /* Format matches existing format with an index. */
@@ -289,8 +290,8 @@ _get_xf_index(lxw_format *self)
         /* New format requiring an index. */
         index = formats_hash_table->unique_count;
         self->xf_index = index;
-        _insert_hash_element(formats_hash_table, format_key, self,
-                             sizeof(lxw_format));
+        lxw_insert_hash_element(formats_hash_table, format_key, self,
+                                sizeof(lxw_format));
         return index;
     }
 }

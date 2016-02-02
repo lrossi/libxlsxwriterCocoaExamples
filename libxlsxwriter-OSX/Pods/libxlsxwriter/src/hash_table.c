@@ -3,7 +3,7 @@
  *
  * Used in conjunction with the libxlsxwriter library.
  *
- * Copyright 2014-2015, John McNamara, jmcnamara@cpan.org. See LICENSE.txt.
+ * Copyright 2014-2016, John McNamara, jmcnamara@cpan.org. See LICENSE.txt.
  *
  */
 
@@ -35,7 +35,7 @@ _generate_hash_key(void *data, size_t data_len, size_t num_buckets)
  * to it if it does.
  */
 lxw_hash_element *
-_hash_key_exists(lxw_hash_table *lxw_hash, void *key, size_t key_len)
+lxw_hash_key_exists(lxw_hash_table *lxw_hash, void *key, size_t key_len)
 {
     size_t hash_key = _generate_hash_key(key, key_len, lxw_hash->num_buckets);
     struct lxw_hash_bucket_list *list;
@@ -67,8 +67,8 @@ _hash_key_exists(lxw_hash_table *lxw_hash, void *key, size_t key_len)
  * and return a pointer to the new or updated element.
  */
 lxw_hash_element *
-_insert_hash_element(lxw_hash_table *lxw_hash, void *key, void *value,
-                     size_t key_len)
+lxw_insert_hash_element(lxw_hash_table *lxw_hash, void *key, void *value,
+                        size_t key_len)
 {
     size_t hash_key = _generate_hash_key(key, key_len, lxw_hash->num_buckets);
     struct lxw_hash_bucket_list *list = NULL;
@@ -81,7 +81,7 @@ _insert_hash_element(lxw_hash_table *lxw_hash, void *key, void *value,
         list = calloc(1, sizeof(struct lxw_hash_bucket_list));
         GOTO_LABEL_ON_MEM_ERROR(list, mem_error1);
 
-        /* Initialise the bucket linked list. */
+        /* Initialize the bucket linked list. */
         SLIST_INIT(list);
 
         /* Create an lxw_hash element to add to the linked list. */
@@ -156,7 +156,7 @@ mem_error2:
  * Create a new LXW_HASH hash table object.
  */
 lxw_hash_table *
-_new_lxw_hash(uint32_t num_buckets, uint8_t free_key, uint8_t free_value)
+lxw_hash_new(uint32_t num_buckets, uint8_t free_key, uint8_t free_value)
 {
     /* Create the new hash table. */
     lxw_hash_table *lxw_hash = calloc(1, sizeof(lxw_hash_table));
@@ -174,7 +174,7 @@ _new_lxw_hash(uint32_t num_buckets, uint8_t free_key, uint8_t free_value)
     lxw_hash->order_list = calloc(1, sizeof(struct lxw_hash_order_list));
     GOTO_LABEL_ON_MEM_ERROR(lxw_hash->order_list, mem_error);
 
-    /* Initialise the order list. */
+    /* Initialize the order list. */
     STAILQ_INIT(lxw_hash->order_list);
 
     /* Store the number of buckets to calculate the load factor. */
@@ -183,11 +183,7 @@ _new_lxw_hash(uint32_t num_buckets, uint8_t free_key, uint8_t free_value)
     return lxw_hash;
 
 mem_error:
-    if (lxw_hash)
-        free(lxw_hash->order_list);
-
-    free(lxw_hash);
-
+    lxw_hash_free(lxw_hash);
     return NULL;
 }
 
@@ -195,7 +191,7 @@ mem_error:
  * Free the LXW_HASH hash table object.
  */
 void
-_free_lxw_hash(lxw_hash_table *lxw_hash)
+lxw_hash_free(lxw_hash_table *lxw_hash)
 {
     size_t i;
     lxw_hash_element *element;
@@ -204,14 +200,16 @@ _free_lxw_hash(lxw_hash_table *lxw_hash)
     if (!lxw_hash)
         return;
 
-    /* Free the lxw_hash_elements and their data using the ordered linked list. */
-    STAILQ_FOREACH_SAFE(element, lxw_hash->order_list,
-                        lxw_hash_order_pointers, element_temp) {
-        if (lxw_hash->free_key)
-            free(element->key);
-        if (lxw_hash->free_value)
-            free(element->value);
-        free(element);
+    /* Free the lxw_hash_elements and data using the ordered linked list. */
+    if (lxw_hash->order_list) {
+        STAILQ_FOREACH_SAFE(element, lxw_hash->order_list,
+                            lxw_hash_order_pointers, element_temp) {
+            if (lxw_hash->free_key)
+                free(element->key);
+            if (lxw_hash->free_value)
+                free(element->value);
+            free(element);
+        }
     }
 
     /* Free the buckets from the hash table. */

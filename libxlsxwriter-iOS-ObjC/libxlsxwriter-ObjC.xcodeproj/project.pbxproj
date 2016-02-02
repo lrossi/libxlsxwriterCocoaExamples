@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		31C6DA31B314E12B96B45F05 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CF2CF7D8FB495DDCAE2C88D /* libPods.a */; };
+		7CE6C2FFB24FDF2FBFF2DE2D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2954462BE814A759BD9E62C7 /* libPods.a */; };
 		8227CF141BF4F27D003202E4 /* DefaultExamples.m in Sources */ = {isa = PBXBuildFile; fileRef = 8227CEEA1BF4F27D003202E4 /* DefaultExamples.m */; };
 		8227CF151BF4F27D003202E4 /* AnatomyExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 8227CEED1BF4F27D003202E4 /* AnatomyExample.m */; };
 		8227CF161BF4F27D003202E4 /* ArrayFormulaExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 8227CEEF1BF4F27D003202E4 /* ArrayFormulaExample.m */; };
@@ -29,6 +29,12 @@
 		8227CF261BF4F27D003202E4 /* Tutorial3Example.m in Sources */ = {isa = PBXBuildFile; fileRef = 8227CF0F1BF4F27D003202E4 /* Tutorial3Example.m */; };
 		8227CF271BF4F27D003202E4 /* UTF8Example.m in Sources */ = {isa = PBXBuildFile; fileRef = 8227CF111BF4F27D003202E4 /* UTF8Example.m */; };
 		8227CF281BF4F27D003202E4 /* Example.m in Sources */ = {isa = PBXBuildFile; fileRef = 8227CF131BF4F27D003202E4 /* Example.m */; };
+		822A54311C60CFFE0060A3EE /* TabColorsExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 822A54301C60CFFE0060A3EE /* TabColorsExample.m */; };
+		822A54341C60D00F0060A3EE /* HideSheetExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 822A54331C60D00F0060A3EE /* HideSheetExample.m */; };
+		822A54371C60D01D0060A3EE /* DocPropertiesExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 822A54361C60D01D0060A3EE /* DocPropertiesExample.m */; };
+		822A543A1C60D02E0060A3EE /* WorksheetProtectionExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 822A54391C60D02E0060A3EE /* WorksheetProtectionExample.m */; };
+		822A543D1C60D03C0060A3EE /* HideRowColExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 822A543C1C60D03C0060A3EE /* HideRowColExample.m */; };
+		822A54401C60D04C0060A3EE /* PanesExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 822A543F1C60D04C0060A3EE /* PanesExample.m */; };
 		82B62ABF1BF34AC000FE079F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 82B62ABE1BF34AC000FE079F /* main.m */; };
 		82B62AC21BF34AC000FE079F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 82B62AC11BF34AC000FE079F /* AppDelegate.m */; };
 		82B62AC81BF34AC000FE079F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 82B62AC61BF34AC000FE079F /* Main.storyboard */; };
@@ -39,9 +45,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1CF2CF7D8FB495DDCAE2C88D /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		3BDFA6C66521817294BA7A11 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
-		4F3D92EECA23A9AABD8F4E73 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		2954462BE814A759BD9E62C7 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		69D0556B37DA4A445D5CF4C6 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		8227CEE91BF4F27D003202E4 /* DefaultExamples.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefaultExamples.h; sourceTree = "<group>"; };
 		8227CEEA1BF4F27D003202E4 /* DefaultExamples.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefaultExamples.m; sourceTree = "<group>"; };
 		8227CEEC1BF4F27D003202E4 /* AnatomyExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnatomyExample.h; sourceTree = "<group>"; };
@@ -84,6 +89,18 @@
 		8227CF111BF4F27D003202E4 /* UTF8Example.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UTF8Example.m; sourceTree = "<group>"; };
 		8227CF121BF4F27D003202E4 /* Example.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Example.h; sourceTree = "<group>"; };
 		8227CF131BF4F27D003202E4 /* Example.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Example.m; sourceTree = "<group>"; };
+		822A542F1C60CFFE0060A3EE /* TabColorsExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabColorsExample.h; sourceTree = "<group>"; };
+		822A54301C60CFFE0060A3EE /* TabColorsExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabColorsExample.m; sourceTree = "<group>"; };
+		822A54321C60D00F0060A3EE /* HideSheetExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HideSheetExample.h; sourceTree = "<group>"; };
+		822A54331C60D00F0060A3EE /* HideSheetExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HideSheetExample.m; sourceTree = "<group>"; };
+		822A54351C60D01D0060A3EE /* DocPropertiesExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DocPropertiesExample.h; sourceTree = "<group>"; };
+		822A54361C60D01D0060A3EE /* DocPropertiesExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DocPropertiesExample.m; sourceTree = "<group>"; };
+		822A54381C60D02E0060A3EE /* WorksheetProtectionExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorksheetProtectionExample.h; sourceTree = "<group>"; };
+		822A54391C60D02E0060A3EE /* WorksheetProtectionExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorksheetProtectionExample.m; sourceTree = "<group>"; };
+		822A543B1C60D03C0060A3EE /* HideRowColExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HideRowColExample.h; sourceTree = "<group>"; };
+		822A543C1C60D03C0060A3EE /* HideRowColExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HideRowColExample.m; sourceTree = "<group>"; };
+		822A543E1C60D04C0060A3EE /* PanesExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PanesExample.h; sourceTree = "<group>"; };
+		822A543F1C60D04C0060A3EE /* PanesExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PanesExample.m; sourceTree = "<group>"; };
 		82B62ABA1BF34AC000FE079F /* libxlsxwriter-ObjC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "libxlsxwriter-ObjC.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		82B62ABE1BF34AC000FE079F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		82B62AC01BF34AC000FE079F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -96,6 +113,7 @@
 		82B62AD61BF34B9300FE079F /* ExamplePickerTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExamplePickerTableViewController.m; sourceTree = "<group>"; };
 		82B62AD91BF34BB500FE079F /* ExampleViewerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleViewerViewController.h; sourceTree = "<group>"; };
 		82B62ADA1BF34BB500FE079F /* ExampleViewerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleViewerViewController.m; sourceTree = "<group>"; };
+		CB92348A8F850899C9645DC9 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,22 +121,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				31C6DA31B314E12B96B45F05 /* libPods.a in Frameworks */,
+				7CE6C2FFB24FDF2FBFF2DE2D /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		01A9492A11B318E353AD3047 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				4F3D92EECA23A9AABD8F4E73 /* Pods.debug.xcconfig */,
-				3BDFA6C66521817294BA7A11 /* Pods.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		8227CEE71BF4F27D003202E4 /* Examples */ = {
 			isa = PBXGroup;
 			children = (
@@ -181,6 +190,18 @@
 				8227CF031BF4F27D003202E4 /* HeadersFootersExample.m */,
 				8227CEFA1BF4F27D003202E4 /* DefinedNameExample.h */,
 				8227CEFB1BF4F27D003202E4 /* DefinedNameExample.m */,
+				822A542F1C60CFFE0060A3EE /* TabColorsExample.h */,
+				822A54301C60CFFE0060A3EE /* TabColorsExample.m */,
+				822A54321C60D00F0060A3EE /* HideSheetExample.h */,
+				822A54331C60D00F0060A3EE /* HideSheetExample.m */,
+				822A54351C60D01D0060A3EE /* DocPropertiesExample.h */,
+				822A54361C60D01D0060A3EE /* DocPropertiesExample.m */,
+				822A54381C60D02E0060A3EE /* WorksheetProtectionExample.h */,
+				822A54391C60D02E0060A3EE /* WorksheetProtectionExample.m */,
+				822A543B1C60D03C0060A3EE /* HideRowColExample.h */,
+				822A543C1C60D03C0060A3EE /* HideRowColExample.m */,
+				822A543E1C60D04C0060A3EE /* PanesExample.h */,
+				822A543F1C60D04C0060A3EE /* PanesExample.m */,
 			);
 			path = Examples;
 			sourceTree = "<group>";
@@ -190,8 +211,8 @@
 			children = (
 				82B62ABC1BF34AC000FE079F /* libxlsxwriter-ObjC */,
 				82B62ABB1BF34AC000FE079F /* Products */,
-				01A9492A11B318E353AD3047 /* Pods */,
-				92A93BC495E2706DB1DF5B85 /* Frameworks */,
+				BD7DACEFC09160328B8C3637 /* Pods */,
+				EA1C346E332651298551CECD /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -254,10 +275,19 @@
 			name = "Example Viewer";
 			sourceTree = "<group>";
 		};
-		92A93BC495E2706DB1DF5B85 /* Frameworks */ = {
+		BD7DACEFC09160328B8C3637 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				1CF2CF7D8FB495DDCAE2C88D /* libPods.a */,
+				CB92348A8F850899C9645DC9 /* Pods.debug.xcconfig */,
+				69D0556B37DA4A445D5CF4C6 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		EA1C346E332651298551CECD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2954462BE814A759BD9E62C7 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -269,12 +299,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 82B62AD11BF34AC000FE079F /* Build configuration list for PBXNativeTarget "libxlsxwriter-ObjC" */;
 			buildPhases = (
-				1DFC28AF0488892A818BE44D /* Check Pods Manifest.lock */,
+				0EFF709223F5BC5C5B57BC7E /* Check Pods Manifest.lock */,
 				82B62AB61BF34AC000FE079F /* Sources */,
 				82B62AB71BF34AC000FE079F /* Frameworks */,
 				82B62AB81BF34AC000FE079F /* Resources */,
-				454F02687208E2A2B298DE9A /* Embed Pods Frameworks */,
-				3207D4DBDC44BBF2DF108A33 /* Copy Pods Resources */,
+				D800F2FC73CDC91FAB6FFDCA /* Embed Pods Frameworks */,
+				9A69A420954F76C6C8AA187D /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -331,7 +361,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1DFC28AF0488892A818BE44D /* Check Pods Manifest.lock */ = {
+		0EFF709223F5BC5C5B57BC7E /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -346,7 +376,7 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		3207D4DBDC44BBF2DF108A33 /* Copy Pods Resources */ = {
+		9A69A420954F76C6C8AA187D /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -361,7 +391,7 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		454F02687208E2A2B298DE9A /* Embed Pods Frameworks */ = {
+		D800F2FC73CDC91FAB6FFDCA /* Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -385,6 +415,7 @@
 			files = (
 				8227CF1F1BF4F27D003202E4 /* FormatNumFormatExample.m in Sources */,
 				8227CF191BF4F27D003202E4 /* DatesAndTimes1Example.m in Sources */,
+				822A54311C60CFFE0060A3EE /* TabColorsExample.m in Sources */,
 				8227CF251BF4F27D003202E4 /* Tutorial2Example.m in Sources */,
 				8227CF1E1BF4F27D003202E4 /* FormatFontExample.m in Sources */,
 				8227CF271BF4F27D003202E4 /* UTF8Example.m in Sources */,
@@ -394,13 +425,18 @@
 				8227CF281BF4F27D003202E4 /* Example.m in Sources */,
 				8227CF201BF4F27D003202E4 /* HeadersFootersExample.m in Sources */,
 				82B62AD71BF34B9300FE079F /* ExamplePickerTableViewController.m in Sources */,
+				822A54371C60D01D0060A3EE /* DocPropertiesExample.m in Sources */,
 				8227CF1B1BF4F27D003202E4 /* DatesAndTimes3Example.m in Sources */,
+				822A54401C60D04C0060A3EE /* PanesExample.m in Sources */,
 				82B62ADB1BF34BB500FE079F /* ExampleViewerViewController.m in Sources */,
 				8227CF241BF4F27D003202E4 /* Tutorial1Example.m in Sources */,
 				8227CF1C1BF4F27D003202E4 /* DefinedNameExample.m in Sources */,
 				8227CF211BF4F27D003202E4 /* HelloExample.m in Sources */,
+				822A543A1C60D02E0060A3EE /* WorksheetProtectionExample.m in Sources */,
+				822A54341C60D00F0060A3EE /* HideSheetExample.m in Sources */,
 				8227CF261BF4F27D003202E4 /* Tutorial3Example.m in Sources */,
 				8227CF1D1BF4F27D003202E4 /* DemoExample.m in Sources */,
+				822A543D1C60D03C0060A3EE /* HideRowColExample.m in Sources */,
 				8227CF231BF4F27D003202E4 /* MergeRangeExample.m in Sources */,
 				8227CF1A1BF4F27D003202E4 /* DatesAndTimes2Example.m in Sources */,
 				82B62AC21BF34AC000FE079F /* AppDelegate.m in Sources */,
@@ -517,7 +553,7 @@
 		};
 		82B62AD21BF34AC000FE079F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4F3D92EECA23A9AABD8F4E73 /* Pods.debug.xcconfig */;
+			baseConfigurationReference = CB92348A8F850899C9645DC9 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "libxlsxwriter-ObjC/Info.plist";
@@ -530,7 +566,7 @@
 		};
 		82B62AD31BF34AC000FE079F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3BDFA6C66521817294BA7A11 /* Pods.release.xcconfig */;
+			baseConfigurationReference = 69D0556B37DA4A445D5CF4C6 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "libxlsxwriter-ObjC/Info.plist";

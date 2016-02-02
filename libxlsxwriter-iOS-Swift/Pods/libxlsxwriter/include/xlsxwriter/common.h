@@ -1,7 +1,7 @@
 /*
  * libxlsxwriter
  *
- * Copyright 2014-2015, John McNamara, jmcnamara@cpan.org. See LICENSE.txt.
+ * Copyright 2014-2016, John McNamara, jmcnamara@cpan.org. See LICENSE.txt.
  *
  * common - Common functions and defines for the libxlsxwriter library.
  *
@@ -11,6 +11,7 @@
 
 #include <time.h>
 #include "xlsxwriter/third_party/queue.h"
+#include "xlsxwriter/third_party/tree.h"
 
 #ifndef TESTING
 #define STATIC static
@@ -18,36 +19,69 @@
 #define STATIC
 #endif
 
-#define LXW_SHEETNAME_MAX  32
-#define LXW_SHEETNAME_LEN  65
-
 enum lxw_boolean {
     LXW_FALSE,
     LXW_TRUE
 };
 
-#define LXW_IGNORE 1
+#define LXW_SHEETNAME_MAX  32
+#define LXW_SHEETNAME_LEN  65
+#define LXW_UINT32_T_LEN   11   /* Length of 4294967296\0. */
+#define LXW_IGNORE          1
+#define FILENAME_LEN      128
+#define LXW_NO_ERROR        0
 
-#define ERROR(message)                          \
+#define LXW_ERROR(message)                      \
     fprintf(stderr, "[ERROR][%s:%d]: " message "\n", __FILE__, __LINE__)
 
-#define MEM_ERROR()                             \
-    ERROR("Memory allocation failed.")
+#define LXW_MEM_ERROR()                         \
+    LXW_ERROR("Memory allocation failed.")
 
 #define GOTO_LABEL_ON_MEM_ERROR(pointer, label) \
     if (!pointer) {                             \
-        MEM_ERROR();                            \
+        LXW_MEM_ERROR();                        \
         goto label;                             \
     }
 
 #define RETURN_ON_MEM_ERROR(pointer, error)     \
     if (!pointer) {                             \
-        MEM_ERROR();                            \
+        LXW_MEM_ERROR();                        \
         return error;                           \
+    }
+
+#define RETURN_VOID_ON_MEM_ERROR(pointer)       \
+    if (!pointer) {                             \
+        LXW_MEM_ERROR();                        \
+        return;                                 \
     }
 
 #define LXW_WARN(message)                       \
     fprintf(stderr, "[WARN]: " message "\n")
+
+#define LXW_WARN_FORMAT(message, var)           \
+    fprintf(stderr, "[WARN]: " message "\n", var)
+
+#ifndef LXW_BIG_ENDIAN
+#define LXW_UINT32_NETWORK(n) ((((n) & 0xFF)       << 24) | \
+                               (((n) & 0xFF00)     <<  8) | \
+                               (((n) & 0xFF0000)   >>  8) | \
+                               (((n) & 0xFF000000) >> 24))
+#define LXW_UINT16_NETWORK(n) ((((n) & 0x00FF) << 8) | (((n) & 0xFF00) >> 8))
+#else
+#define LXW_UINT32_NETWORK(n) (n)
+#define LXW_UINT16_NETWORK(n) (n)
+#endif
+
+/* Compilers that have a native snprintf() can use it directly. */
+#ifdef _MSC_VER
+#define HAS_SNPRINTF
+#endif
+
+#ifdef HAS_SNPRINTF
+#define lxw_snprintf snprintf
+#else
+#define lxw_snprintf __builtin_snprintf
+#endif
 
 /* Define the queue.h structs for the formats list. */
 STAILQ_HEAD(lxw_formats, lxw_format);
@@ -61,19 +95,6 @@ typedef struct lxw_tuple {
 
     STAILQ_ENTRY (lxw_tuple) list_pointers;
 } lxw_tuple;
-
-typedef struct lxw_doc_properties {
-    char *title;
-    char *subject;
-    char *author;
-    char *manager;
-    char *company;
-    char *category;
-    char *keywords;
-    char *comments;
-    char *status;
-    time_t created;
-} lxw_doc_properties;
 
 
  /* *INDENT-OFF* */

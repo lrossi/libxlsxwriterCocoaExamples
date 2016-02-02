@@ -48,7 +48,7 @@
     format_set_num_format(format, "mmm d yyyy hh:mm AM/PM");
     
     /* Widen the first column to make the text clearer. */
-    worksheet_set_column(worksheet, 0, 0, 20, NULL, NULL);
+    worksheet_set_column(worksheet, 0, 0, 20, NULL);
     
     /* Write the number without formatting. */
     worksheet_write_number(worksheet, 0, 0, number, NULL   );  // 41333.5

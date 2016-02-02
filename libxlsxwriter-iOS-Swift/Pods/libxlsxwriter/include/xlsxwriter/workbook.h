@@ -1,7 +1,7 @@
 /*
  * libxlsxwriter
  *
- * Copyright 2014-2015, John McNamara, jmcnamara@cpan.org. See LICENSE.txt.
+ * Copyright 2014-2016, John McNamara, jmcnamara@cpan.org. See LICENSE.txt.
  */
 
 /**
@@ -26,7 +26,7 @@
  *
  *     int main() {
  *
- *         lxw_workbook  *workbook  = new_workbook("filename.xlsx");
+ *         lxw_workbook  *workbook  = workbook_new("filename.xlsx");
  *         lxw_worksheet *worksheet = workbook_add_worksheet(workbook, NULL);
  *
  *         worksheet_write_string(worksheet, 0, 0, "Hello Excel", NULL);
@@ -43,7 +43,7 @@
 
 #include <stdint.h>
 #include <stdio.h>
-#include "xlsxwriter/third_party/queue.h"
+#include <errno.h>
 
 #include "worksheet.h"
 #include "shared_strings.h"
@@ -64,7 +64,7 @@ TAILQ_HEAD(lxw_defined_names, lxw_defined_name);
  * a pointer to the lxw_workbook:
  *
  * @code
- *    lxw_workbook  *workbook = new_workbook("test.xlsx");
+ *    lxw_workbook  *workbook = workbook_new("test.xlsx");
  *
  *    lxw_worksheet *worksheet; // Generic worksheet pointer.
  *
@@ -97,29 +97,75 @@ typedef struct lxw_defined_name {
 } lxw_defined_name;
 
 /**
- * @brief Errors conditions encountered when closing the Workbook and writing
- * the Excel file to disk.
+ * @brief Error codes from workbook functions.
  */
-enum lxw_close_error {
+enum lxw_workbook_error {
     /** No error */
-    LXW_CLOSE_ERROR_NONE,
+    LXW_ERROR_WORKBOOK_NONE = 0,
+
+    /** Error encountered when creating file */
+    LXW_ERROR_WORKBOOK_FILE_CREATE,
+
+    /** Error encountered when creating a packager object */
+    LXW_ERROR_WORKBOOK_PACKAGER,
+
     /** Error encountered when creating file zip container */
-    LXW_CLOSE_ERROR_ZIP
-        /* TODO. Need to add/document more. */
+    LXW_ERROR_WORKBOOK_ZIP,
+
+    /** Memory error. */
+    LXW_ERROR_WORKBOOK_MEMORY_ERROR
 };
+
+/**
+ * Workbook document properties.
+ */
+typedef struct lxw_doc_properties {
+    /** The title of the Excel Document. */
+    char *title;
+
+    /** The subject of the Excel Document. */
+    char *subject;
+
+    /** The author of the Excel Document. */
+    char *author;
+
+    /** The manager field of the Excel Document. */
+    char *manager;
+
+    /** The company field of the Excel Document. */
+    char *company;
+
+    /** The category of the Excel Document. */
+    char *category;
+
+    /** The keywords of the Excel Document. */
+    char *keywords;
+
+    /** The comment field of the Excel Document. */
+    char *comments;
+
+    /** The status of the Excel Document. */
+    char *status;
+
+    /** The hyperlink base url of the Excel Document. */
+    char *hyperlink_base;
+
+    time_t created;
+
+} lxw_doc_properties;
 
 /**
  * @brief Workbook options.
  *
  * Optional parameters when creating a new Workbook object via
- * new_workbook_opt().
+ * workbook_new_opt().
  *
  * Currently only the `constant_memory` property is supported:
  *
  * * `constant_memory`
  */
 typedef struct lxw_workbook_options {
-    /** Optimise the workbook to use constant memory for worksheets */
+    /** Optimize the workbook to use constant memory for worksheets */
     uint8_t constant_memory;
 } lxw_workbook_options;
 
@@ -138,19 +184,24 @@ typedef struct lxw_workbook {
     struct lxw_defined_names *defined_names;
     lxw_sst *sst;
     lxw_doc_properties *properties;
-    const char *filename;
+    char *filename;
     lxw_workbook_options options;
 
     uint16_t num_sheets;
     uint16_t first_sheet;
-    uint32_t active_sheet;
+    uint16_t active_sheet;
     uint16_t num_xf_formats;
     uint16_t num_format_count;
+    uint16_t drawing_count;
 
     uint16_t font_count;
     uint16_t border_count;
     uint16_t fill_count;
     uint8_t optimize;
+
+    uint8_t has_png;
+    uint8_t has_jpeg;
+    uint8_t has_bmp;
 
     lxw_hash_table *used_xf_formats;
 
@@ -170,18 +221,18 @@ extern "C" {
  *
  * @return A lxw_workbook instance.
  *
- * The `%new_workbook()` constructor is used to create a new Excel workbook
+ * The `%workbook_new()` constructor is used to create a new Excel workbook
  * with a given filename:
  *
  * @code
- *     lxw_workbook *workbook  = new_workbook("filename.xlsx");
+ *     lxw_workbook *workbook  = workbook_new("filename.xlsx");
  * @endcode
  *
  * When specifying a filename it is recommended that you use an `.xlsx`
  * extension or Excel will generate a warning when opening the file.
  *
  */
-lxw_workbook *new_workbook(const char *filename);
+lxw_workbook *workbook_new(const char *filename);
 
 /**
  * @brief Create a new workbook object, and set the workbook options.
@@ -191,13 +242,13 @@ lxw_workbook *new_workbook(const char *filename);
  *
  * @return A lxw_workbook instance.
  *
- * This method is the same as the `new_workbook()` constructor but allows
+ * This method is the same as the `workbook_new()` constructor but allows
  * additional options to be set.
  *
  * @code
  *    lxw_workbook_options options = {.constant_memory = 1};
  *
- *    lxw_workbook  *workbook  = new_workbook_opt("filename.xlsx", &options);
+ *    lxw_workbook  *workbook  = workbook_new_opt("filename.xlsx", &options);
  * @endcode
  *
  * Note, in this mode a row of data is written and then discarded when a cell
@@ -208,6 +259,13 @@ lxw_workbook *new_workbook(const char *filename);
  * See @ref working_with_memory for more details.
  *
  */
+lxw_workbook *workbook_new_opt(const char *filename,
+                               lxw_workbook_options *options);
+
+/* Deprecated function name for backwards compatibility. */
+lxw_workbook *new_workbook(const char *filename);
+
+/* Deprecated function name for backwards compatibility. */
 lxw_workbook *new_workbook_opt(const char *filename,
                                lxw_workbook_options *options);
 
@@ -284,7 +342,7 @@ lxw_format *workbook_add_format(lxw_workbook *workbook);
  *
  * @param workbook Pointer to a lxw_workbook instance.
  *
- * @return A #lxw_close_error.
+ * @return A #lxw_workbook_error.
  *
  * The `%workbook_close()` function closes a Workbook object, writes the Excel
  * file to disk, frees any memory allocated internally to the Workbook and
@@ -294,7 +352,7 @@ lxw_format *workbook_add_format(lxw_workbook *workbook);
  *     workbook_close(workbook);
  * @endcode
  *
- * The `%workbook_close()` function returns any #lxw_close_error error codes
+ * The `%workbook_close()` function returns any #lxw_workbook_error error codes
  * encountered when creating the Excel file. The error code can be returned
  * from the program main or the calling function:
  *
@@ -304,6 +362,59 @@ lxw_format *workbook_add_format(lxw_workbook *workbook);
  *
  */
 uint8_t workbook_close(lxw_workbook *workbook);
+
+/**
+ * @brief Set the document properties such as Title, Author etc.
+ *
+ * @param workbook   Pointer to a lxw_workbook instance.
+ * @param properties Document properties to set.
+ *
+ * The `%workbook_set_properties` method can be used to set the document
+ * properties of the Excel file created by `libxlsxwriter`. These properties
+ * are visible when you use the `Office Button -> Prepare -> Properties`
+ * option in Excel and are also available to external applications that read
+ * or index windows files.
+ *
+ * The properties that can be set are:
+ *
+ * - `title`
+ * - `subject`
+ * - `author`
+ * - `manager`
+ * - `company`
+ * - `category`
+ * - `keywords`
+ * - `comments`
+ * - `hyperlink_base`
+ *
+ * The properties are specified via a `lxw_doc_properties` struct. All the
+ * members are `char *` and they are all optional. An example of how to create
+ * and pass the properties is:
+ *
+ * @code
+ *     // Create a properties structure and set some of the fields.
+ *     lxw_doc_properties properties = {
+ *         .title    = "This is an example spreadsheet",
+ *         .subject  = "With document properties",
+ *         .author   = "John McNamara",
+ *         .manager  = "Dr. Heinz Doofenshmirtz",
+ *         .company  = "of Wolves",
+ *         .category = "Example spreadsheets",
+ *         .keywords = "Sample, Example, Properties",
+ *         .comments = "Created with libxlsxwriter",
+ *         .status   = "Quo",
+ *     };
+ *
+ *     // Set the properties in the workbook.
+ *     workbook_set_properties(workbook, &properties);
+ * @endcode
+ *
+ * @image html doc_properties.png
+ *
+ * @return 0 for success, non-zero on error.
+ */
+uint8_t workbook_set_properties(lxw_workbook *workbook,
+                                lxw_doc_properties *properties);
 
 /**
  * @brief Create a defined name in the workbook to use as a variable.
@@ -357,14 +468,13 @@ documentation](http://office.microsoft.com/en-001/excel-help/define-and-use-name
 uint8_t workbook_define_name(lxw_workbook *workbook, const char *name,
                              const char *formula);
 
-void _free_workbook(lxw_workbook *workbook);
-void _workbook_assemble_xml_file(lxw_workbook *workbook);
-void _set_default_xf_indices(lxw_workbook *workbook);
+void lxw_workbook_free(lxw_workbook *workbook);
+void lxw_workbook_assemble_xml_file(lxw_workbook *workbook);
+void lxw_workbook_set_default_xf_indices(lxw_workbook *workbook);
 
 /* Declarations required for unit testing. */
 #ifdef TESTING
 
-STATIC void _workbook_xml_declaration(lxw_workbook *self);
 STATIC void _workbook_xml_declaration(lxw_workbook *self);
 STATIC void _write_workbook(lxw_workbook *self);
 STATIC void _write_file_version(lxw_workbook *self);
