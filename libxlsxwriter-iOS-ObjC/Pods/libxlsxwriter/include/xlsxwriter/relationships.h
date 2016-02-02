@@ -1,7 +1,7 @@
 /*
  * libxlsxwriter
- * 
- * Copyright 2014-2015, John McNamara, jmcnamara@cpan.org. See LICENSE.txt.
+ *
+ * Copyright 2014-2016, John McNamara, jmcnamara@cpan.org. See LICENSE.txt.
  *
  * relationships - A libxlsxwriter library for creating Excel XLSX
  *                 relationships files.
@@ -11,7 +11,6 @@
 #define __LXW_RELATIONSHIPS_H__
 
 #include <stdint.h>
-#include "xlsxwriter/third_party/queue.h"
 
 #include "common.h"
 
@@ -53,18 +52,19 @@ extern "C" {
 #endif
 /* *INDENT-ON* */
 
-lxw_relationships *_new_relationships();
-void _free_relationships(lxw_relationships *relationships);
-void _relationships_assemble_xml_file(lxw_relationships *self);
+lxw_relationships *lxw_relationships_new();
+void lxw_free_relationships(lxw_relationships *relationships);
+void lxw_relationships_assemble_xml_file(lxw_relationships *self);
 
-void _add_document_relationship(lxw_relationships *self, const char *type,
-                                const char *target);
-void _add_package_relationship(lxw_relationships *self, const char *type,
-                               const char *target);
-void _add_ms_package_relationship(lxw_relationships *self, const char *type,
+void lxw_add_document_relationship(lxw_relationships *self, const char *type,
+                                   const char *target);
+void lxw_add_package_relationship(lxw_relationships *self, const char *type,
                                   const char *target);
-void _add_worksheet_relationship(lxw_relationships *self, const char *type,
-                                 const char *target, const char *target_mode);
+void lxw_add_ms_package_relationship(lxw_relationships *self,
+                                     const char *type, const char *target);
+void lxw_add_worksheet_relationship(lxw_relationships *self, const char *type,
+                                    const char *target,
+                                    const char *target_mode);
 
 /* Declarations required for unit testing. */
 #ifdef TESTING

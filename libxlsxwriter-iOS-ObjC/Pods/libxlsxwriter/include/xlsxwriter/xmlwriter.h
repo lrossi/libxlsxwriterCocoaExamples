@@ -1,7 +1,7 @@
 /*
  * libxlsxwriter
  *
- * Copyright 2014-2015, John McNamara, jmcnamara@cpan.org. See LICENSE.txt.
+ * Copyright 2014-2016, John McNamara, jmcnamara@cpan.org. See LICENSE.txt.
  *
  * xmlwriter - A libxlsxwriter library for creating Excel XLSX
  *             XML files.
@@ -10,7 +10,7 @@
  * in the Excel XLSX file format.
  *
  * This library is used in preference to a more generic XML library to allow
- * for customisation and optimisation for the XLSX file format.
+ * for customization and optimization for the XLSX file format.
  *
  * The xmlwriter functions are only used internally and do not need to be
  * called directly by the end user.
@@ -22,7 +22,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
-#include "xlsxwriter/third_party/queue.h"
+#include "common.h"
 
 #define MAX_ATTRIBUTE_LENGTH 256
 #define ATTR_32              32
@@ -53,37 +53,38 @@ struct xml_attribute {
 STAILQ_HEAD(xml_attribute_list, xml_attribute);
 
 /* Create a new attribute struct to add to a xml_attribute_list. */
-struct xml_attribute *_new_attribute_str(const char *key, const char *value);
-struct xml_attribute *_new_attribute_int(const char *key, uint32_t value);
-struct xml_attribute *_new_attribute_dbl(const char *key, double value);
+struct xml_attribute *lxw_new_attribute_str(const char *key,
+                                            const char *value);
+struct xml_attribute *lxw_new_attribute_int(const char *key, uint32_t value);
+struct xml_attribute *lxw_new_attribute_dbl(const char *key, double value);
 
-/* Macro to initialise the xml_attribute_list pointers. */
-#define _INIT_ATTRIBUTES()                                    \
+/* Macro to initialize the xml_attribute_list pointers. */
+#define LXW_INIT_ATTRIBUTES()                                 \
     STAILQ_INIT(&attributes)
 
 /* Macro to add attribute string elements to xml_attribute_list. */
-#define _PUSH_ATTRIBUTES_STR(key, value)                      \
+#define LXW_PUSH_ATTRIBUTES_STR(key, value)                   \
     do {                                                      \
-    attribute = _new_attribute_str((key), (value));           \
+    attribute = lxw_new_attribute_str((key), (value));        \
     STAILQ_INSERT_TAIL(&attributes, attribute, list_entries); \
     } while (0)
 
 /* Macro to add attribute int values to xml_attribute_list. */
-#define _PUSH_ATTRIBUTES_INT(key, value)                      \
+#define LXW_PUSH_ATTRIBUTES_INT(key, value)                   \
     do {                                                      \
-    attribute = _new_attribute_int((key), (value));           \
+    attribute = lxw_new_attribute_int((key), (value));        \
     STAILQ_INSERT_TAIL(&attributes, attribute, list_entries); \
     } while (0)
 
 /* Macro to add attribute double values to xml_attribute_list. */
-#define _PUSH_ATTRIBUTES_DBL(key, value)                      \
+#define LXW_PUSH_ATTRIBUTES_DBL(key, value)                   \
     do {                                                      \
-    attribute = _new_attribute_dbl((key), (value));           \
+    attribute = lxw_new_attribute_dbl((key), (value));        \
     STAILQ_INSERT_TAIL(&attributes, attribute, list_entries); \
     } while (0)
 
 /* Macro to free xml_attribute_list and attribute. */
-#define _FREE_ATTRIBUTES()                                    \
+#define LXW_FREE_ATTRIBUTES()                                 \
     while (!STAILQ_EMPTY(&attributes)) {                      \
         attribute = STAILQ_FIRST(&attributes);                \
         STAILQ_REMOVE_HEAD(&attributes, list_entries);        \
@@ -95,7 +96,7 @@ struct xml_attribute *_new_attribute_dbl(const char *key, double value);
  *
  * @param xmlfile A FILE pointer to the output XML file.
  */
-void _xml_declaration(FILE * xmlfile);
+void lxw_xml_declaration(FILE * xmlfile);
 
 /**
  * Write an XML start tag with optional attributes.
@@ -104,20 +105,21 @@ void _xml_declaration(FILE * xmlfile);
  * @param tag        The XML tag to write.
  * @param attributes An optional list of attributes to add to the tag.
  */
-void _xml_start_tag(FILE * xmlfile,
-                    const char *tag, struct xml_attribute_list *attributes);
+void lxw_xml_start_tag(FILE * xmlfile,
+                       const char *tag,
+                       struct xml_attribute_list *attributes);
 
 /**
  * Write an XML start tag with optional un-encoded attributes.
- * This is a minor optimisation for attributes that don't need encoding.
+ * This is a minor optimization for attributes that don't need encoding.
  *
  * @param xmlfile    A FILE pointer to the output XML file.
  * @param tag        The XML tag to write.
  * @param attributes An optional list of attributes to add to the tag.
  */
-void _xml_start_tag_unencoded(FILE * xmlfile,
-                              const char *tag,
-                              struct xml_attribute_list *attributes);
+void lxw_xml_start_tag_unencoded(FILE * xmlfile,
+                                 const char *tag,
+                                 struct xml_attribute_list *attributes);
 
 /**
  * Write an XML end tag.
@@ -125,7 +127,7 @@ void _xml_start_tag_unencoded(FILE * xmlfile,
  * @param xmlfile    A FILE pointer to the output XML file.
  * @param tag        The XML tag to write.
  */
-void _xml_end_tag(FILE * xmlfile, const char *tag);
+void lxw_xml_end_tag(FILE * xmlfile, const char *tag);
 
 /**
  * Write an XML empty tag with optional attributes.
@@ -134,20 +136,21 @@ void _xml_end_tag(FILE * xmlfile, const char *tag);
  * @param tag        The XML tag to write.
  * @param attributes An optional list of attributes to add to the tag.
  */
-void _xml_empty_tag(FILE * xmlfile,
-                    const char *tag, struct xml_attribute_list *attributes);
+void lxw_xml_empty_tag(FILE * xmlfile,
+                       const char *tag,
+                       struct xml_attribute_list *attributes);
 
 /**
  * Write an XML empty tag with optional un-encoded attributes.
- * This is a minor optimisation for attributes that don't need encoding.
+ * This is a minor optimization for attributes that don't need encoding.
  *
  * @param xmlfile    A FILE pointer to the output XML file.
  * @param tag        The XML tag to write.
  * @param attributes An optional list of attributes to add to the tag.
  */
-void _xml_empty_tag_unencoded(FILE * xmlfile,
-                              const char *tag,
-                              struct xml_attribute_list *attributes);
+void lxw_xml_empty_tag_unencoded(FILE * xmlfile,
+                                 const char *tag,
+                                 struct xml_attribute_list *attributes);
 
 /**
  * Write an XML element containing data and optional attributes.
@@ -157,10 +160,14 @@ void _xml_empty_tag_unencoded(FILE * xmlfile,
  * @param data       The data section of the XML element.
  * @param attributes An optional list of attributes to add to the tag.
  */
-void _xml_data_element(FILE * xmlfile,
-                       const char *tag,
-                       const char *data,
-                       struct xml_attribute_list *attributes);
+void lxw_xml_data_element(FILE * xmlfile,
+                          const char *tag,
+                          const char *data,
+                          struct xml_attribute_list *attributes);
+
+char *lxw_escape_control_characters(const char *string);
+
+char *lxw_escape_data(const char *data);
 
 /* *INDENT-OFF* */
 #ifdef __cplusplus
