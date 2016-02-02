@@ -1,7 +1,7 @@
 /*
  * libxlsxwriter
  *
- * Copyright 2014-2015, John McNamara, jmcnamara@cpan.org. See LICENSE.txt.
+ * Copyright 2014-2016, John McNamara, jmcnamara@cpan.org. See LICENSE.txt.
  */
 
 /**
@@ -30,7 +30,7 @@
  *
  *     int main() {
  *
- *         lxw_workbook  *workbook  = new_workbook("filename.xlsx");
+ *         lxw_workbook  *workbook  = workbook_new("filename.xlsx");
  *         lxw_worksheet *worksheet = workbook_add_worksheet(workbook, NULL);
  *
  *         worksheet_write_string(worksheet, 0, 0, "Hello Excel", NULL);
@@ -47,8 +47,10 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include <string.h>
+#include <libgen.h>
 
 #include "shared_strings.h"
+#include "drawing.h"
 #include "common.h"
 #include "format.h"
 #include "utility.h"
@@ -57,6 +59,8 @@
 #define LXW_COL_MAX 16384
 #define LXW_COL_META_MAX 128
 #define LXW_HEADER_FOOTER_MAX 255
+#define LXW_MAX_NUMBER_URLS 65530
+#define LXW_PANE_NAME_LENGTH 12 /* bottomRight + 1 */
 
 /* The Excel 2007 specification says that the maximum number of page
  * breaks is 1026. However, in practice it is actually 1023. */
@@ -66,18 +70,30 @@
 #define LXW_DEF_COL_WIDTH 8.43
 
 /** Default row height in Excel */
-#define LXW_DEF_ROW_HEIGHT 15
+#define LXW_DEF_ROW_HEIGHT 15.0
 
-/** Error codes from `worksheet_write*()` functions. */
-enum lxw_write_error {
+/** Error codes from worksheet functions. */
+enum lxw_worksheet_error {
     /** No error. */
-    LXW_WRITE_ERROR_NONE = 0,
+    LXW_ERROR_WORKSHEET_NONE = 0,
+
     /** Row or column index out of range. */
-    LXW_RANGE_ERROR,
-    /** String exceeds Excel's LXW_STRING_LENGTH_ERROR limit. */
-    LXW_STRING_LENGTH_ERROR,
+    LXW_ERROR_WORKSHEET_INDEX_OUT_OF_RANGE,
+
+    /** String exceeds Excel's LXW_STR_MAX limit. */
+    LXW_ERROR_WORKSHEET_MAX_STRING_LENGTH_EXCEEDED,
+
+    /** NULL String ignored as function parameter. */
+    LXW_ERROR_WORKSHEET_NULL_STRING_IGNORED,
+
+    /** Maximum number of worksheet URLs (65530) exceeded. */
+    LXW_ERROR_WORKSHEET_MAX_NUMBER_URLS_EXCEEDED,
+
     /** Error finding string index. */
-    LXW_STRING_HASH_ERROR
+    LXW_ERROR_WORKSHEET_STRING_HASH_NOT_FOUND,
+
+    /** Memory error. */
+    LXW_ERROR_WORKSHEET_MEMORY_ERROR
 };
 
 /** Gridline options using in `worksheet_gridlines()`. */
@@ -116,10 +132,49 @@ enum cell_types {
     HYPERLINK_EXTERNAL
 };
 
-/* Define the queue.h TAILQ structs for the list head types. */
-TAILQ_HEAD(lxw_table_cells, lxw_cell);
-TAILQ_HEAD(lxw_table_rows, lxw_row);
+enum pane_types {
+    NO_PANES = 0,
+    FREEZE_PANES,
+    SPLIT_PANES,
+    FREEZE_SPLIT_PANES
+};
+
+/* Define the tree.h RB structs for the red-black head types. */
+RB_HEAD(lxw_table_cells, lxw_cell);
+
+/* Define a RB_TREE struct manually to add extra members. */
+struct lxw_table_rows {
+    struct lxw_row *rbh_root;
+    struct lxw_row *cached_row;
+    lxw_row_t cached_row_num;
+};
+
+/* Wrapper around RB_GENERATE_STATIC from tree.h to avoid unused function
+ * warnings and to avoid portability issues with the _unused attribute. */
+#define LXW_RB_GENERATE_ROW(name, type, field, cmp)       \
+    RB_GENERATE_INSERT_COLOR(name, type, field, static)   \
+    RB_GENERATE_REMOVE_COLOR(name, type, field, static)   \
+    RB_GENERATE_INSERT(name, type, field, cmp, static)    \
+    RB_GENERATE_REMOVE(name, type, field, static)         \
+    RB_GENERATE_FIND(name, type, field, cmp, static)      \
+    RB_GENERATE_NEXT(name, type, field, static)           \
+    RB_GENERATE_MINMAX(name, type, field, static)         \
+    /* Add unused struct to allow adding a semicolon */   \
+    struct lxw_rb_generate_row{int unused;}
+
+#define LXW_RB_GENERATE_CELL(name, type, field, cmp)      \
+    RB_GENERATE_INSERT_COLOR(name, type, field, static)   \
+    RB_GENERATE_REMOVE_COLOR(name, type, field, static)   \
+    RB_GENERATE_INSERT(name, type, field, cmp, static)    \
+    RB_GENERATE_REMOVE(name, type, field, static)         \
+    RB_GENERATE_NEXT(name, type, field, static)           \
+    RB_GENERATE_MINMAX(name, type, field, static)         \
+    /* Add unused struct to allow adding a semicolon */   \
+    struct lxw_rb_generate_cell{int unused;}
+
 STAILQ_HEAD(lxw_merged_ranges, lxw_merged_range);
+STAILQ_HEAD(lxw_selections, lxw_selection);
+STAILQ_HEAD(lxw_images, lxw_image_options);
 
 /**
  * @brief Options for rows and columns.
@@ -188,6 +243,66 @@ typedef struct lxw_autofilter {
     lxw_col_t last_col;
 } lxw_autofilter;
 
+typedef struct lxw_panes {
+    uint8_t type;
+    lxw_row_t first_row;
+    lxw_col_t first_col;
+    lxw_row_t top_row;
+    lxw_col_t left_col;
+    double x_split;
+    double y_split;
+} lxw_panes;
+
+typedef struct lxw_selection {
+    char pane[LXW_PANE_NAME_LENGTH];
+    char active_cell[MAX_CELL_RANGE_LENGTH];
+    char sqref[MAX_CELL_RANGE_LENGTH];
+
+    STAILQ_ENTRY (lxw_selection) list_pointers;
+
+} lxw_selection;
+
+/**
+ * @brief Options for inserted images
+ *
+ * Options for modifying images inserted via `worksheet_insert_image_opt()`.
+ *
+ */
+typedef struct lxw_image_options {
+
+    /** Offset from the left of the cell in pixels. */
+    int32_t x_offset;
+
+    /** Offset from the top of the cell in pixels. */
+    int32_t y_offset;
+
+    /** X scale of the image as a decimal. */
+    double x_scale;
+
+    /** Y scale of the image as a decimal. */
+    double y_scale;
+
+    lxw_row_t row;
+    lxw_col_t col;
+    char *filename;
+    char *url;
+    char *tip;
+    uint8_t anchor;
+
+    /* Internal metadata. */
+    FILE *stream;
+    uint8_t image_type;
+    double width;
+    double height;
+    char *short_name;
+    char *extension;
+    double x_dpi;
+    double y_dpi;
+
+    STAILQ_ENTRY (lxw_image_options) list_pointers;
+
+} lxw_image_options;
+
 /**
  * @brief Header and footer options.
  *
@@ -199,6 +314,61 @@ typedef struct lxw_header_footer_options {
     /** Header or footer margin in inches. Excel default is 0.3. */
     double margin;
 } lxw_header_footer_options;
+
+/**
+ * @brief Worksheet protection options.
+ */
+typedef struct lxw_protection {
+    /** Turn off selection of locked cells. This in on in Excel by default.*/
+    uint8_t no_select_locked_cells;
+
+    /** Turn off selection of unlocked cells. This in on in Excel by default.*/
+    uint8_t no_select_unlocked_cells;
+
+    /** Prevent formatting of cells. */
+    uint8_t format_cells;
+
+    /** Prevent formatting of columns. */
+    uint8_t format_columns;
+
+    /** Prevent formatting of rows. */
+    uint8_t format_rows;
+
+    /** Prevent insertion of columns. */
+    uint8_t insert_columns;
+
+    /** Prevent insertion of rows. */
+    uint8_t insert_rows;
+
+    /** Prevent insertion of hyperlinks. */
+    uint8_t insert_hyperlinks;
+
+    /** Prevent deletion of columns. */
+    uint8_t delete_columns;
+
+    /** Prevent deletion of rows. */
+    uint8_t delete_rows;
+
+    /** Prevent sorting data. */
+    uint8_t sort;
+
+    /** Prevent filtering data. */
+    uint8_t autofilter;
+
+    /** Prevent insertion of pivot tables. */
+    uint8_t pivot_tables;
+
+    /** Protect scenarios. */
+    uint8_t scenarios;
+
+    /** Protect drawing objects. */
+    uint8_t objects;
+
+    uint8_t no_sheet;
+    uint8_t content;
+    uint8_t is_configured;
+    char hash[5];
+} lxw_protection;
 
 /**
  * @brief Struct to represent an Excel worksheet.
@@ -215,6 +385,8 @@ typedef struct lxw_worksheet {
     struct lxw_table_rows *hyperlinks;
     struct lxw_cell **array;
     struct lxw_merged_ranges *merged_ranges;
+    struct lxw_selections *selections;
+    struct lxw_images *images;
 
     lxw_row_t dim_rowmin;
     lxw_row_t dim_rowmax;
@@ -229,7 +401,8 @@ typedef struct lxw_worksheet {
     uint8_t active;
     uint8_t selected;
     uint8_t hidden;
-    uint32_t *active_sheet;
+    uint16_t *active_sheet;
+    uint16_t *first_sheet;
 
     lxw_col_options **col_options;
     uint16_t col_options_max;
@@ -241,6 +414,7 @@ typedef struct lxw_worksheet {
     uint16_t col_formats_max;
 
     uint8_t col_size_changed;
+    uint8_t row_size_changed;
     uint8_t optimize;
     struct lxw_row *optimize_row;
 
@@ -252,11 +426,13 @@ typedef struct lxw_worksheet {
     uint16_t print_scale;
     uint16_t rel_count;
     uint16_t vertical_dpi;
+    uint16_t zoom;
     uint8_t filter_on;
     uint8_t fit_page;
     uint8_t hcenter;
     uint8_t orientation;
     uint8_t outline_changed;
+    uint8_t outline_on;
     uint8_t page_order;
     uint8_t page_setup_changed;
     uint8_t page_view;
@@ -264,10 +440,14 @@ typedef struct lxw_worksheet {
     uint8_t print_gridlines;
     uint8_t print_headers;
     uint8_t print_options_changed;
+    uint8_t right_to_left;
     uint8_t screen_gridlines;
-    uint8_t tab_color;
+    uint8_t show_zeros;
     uint8_t vba_codename;
     uint8_t vcenter;
+    uint8_t zoom_scale_normal;
+
+    lxw_color_t tab_color;
 
     double margin_left;
     double margin_right;
@@ -275,6 +455,12 @@ typedef struct lxw_worksheet {
     double margin_bottom;
     double margin_header;
     double margin_footer;
+
+    double default_row_height;
+    uint32_t default_row_pixels;
+    uint32_t default_col_pixels;
+    uint8_t default_row_zeroed;
+    uint8_t default_row_set;
 
     uint8_t header_footer_changed;
     char header[LXW_HEADER_FOOTER_MAX];
@@ -291,19 +477,28 @@ typedef struct lxw_worksheet {
     lxw_col_t *vbreaks;
 
     struct lxw_rel_tuples *external_hyperlinks;
+    struct lxw_rel_tuples *external_drawing_links;
+    struct lxw_rel_tuples *drawing_links;
+
+    struct lxw_panes panes;
+
+    struct lxw_protection protection;
+
+    lxw_drawing *drawing;
 
     STAILQ_ENTRY (lxw_worksheet) list_pointers;
 
 } lxw_worksheet;
 
 /*
- * Worksheet initialisation data.
+ * Worksheet initialization data.
  */
 typedef struct lxw_worksheet_init_data {
     uint32_t index;
     uint8_t hidden;
     uint8_t optimize;
-    uint32_t *active_sheet;
+    uint16_t *active_sheet;
+    uint16_t *first_sheet;
     lxw_sst *sst;
     char *name;
     char *quoted_name;
@@ -320,10 +515,11 @@ typedef struct lxw_row {
     uint8_t collapsed;
     uint8_t row_changed;
     uint8_t data_changed;
+    uint8_t height_changed;
     struct lxw_table_cells *cells;
 
-    /* List pointers for queue.h. */
-    TAILQ_ENTRY (lxw_row) list_pointers;
+    /* tree management pointers for tree.h. */
+    RB_ENTRY (lxw_row) tree_pointers;
 } lxw_row;
 
 /* Struct to represent a worksheet cell. */
@@ -343,8 +539,8 @@ typedef struct lxw_cell {
     char *user_data1;
     char *user_data2;
 
-    /* List pointers for queue.h. */
-    TAILQ_ENTRY (lxw_cell) list_pointers;
+    /* List pointers for tree.h. */
+    RB_ENTRY (lxw_cell) tree_pointers;
 } lxw_cell;
 
 /* *INDENT-OFF* */
@@ -356,13 +552,13 @@ extern "C" {
 /**
  * @brief Write a number to a worksheet cell.
  *
- * @param worksheet Pointer to the lxw_worksheet instance to be updated.
+ * @param worksheet pointer to a lxw_worksheet instance to be updated.
  * @param row       The zero indexed row number.
  * @param col       The zero indexed column number.
  * @param number    The number to write to the cell.
  * @param format    A pointer to a Format instance or NULL.
  *
- * @return A #lxw_write_error code.
+ * @return A #lxw_worksheet_error code.
  *
  * The `worksheet_write_number()` function writes numeric types to the cell
  * specified by `row` and `column`:
@@ -399,13 +595,13 @@ int8_t worksheet_write_number(lxw_worksheet *worksheet,
 /**
  * @brief Write a string to a worksheet cell.
  *
- * @param worksheet Pointer to the lxw_worksheet instance to be updated.
+ * @param worksheet pointer to a lxw_worksheet instance to be updated.
  * @param row       The zero indexed row number.
  * @param col       The zero indexed column number.
  * @param string    String to write to cell.
  * @param format    A pointer to a Format instance or NULL.
  *
- * @return A #lxw_write_error code.
+ * @return A #lxw_worksheet_error code.
  *
  * The `%worksheet_write_string()` function writes a string to the cell
  * specified by `row` and `column`:
@@ -447,13 +643,13 @@ int8_t worksheet_write_string(lxw_worksheet *worksheet,
 /**
  * @brief Write a formula to a worksheet cell.
  *
- * @param worksheet Pointer to the lxw_worksheet instance to be updated.
+ * @param worksheet pointer to a lxw_worksheet instance to be updated.
  * @param row       The zero indexed row number.
  * @param col       The zero indexed column number.
  * @param formula   Formula string to write to cell.
  * @param format    A pointer to a Format instance or NULL.
  *
- * @return A #lxw_write_error code.
+ * @return A #lxw_worksheet_error code.
  *
  * The `%worksheet_write_formula()` function writes a formula or function to
  * the cell specified by `row` and `column`:
@@ -507,7 +703,7 @@ int8_t worksheet_write_formula(lxw_worksheet *worksheet,
  * @param formula     Array formula to write to cell.
  * @param format      A pointer to a Format instance or NULL.
  *
- * @return A #lxw_write_error code.
+ * @return A #lxw_worksheet_error code.
  *
   * The `%worksheet_write_array_formula()` function writes an array formula to
  * a cell range. In Excel an array formula is a formula that performs a
@@ -556,13 +752,13 @@ int8_t worksheet_write_array_formula_num(lxw_worksheet *worksheet,
 /**
  * @brief Write a date or time to a worksheet cell.
  *
- * @param worksheet Pointer to the lxw_worksheet instance to be updated.
+ * @param worksheet pointer to a lxw_worksheet instance to be updated.
  * @param row       The zero indexed row number.
  * @param col       The zero indexed column number.
  * @param datetime  The datetime to write to the cell.
  * @param format    A pointer to a Format instance or NULL.
  *
- * @return A #lxw_write_error code.
+ * @return A #lxw_worksheet_error code.
  *
  * The `worksheet_write_datetime()` function can be used to write a date or
  * time to the cell specified by `row` and `column`:
@@ -592,13 +788,13 @@ int8_t worksheet_write_url_opt(lxw_worksheet *worksheet,
                                const char *tooltip);
 /**
  *
- * @param worksheet Pointer to the lxw_worksheet instance to be updated.
+ * @param worksheet pointer to a lxw_worksheet instance to be updated.
  * @param row       The zero indexed row number.
  * @param col       The zero indexed column number.
  * @param url       The url to write to the cell.
  * @param format    A pointer to a Format instance or NULL.
  *
- * @return A #lxw_write_error code.
+ * @return A #lxw_worksheet_error code.
  *
  *
  * The `%worksheet_write_url()` function is used to write a URL/hyperlink to a
@@ -627,10 +823,10 @@ int8_t worksheet_write_url_opt(lxw_worksheet *worksheet,
  * and `mailto:` :
  *
  * @code
- *     worksheet_write_url(worksheet, 0, 0, "ftp://www.python.org/",    url_format);
- *     worksheet_write_url(worksheet, 1, 0, "http://www.python.org/",   url_format);
- *     worksheet_write_url(worksheet, 2, 0, "https://www.python.org/",  url_format);
- *     worksheet_write_url(worksheet, 3, 0, "mailto:jmcnamaracpan.org", url_format);
+ *     worksheet_write_url(worksheet, 0, 0, "ftp://www.python.org/",     url_format);
+ *     worksheet_write_url(worksheet, 1, 0, "http://www.python.org/",    url_format);
+ *     worksheet_write_url(worksheet, 2, 0, "https://www.python.org/",   url_format);
+ *     worksheet_write_url(worksheet, 3, 0, "mailto:jmcnamara@cpan.org", url_format);
  *
  * @endcode
  *
@@ -728,12 +924,12 @@ int8_t worksheet_write_url(lxw_worksheet *worksheet,
 /**
  * @brief Write a formatted blank worksheet cell.
  *
- * @param worksheet Pointer to the lxw_worksheet instance to be updated.
+ * @param worksheet pointer to a lxw_worksheet instance to be updated.
  * @param row       The zero indexed row number.
  * @param col       The zero indexed column number.
  * @param format    A pointer to a Format instance or NULL.
  *
- * @return A #lxw_write_error code.
+ * @return A #lxw_worksheet_error code.
  *
  * Write a blank cell specified by `row` and `column`:
  *
@@ -759,14 +955,14 @@ int8_t worksheet_write_blank(lxw_worksheet *worksheet,
 /**
  * @brief Write a formula to a worksheet cell with a user defined result.
  *
- * @param worksheet Pointer to the lxw_worksheet instance to be updated.
+ * @param worksheet pointer to a lxw_worksheet instance to be updated.
  * @param row       The zero indexed row number.
  * @param col       The zero indexed column number.
  * @param formula   Formula string to write to cell.
  * @param format    A pointer to a Format instance or NULL.
  * @param result    A user defined result for a formula.
  *
- * @return A #lxw_write_error code.
+ * @return A #lxw_worksheet_error code.
  *
  * The `%worksheet_write_formula_num()` function writes a formula or Excel
  * function to the cell specified by `row` and `column` with a user defined
@@ -811,7 +1007,6 @@ int8_t worksheet_write_formula_num(lxw_worksheet *worksheet,
  * @param row       The zero indexed row number.
  * @param height    The row height.
  * @param format    A pointer to a Format instance or NULL.
- * @param options   Optional row parameters: hidden, level, collapsed.
  *
  * The `%worksheet_set_row()` function is used to change the default
  * properties of a row. The most common use for this function is to change the
@@ -819,7 +1014,7 @@ int8_t worksheet_write_formula_num(lxw_worksheet *worksheet,
  *
  * @code
  *     // Set the height of Row 1 to 20.
- *     worksheet_set_row(worksheet, 0, 20, NULL, NULL);
+ *     worksheet_set_row(worksheet, 0, 20, NULL);
  * @endcode
  *
  * The other common use for `%worksheet_set_row()` is to set the a @ref
@@ -830,15 +1025,15 @@ int8_t worksheet_write_formula_num(lxw_worksheet *worksheet,
  *     format_set_bold(bold);
  *
  *     // Set the header row to bold.
- *     worksheet_set_row(worksheet, 0, 15, bold, NULL);
+ *     worksheet_set_row(worksheet, 0, 15, bold);
  * @endcode
  *
  * If you wish to set the format of a row without changing the height you can
  * pass the default row height of #LXW_DEF_ROW_HEIGHT = 15:
  *
  * @code
- *     worksheet_set_row(worksheet, 0, LXW_DEF_ROW_HEIGHT, format, NULL);
- *     worksheet_set_row(worksheet, 0, 15, format, NULL); // Same as above.
+ *     worksheet_set_row(worksheet, 0, LXW_DEF_ROW_HEIGHT, format);
+ *     worksheet_set_row(worksheet, 0, 15, format); // Same as above.
  * @endcode
  *
  * The `format` parameter will be applied to any cells in the row that don't
@@ -847,7 +1042,7 @@ int8_t worksheet_write_formula_num(lxw_worksheet *worksheet,
  *
  * @code
  *     // Row 1 has format1.
- *     worksheet_set_row(worksheet, 0, 15, format1, NULL);
+ *     worksheet_set_row(worksheet, 0, 15, format1);
  *
  *     // Cell A1 in Row 1 defaults to format1.
  *     worksheet_write_string(worksheet, 0, 0, "Hello", NULL);
@@ -855,6 +1050,22 @@ int8_t worksheet_write_formula_num(lxw_worksheet *worksheet,
  *     // Cell B1 in Row 1 keeps format2.
  *     worksheet_write_string(worksheet, 0, 1, "Hello", format2);
  * @endcode
+ *
+ */
+int8_t worksheet_set_row(lxw_worksheet *worksheet,
+                         lxw_row_t row, double height, lxw_format *format);
+
+/**
+ * @brief Set the properties for a row of cells.
+ *
+ * @param worksheet Pointer to a lxw_worksheet instance to be updated.
+ * @param row       The zero indexed row number.
+ * @param height    The row height.
+ * @param format    A pointer to a Format instance or NULL.
+ * @param options   Optional row parameters: hidden, level, collapsed.
+ *
+ * The `%worksheet_set_row_opt()` function  is the same as
+ *  `worksheet_set_row()` with an additional `options` parameter.
  *
  * The `options` parameter is a #lxw_row_col_options struct. It has the
  * following members but currently only the `hidden` property is supported:
@@ -874,10 +1085,11 @@ int8_t worksheet_write_formula_num(lxw_worksheet *worksheet,
  * @endcode
  *
  */
-int8_t worksheet_set_row(lxw_worksheet *worksheet,
-                         lxw_row_t row,
-                         double height,
-                         lxw_format *format, lxw_row_col_options *options);
+int8_t worksheet_set_row_opt(lxw_worksheet *worksheet,
+                             lxw_row_t row,
+                             double height,
+                             lxw_format *format,
+                             lxw_row_col_options *options);
 
 /**
  * @brief Set the properties for one or more columns of cells.
@@ -887,14 +1099,13 @@ int8_t worksheet_set_row(lxw_worksheet *worksheet,
  * @param last_col  The zero indexed last column.
  * @param width     The width of the column(s).
  * @param format    A pointer to a Format instance or NULL.
- * @param options   Optional row parameters: hidden, level, collapsed.
  *
  * The `%worksheet_set_column()` function can be used to change the default
  * properties of a single column or a range of columns:
  *
  * @code
  *     // Width of columns B:D set to 30.
- *     worksheet_set_column(worksheet, 1, 3, 30, NULL, NULL);
+ *     worksheet_set_column(worksheet, 1, 3, 30, NULL);
  *
  * @endcode
  *
@@ -903,7 +1114,7 @@ int8_t worksheet_set_row(lxw_worksheet *worksheet,
  *
  * @code
  *     // Width of column B set to 30.
- *     worksheet_set_column(worksheet, 1, 1, 30, NULL, NULL);
+ *     worksheet_set_column(worksheet, 1, 1, 30, NULL);
  *
  * @endcode
  *
@@ -911,12 +1122,12 @@ int8_t worksheet_set_row(lxw_worksheet *worksheet,
  * the form of `COLS()` macro:
  *
  * @code
- *     worksheet_set_column(worksheet, 4, 4, 20, NULL, NULL);
- *     worksheet_set_column(worksheet, 5, 8, 30, NULL, NULL);
+ *     worksheet_set_column(worksheet, 4, 4, 20, NULL);
+ *     worksheet_set_column(worksheet, 5, 8, 30, NULL);
  *
  *     // Same as the examples above but clearer.
- *     worksheet_set_column(worksheet, COLS("E:E"), 20, NULL, NULL);
- *     worksheet_set_column(worksheet, COLS("F:H"), 30, NULL, NULL);
+ *     worksheet_set_column(worksheet, COLS("E:E"), 20, NULL);
+ *     worksheet_set_column(worksheet, COLS("F:H"), 30, NULL);
  *
  * @endcode
  *
@@ -936,7 +1147,7 @@ int8_t worksheet_set_row(lxw_worksheet *worksheet,
  *     format_set_bold(bold);
  *
  *     // Set the first column to bold.
- *     worksheet_set_column(worksheet, 0, 0, LXW_DEF_COL_HEIGHT, bold, NULL);
+ *     worksheet_set_column(worksheet, 0, 0, LXW_DEF_COL_HEIGHT, bold);
  * @endcode
  *
  * The `format` parameter will be applied to any cells in the column that
@@ -944,7 +1155,7 @@ int8_t worksheet_set_row(lxw_worksheet *worksheet,
  *
  * @code
  *     // Column 1 has format1.
- *     worksheet_set_column(worksheet, COLS("A:A"), 8.43, format1, NULL);
+ *     worksheet_set_column(worksheet, COLS("A:A"), 8.43, format1);
  *
  *     // Cell A1 in column 1 defaults to format1.
  *     worksheet_write_string(worksheet, 0, 0, "Hello", NULL);
@@ -957,10 +1168,10 @@ int8_t worksheet_set_row(lxw_worksheet *worksheet,
  *
  * @code
  *     // Row 1 has format1.
- *     worksheet_set_row(worksheet, 0, 15, format1, NULL);
+ *     worksheet_set_row(worksheet, 0, 15, format1);
  *
  *     // Col 1 has format2.
- *     worksheet_set_column(worksheet, COLS("A:A"), 8.43, format2, NULL);
+ *     worksheet_set_column(worksheet, COLS("A:A"), 8.43, format2);
  *
  *     // Cell A1 defaults to format1, the row format.
  *     worksheet_write_string(worksheet, 0, 0, "Hello", NULL);
@@ -968,27 +1179,118 @@ int8_t worksheet_set_row(lxw_worksheet *worksheet,
  *    // Cell A2 keeps format2, the column format.
  *     worksheet_write_string(worksheet, 1, 0, "Hello", NULL);
  * @endcode
+ */
+int8_t worksheet_set_column(lxw_worksheet *worksheet,
+                            lxw_col_t first_col,
+                            lxw_col_t last_col,
+                            double width, lxw_format *format);
+
+ /**
+  * @brief Set the properties for one or more columns of cells with options.
+  *
+  * @param worksheet Pointer to a lxw_worksheet instance to be updated.
+  * @param first_col The zero indexed first column.
+  * @param last_col  The zero indexed last column.
+  * @param width     The width of the column(s).
+  * @param format    A pointer to a Format instance or NULL.
+  * @param options   Optional row parameters: hidden, level, collapsed.
+  *
+  * The `%worksheet_set_column_opt()` function  is the same as
+  * `worksheet_set_column()` with an additional `options` parameter.
+  *
+  * The `options` parameter is a #lxw_row_col_options struct. It has the
+  * following members but currently only the `hidden` property is supported:
+  *
+  * - `hidden`
+  * - `level`
+  * - `collapsed`
+  *
+  * The `"hidden"` option is used to hide a column. This can be used, for
+  * example, to hide intermediary steps in a complicated calculation:
+  *
+  * @code
+  *     lxw_row_col_options options = {.hidden = 1, .level = 0, .collapsed = 0};
+  *
+  *     worksheet_set_column_opt(worksheet, COLS("A:A"), 8.43, NULL, &options);
+  * @endcode
+  *
+  */
+int8_t worksheet_set_column_opt(lxw_worksheet *worksheet,
+                                lxw_col_t first_col,
+                                lxw_col_t last_col,
+                                double width,
+                                lxw_format *format,
+                                lxw_row_col_options *options);
+
+/**
+ * @brief Insert an image in a worksheet cell.
  *
- * The `options` parameter is a #lxw_row_col_options struct. It has the
- * following members but currently only the `hidden` property is supported:
+ * @param worksheet Pointer to a lxw_worksheet instance to be updated.
+ * @param row       The zero indexed row number.
+ * @param col       The zero indexed column number.
+ * @param filename  The image filename, with path if required.
  *
- * - `hidden`
- * - `level`
- * - `collapsed`
+ * @return 0 for success, non-zero on error.
  *
- * The `"hidden"` option is used to hide a column. This can be used, for
- * example, to hide intermediary steps in a complicated calculation:
+ * This function can be used to insert a image into a worksheet. The image can
+ * be in PNG, JPEG or BMP format:
  *
  * @code
- *     lxw_row_col_options options = {.hidden = 1, .level = 0, .collapsed = 0};
- *
- *     worksheet_set_column(worksheet, COLS("A:A"), 8.43, NULL, &options);
+ *     worksheet_insert_image(worksheet, 2, 1, "logo.png");
  * @endcode
  *
+ * @image html insert_image.png
+ *
+ * The `worksheet_insert_image_opt()` function takes additional optional
+ * parameters to position and scale the image, see below.
+ *
+ * **Note**:
+ * The scaling of a image may be affected if is crosses a row that has its
+ * default height changed due to a font that is larger than the default font
+ * size or that has text wrapping turned on. To avoid this you should
+ * explicitly set the height of the row using `worksheet_set_row()` if it
+ * crosses an inserted image.
+ *
+ * BMP images are only supported for backward compatibility. In general it is
+ * best to avoid BMP images since they aren't compressed. If used, BMP images
+ * must be 24 bit, true color, bitmaps.
  */
-int8_t worksheet_set_column(lxw_worksheet *worksheet, lxw_col_t first_col,
-                            lxw_col_t last_col, double width,
-                            lxw_format *format, lxw_row_col_options *options);
+int worksheet_insert_image(lxw_worksheet *worksheet,
+                           lxw_row_t row, lxw_col_t col,
+                           const char *filename);
+
+/**
+ * @brief Insert an image in a worksheet cell, with options.
+ *
+ * @param worksheet Pointer to a lxw_worksheet instance to be updated.
+ * @param row       The zero indexed row number.
+ * @param col       The zero indexed column number.
+ * @param filename  The image filename, with path if required.
+ * @param options   Optional image parameters.
+ *
+ * @return 0 for success, non-zero on error.
+ *
+ * The `%worksheet_insert_image_opt()` function is like
+ * `worksheet_insert_image()` function except that it takes an optional
+ * #lxw_image_options struct to scale and position the image:
+ *
+ * @code
+ *    lxw_image_options options = {.x_offset = 30,   .y_offset = 10,
+ *                                 .x_scale  = 0.5, .y_scale  = 0.5};
+ *
+ *    worksheet_insert_image_opt(worksheet, 2, 1, "logo.png", &options);
+ *
+ * @endcode
+ *
+ * @image html insert_image_opt.png
+ *
+ * **Note**: See the notes about row scaling and BMP images in
+ * `worksheet_insert_image()` above.
+ */
+int worksheet_insert_image_opt(lxw_worksheet *worksheet,
+                               lxw_row_t row, lxw_col_t col,
+                               const char *filename,
+                               lxw_image_options *options);
 
 /**
  * @brief Merge a range of cells.
@@ -1007,7 +1309,7 @@ int8_t worksheet_set_column(lxw_worksheet *worksheet, lxw_col_t first_col,
  * so that they act as a single area.
  *
  * Excel generally merges and centers cells at same time. To get similar
- * behaviour with libxlsxwriter you need to apply a @ref format.h "Format"
+ * behavior with libxlsxwriter you need to apply a @ref format.h "Format"
  * object with the appropriate alignment:
  *
  * @code
@@ -1063,8 +1365,8 @@ uint8_t worksheet_merge_range(lxw_worksheet *worksheet, lxw_row_t first_row,
  *
  * @return 0 for success, non-zero on error.
  *
- * The `%worksheet_autofilter()` method allows an autofilter to be added to a
- * worksheet.
+ * The `%worksheet_autofilter()` function allows an autofilter to be added to
+ * a worksheet.
  *
  * An autofilter is a way of adding drop down lists to the headers of a 2D
  * range of worksheet data. This allows users to filter the data based on
@@ -1136,6 +1438,164 @@ void worksheet_activate(lxw_worksheet *worksheet);
   *
   */
 void worksheet_select(lxw_worksheet *worksheet);
+
+/**
+ * @brief Hide the current worksheet.
+ *
+ * @param worksheet Pointer to a lxw_worksheet instance to be updated.
+ *
+ * The `%worksheet_hide()` function is used to hide a worksheet:
+ *
+ * @code
+ *     worksheet_hide(worksheet2);
+ * @endcode
+ *
+ * You may wish to hide a worksheet in order to avoid confusing a user with
+ * intermediate data or calculations.
+ *
+ * @image html hide_sheet.png
+ *
+ * A hidden worksheet can not be activated or selected so this function is
+ * mutually exclusive with the `worksheet_activate()` and `worksheet_select()`
+ * functions. In addition, since the first worksheet will default to being the
+ * active worksheet, you cannot hide the first worksheet without activating
+ * another sheet:
+ *
+ * @code
+ *     worksheet_activate(worksheet2);
+ *     worksheet_hide(worksheet1);
+ * @endcode
+ */
+void worksheet_hide(lxw_worksheet *worksheet);
+
+/**
+ * @brief Set current worksheet as the first visible sheet tab.
+ *
+ * @param worksheet Pointer to a lxw_worksheet instance to be updated.
+ *
+ * The `worksheet_activate()` function determines which worksheet is initially
+ * selected.  However, if there are a large number of worksheets the selected
+ * worksheet may not appear on the screen. To avoid this you can select the
+ * leftmost visible worksheet tab using `%worksheet_set_first_sheet()`:
+ *
+ * @code
+ *     worksheet_set_first_sheet(worksheet19); // First visible worksheet tab.
+ *     worksheet_activate(worksheet20);        // First visible worksheet.
+ * @endcode
+ *
+ * This function is not required very often. The default value is the first
+ * worksheet.
+ */
+void worksheet_set_first_sheet(lxw_worksheet *worksheet);
+
+/**
+ * @brief Split and freeze a worksheet into panes.
+ *
+ * @param worksheet Pointer to a lxw_worksheet instance to be updated.
+ * @param row       The cell row (zero indexed).
+ * @param col       The cell column (zero indexed).
+ *
+ * The `%worksheet_freeze_panes()` function can be used to divide a worksheet
+ * into horizontal or vertical regions known as panes and to "freeze" these
+ * panes so that the splitter bars are not visible.
+ *
+ * The parameters `row` and `col` are used to specify the location of the
+ * split. It should be noted that the split is specified at the top or left of
+ * a cell and that the function uses zero based indexing. Therefore to freeze
+ * the first row of a worksheet it is necessary to specify the split at row 2
+ * (which is 1 as the zero-based index).
+ *
+ * You can set one of the `row` and `col` parameters as zero if you do not
+ * want either a vertical or horizontal split.
+ *
+ * Examples:
+ *
+ * @code
+ *     worksheet_freeze_panes(worksheet1, 1, 0); // Freeze the first row.
+ *     worksheet_freeze_panes(worksheet2, 0, 1); // Freeze the first column.
+ *     worksheet_freeze_panes(worksheet3, 1, 1); // Freeze first row/column.
+ *
+ * @endcode
+ *
+ */
+void worksheet_freeze_panes(lxw_worksheet *worksheet,
+                            lxw_row_t row, lxw_col_t col);
+/**
+ * @brief Split a worksheet into panes.
+ *
+ * @param worksheet  Pointer to a lxw_worksheet instance to be updated.
+ * @param vertical   The position for the vertical split.
+ * @param horizontal The position for the horizontal split.
+ *
+ * The `%worksheet_split_panes()` function can be used to divide a worksheet
+ * into horizontal or vertical regions known as panes. This function is
+ * different from the `worksheet_freeze_panes()` function in that the splits
+ * between the panes will be visible to the user and each pane will have its
+ * own scroll bars.
+ *
+ * The parameters `vertical` and `horizontal` are used to specify the vertical
+ * and horizontal position of the split. The units for `vertical` and
+ * `horizontal` are the same as those used by Excel to specify row height and
+ * column width. However, the vertical and horizontal units are different from
+ * each other. Therefore you must specify the `vertical` and `horizontal`
+ * parameters in terms of the row heights and column widths that you have set
+ * or the default values which are 15 for a row and 8.43 for a column.
+ *
+ * Examples:
+ *
+ * @code
+ *     worksheet_split_panes(worksheet1, 15, 0);    // First row.
+ *     worksheet_split_panes(worksheet2, 0,  8.43); // First column.
+ *     worksheet_split_panes(worksheet3, 15, 8.43); // First row and column.
+ *
+ * @endcode
+ *
+ */
+void worksheet_split_panes(lxw_worksheet *worksheet,
+                           double vertical, double horizontal);
+
+/* worksheet_freeze_panes() with infrequent options. Undocumented for now. */
+void worksheet_freeze_panes_opt(lxw_worksheet *worksheet,
+                                lxw_row_t first_row, lxw_col_t first_col,
+                                lxw_row_t top_row, lxw_col_t left_col,
+                                uint8_t type);
+
+/* worksheet_split_panes() with infrequent options. Undocumented for now. */
+void worksheet_split_panes_opt(lxw_worksheet *worksheet,
+                               double vertical, double horizontal,
+                               lxw_row_t top_row, lxw_col_t left_col);
+/**
+ * @brief Set the selected cell or cells in a worksheet:
+ *
+ * @param worksheet   Pointer to a lxw_worksheet instance to be updated.
+ * @param first_row   The first row of the range. (All zero indexed.)
+ * @param first_col   The first column of the range.
+ * @param last_row    The last row of the range.
+ * @param last_col    The last col of the range.
+ *
+ *
+ * The `%worksheet_set_selection()` function can be used to specify which cell
+ * or range of cells is selected in a worksheet: The most common requirement
+ * is to select a single cell, in which case the `first_` and `last_`
+ * parameters should be the same.
+ *
+ * The active cell within a selected range is determined by the order in which
+ * `first_` and `last_` are specified.
+ *
+ * Examples:
+ *
+ * @code
+ *     worksheet_set_selection(worksheet1, 3, 3, 3, 3);     // Cell D4.
+ *     worksheet_set_selection(worksheet2, 3, 3, 6, 6);     // Cells D4 to G7.
+ *     worksheet_set_selection(worksheet3, 6, 6, 3, 3);     // Cells G7 to D4.
+ *     worksheet_set_selection(worksheet5, RANGE("D4:G7")); // Using the RANGE macro.
+ *
+ * @endcode
+ *
+ */
+void worksheet_set_selection(lxw_worksheet *worksheet,
+                             lxw_row_t first_row, lxw_col_t first_col,
+                             lxw_row_t last_row, lxw_col_t last_col);
 
 /**
  * @brief Set the page orientation as landscape.
@@ -1338,7 +1798,7 @@ void worksheet_set_margins(lxw_worksheet *worksheet, double left,
  * @endcode
  *
  * For simple text, if you do not specify any justification the text will be
- * centred. However, you must prefix the text with `&C` if you specify a font
+ * centered. However, you must prefix the text with `&C` if you specify a font
  * name or any other formatting:
  *
  * @code
@@ -1612,6 +2072,29 @@ void worksheet_set_v_pagebreaks(lxw_worksheet *worksheet, lxw_col_t breaks[]);
 void worksheet_print_across(lxw_worksheet *worksheet);
 
 /**
+ * @brief Set the worksheet zoom factor.
+ *
+ * @param worksheet Pointer to a lxw_worksheet instance to be updated.
+ * @param scale     Worksheet zoom factor.
+ *
+ * Set the worksheet zoom factor in the range `10 <= zoom <= 400`:
+ *
+ * @code
+ *     worksheet_set_zoom(worksheet1, 50);
+ *     worksheet_set_zoom(worksheet2, 75);
+ *     worksheet_set_zoom(worksheet3, 300);
+ *     worksheet_set_zoom(worksheet4, 400);
+ * @endcode
+ *
+ * The default zoom factor is 100. It isn't possible to set the zoom to
+ * "Selection" because it is calculated by Excel at run-time.
+ *
+ * Note, `%worksheet_zoom()` does not affect the scale of the printed
+ * page. For that you should use `worksheet_set_print_scale()`.
+ */
+void worksheet_set_zoom(lxw_worksheet *worksheet, uint16_t scale);
+
+/**
  * @brief Set the option to display or hide gridlines on the screen and
  *        the printed page.
  *
@@ -1850,10 +2333,177 @@ void worksheet_set_start_page(lxw_worksheet *worksheet, uint16_t start_page);
  */
 void worksheet_set_print_scale(lxw_worksheet *worksheet, uint16_t scale);
 
-lxw_worksheet *_new_worksheet(lxw_worksheet_init_data *init_data);
-void _free_worksheet(lxw_worksheet *worksheet);
-void _worksheet_assemble_xml_file(lxw_worksheet *worksheet);
-void _worksheet_write_single_row(lxw_worksheet *worksheet);
+/**
+ * @brief Display the worksheet cells from right to left for some versions of
+ *        Excel.
+ *
+ * @param worksheet Pointer to a lxw_worksheet instance to be updated.
+ *
+  * The `%worksheet_right_to_left()` function is used to change the default
+ * direction of the worksheet from left-to-right, with the `A1` cell in the
+ * top left, to right-to-left, with the `A1` cell in the top right.
+ *
+ * @code
+ *     worksheet_right_to_left(worksheet1);
+ * @endcode
+ *
+ * This is useful when creating Arabic, Hebrew or other near or far eastern
+ * worksheets that use right-to-left as the default direction.
+ */
+void worksheet_right_to_left(lxw_worksheet *worksheet);
+
+/**
+ * @brief Hide zero values in worksheet cells.
+ *
+ * @param worksheet Pointer to a lxw_worksheet instance to be updated.
+ *
+ * The `%worksheet_hide_zero()` function is used to hide any zero values that
+ * appear in cells:
+ *
+ * @code
+ *     worksheet_hide_zero(worksheet1);
+ * @endcode
+ */
+void worksheet_hide_zero(lxw_worksheet *worksheet);
+
+/**
+ * @brief Set the color of the worksheet tab.
+ *
+ * @param worksheet Pointer to a lxw_worksheet instance to be updated.
+ * @param color     The tab color.
+ *
+ * The `%worksheet_set_tab_color()` function is used to change the color of the worksheet
+ * tab:
+ *
+ * @code
+ *      worksheet_set_tab_color(worksheet1, LXW_COLOR_RED);
+ *      worksheet_set_tab_color(worksheet2, LXW_COLOR_GREEN);
+ *      worksheet_set_tab_color(worksheet3, 0xFF9900); // Orange.
+ * @endcode
+ *
+ * The color should be an RGB integer value, see @ref working_with_colors.
+ */
+void worksheet_set_tab_color(lxw_worksheet *worksheet, lxw_color_t color);
+
+/**
+ * @brief Protect elements of a worksheet from modification.
+ *
+ * @param worksheet Pointer to a lxw_worksheet instance to be updated.
+ * @param password  A worksheet password.
+ * @param options   Worksheet elements to protect.
+ *
+ * The `%worksheet_protect()` function protects worksheet elements from modification:
+ *
+ * @code
+ *     worksheet_protect(worksheet, "Some Password", options);
+ * @endcode
+ *
+ * The `password` and lxw_protection pointer are both optional:
+ *
+ * @code
+ *     worksheet_protect(worksheet1, NULL,       NULL);
+ *     worksheet_protect(worksheet2, NULL,       my_options);
+ *     worksheet_protect(worksheet3, "password", NULL);
+ *     worksheet_protect(worksheet4, "password", my_options);
+ * @endcode
+ *
+ * Passing a `NULL` password is the same as turning on protection without a
+ * password. Passing a `NULL` password and `NULL` options, or any other
+ * combination has the effect of enabling a cell's `locked` and `hidden`
+ * properties if they have been set.
+ *
+ * A *locked* cell cannot be edited and this property is on by default for all
+ * cells. A *hidden* cell will display the results of a formula but not the
+ * formula itself. These properties can be set using the format_set_unlocked()
+ * and format_set_hidden() format functions.
+ *
+ * You can specify which worksheet elements you wish to protect by passing a
+ * lxw_protection pointer in the `options` argument with any or all of the
+ * following members set:
+ *
+ *     no_select_locked_cells
+ *     no_select_unlocked_cells
+ *     format_cells
+ *     format_columns
+ *     format_rows
+ *     insert_columns
+ *     insert_rows
+ *     insert_hyperlinks
+ *     delete_columns
+ *     delete_rows
+ *     sort
+ *     autofilter
+ *     pivot_tables
+ *     scenarios
+ *     objects
+ *
+ * All parameters are off by default. Individual elements can be protected as
+ * follows:
+ *
+ * @code
+ *     lxw_protection options = {
+ *         .format_cells             = 1,
+ *         .insert_hyperlinks        = 1,
+ *         .insert_rows              = 1,
+ *         .delete_rows              = 1,
+ *         .insert_columns           = 1,
+ *         .delete_columns           = 1,
+ *     };
+ *
+ *     worksheet_protect(worksheet, NULL, &options);
+ *
+ * @endcode
+ *
+ * See also the format_set_unlocked() and format_set_hidden() format functions.
+ *
+ * **Note:** Worksheet level passwords in Excel offer **very** weak
+ * protection. They don't encrypt your data and are very easy to
+ * deactivate. Full workbook encryption is not supported by `libxlsxwriter`
+ * since it requires a completely different file format and would take several
+ * man months to implement.
+ */
+void worksheet_protect(lxw_worksheet *worksheet, char *password,
+                       lxw_protection *options);
+
+/**
+ * @brief Set the default row properties.
+ *
+ * @param worksheet        Pointer to a lxw_worksheet instance to be updated.
+ * @param height           Default row height.
+ * @param hide_unused_rows Hide unused cells.
+ *
+ * The `%worksheet_set_default_row()` function is used to set Excel default
+ * row properties such as the default height and the option to hide unused
+ * rows. These parameters are an optimization used by Excel to set row
+ * properties without generating a very large file with an entry for each row.
+ *
+ * To set the default row height:
+ *
+ * @code
+ *     worksheet_set_default_row(worksheet, 24, LXW_FALSE);
+ *
+ * @endcode
+ *
+ * To hide unused rows:
+ *
+ * @code
+ *     worksheet_set_default_row(worksheet, 15, LXW_TRUE);
+ * @endcode
+ *
+ * Note, in the previous case we use the default height #LXW_DEF_ROW_HEIGHT =
+ * 15 so the the height remains unchanged.
+ */
+void worksheet_set_default_row(lxw_worksheet *worksheet, double height,
+                               uint8_t hide_unused_rows);
+
+lxw_worksheet *lxw_worksheet_new(lxw_worksheet_init_data *init_data);
+void lxw_worksheet_free(lxw_worksheet *worksheet);
+void lxw_worksheet_assemble_xml_file(lxw_worksheet *worksheet);
+void lxw_worksheet_write_single_row(lxw_worksheet *worksheet);
+
+void lxw_worksheet_prepare_image(lxw_worksheet *worksheet,
+                                 uint16_t image_ref_id, uint16_t drawing_id,
+                                 lxw_image_options *image);
 
 /* Declarations required for unit testing. */
 #ifdef TESTING
@@ -1882,6 +2532,9 @@ STATIC void _worksheet_write_odd_footer(lxw_worksheet *worksheet);
 STATIC void _worksheet_write_header_footer(lxw_worksheet *worksheet);
 
 STATIC void _worksheet_write_print_options(lxw_worksheet *worksheet);
+STATIC void _worksheet_write_sheet_pr(lxw_worksheet *worksheet);
+STATIC void _worksheet_write_tab_color(lxw_worksheet *worksheet);
+STATIC void _worksheet_write_sheet_protection(lxw_worksheet *worksheet);
 #endif /* TESTING */
 
 /* *INDENT-OFF* */

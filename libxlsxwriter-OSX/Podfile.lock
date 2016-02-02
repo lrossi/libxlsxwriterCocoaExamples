@@ -1,10 +1,10 @@
 PODS:
-  - libxlsxwriter (0.1.7)
+  - libxlsxwriter (0.3.1)
 
 DEPENDENCIES:
-  - libxlsxwriter
+  - libxlsxwriter (~> 0.3.1)
 
 SPEC CHECKSUMS:
-  libxlsxwriter: 74d042f1ac280d2e301019bf5d3690f2bc9073a4
+  libxlsxwriter: 4b1a3133ddb273cf49b3541a04567f647697c3ed
 
 COCOAPODS: 0.39.0

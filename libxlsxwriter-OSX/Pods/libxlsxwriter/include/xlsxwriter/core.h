@@ -1,7 +1,7 @@
 /*
  * libxlsxwriter
- * 
- * Copyright 2014-2015, John McNamara, jmcnamara@cpan.org. See LICENSE.txt.
+ *
+ * Copyright 2014-2016, John McNamara, jmcnamara@cpan.org. See LICENSE.txt.
  *
  * core - A libxlsxwriter library for creating Excel XLSX core files.
  *
@@ -10,8 +10,8 @@
 #define __LXW_CORE_H__
 
 #include <stdint.h>
-#include "xlsxwriter/third_party/queue.h"
 
+#include "xlsxwriter/workbook.h"
 #include "common.h"
 
 /*
@@ -31,9 +31,9 @@ extern "C" {
 #endif
 /* *INDENT-ON* */
 
-lxw_core *_new_core();
-void _free_core(lxw_core *core);
-void _core_assemble_xml_file(lxw_core *self);
+lxw_core *lxw_core_new();
+void lxw_core_free(lxw_core *core);
+void lxw_core_assemble_xml_file(lxw_core *self);
 
 /* Declarations required for unit testing. */
 #ifdef TESTING
