@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		822A545F1C60D61C0060A3EE /* PanesExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 822A54531C60D61C0060A3EE /* PanesExample.m */; };
+		822A54601C60D61C0060A3EE /* HideRowColExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 822A54541C60D61C0060A3EE /* HideRowColExample.m */; };
+		822A54611C60D61C0060A3EE /* WorksheetProtectionExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 822A54551C60D61C0060A3EE /* WorksheetProtectionExample.m */; };
+		822A54621C60D61C0060A3EE /* DocPropertiesExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 822A54561C60D61C0060A3EE /* DocPropertiesExample.m */; };
+		822A54631C60D61C0060A3EE /* HideSheetExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 822A54571C60D61C0060A3EE /* HideSheetExample.m */; };
+		822A54641C60D61C0060A3EE /* TabColorsExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 822A54581C60D61C0060A3EE /* TabColorsExample.m */; };
 		8294E3051BF617BF00F14982 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8294E3041BF617BF00F14982 /* AppDelegate.m */; };
 		8294E3081BF617BF00F14982 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8294E3071BF617BF00F14982 /* main.m */; };
 		8294E30B1BF617BF00F14982 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8294E30A1BF617BF00F14982 /* ViewController.m */; };
@@ -40,6 +46,18 @@
 		11B4DFAD73B9D2C11D6EB636 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		226652A7885692079A754A76 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		3C52F42E50F5B0C7FE4C4E8E /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		822A54531C60D61C0060A3EE /* PanesExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PanesExample.m; sourceTree = "<group>"; };
+		822A54541C60D61C0060A3EE /* HideRowColExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HideRowColExample.m; sourceTree = "<group>"; };
+		822A54551C60D61C0060A3EE /* WorksheetProtectionExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorksheetProtectionExample.m; sourceTree = "<group>"; };
+		822A54561C60D61C0060A3EE /* DocPropertiesExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DocPropertiesExample.m; sourceTree = "<group>"; };
+		822A54571C60D61C0060A3EE /* HideSheetExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HideSheetExample.m; sourceTree = "<group>"; };
+		822A54581C60D61C0060A3EE /* TabColorsExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabColorsExample.m; sourceTree = "<group>"; };
+		822A54591C60D61C0060A3EE /* PanesExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PanesExample.h; sourceTree = "<group>"; };
+		822A545A1C60D61C0060A3EE /* HideRowColExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HideRowColExample.h; sourceTree = "<group>"; };
+		822A545B1C60D61C0060A3EE /* WorksheetProtectionExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorksheetProtectionExample.h; sourceTree = "<group>"; };
+		822A545C1C60D61C0060A3EE /* DocPropertiesExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DocPropertiesExample.h; sourceTree = "<group>"; };
+		822A545D1C60D61C0060A3EE /* HideSheetExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HideSheetExample.h; sourceTree = "<group>"; };
+		822A545E1C60D61C0060A3EE /* TabColorsExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabColorsExample.h; sourceTree = "<group>"; };
 		8294E3001BF617BF00F14982 /* libxlsxwriter-OSX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "libxlsxwriter-OSX.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8294E3031BF617BF00F14982 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		8294E3041BF617BF00F14982 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -216,6 +234,18 @@
 				8294E33F1BF617CA00F14982 /* Tutorial3Example.m */,
 				8294E3401BF617CA00F14982 /* UTF8Example.h */,
 				8294E3411BF617CA00F14982 /* UTF8Example.m */,
+				822A54591C60D61C0060A3EE /* PanesExample.h */,
+				822A54531C60D61C0060A3EE /* PanesExample.m */,
+				822A545A1C60D61C0060A3EE /* HideRowColExample.h */,
+				822A54541C60D61C0060A3EE /* HideRowColExample.m */,
+				822A545B1C60D61C0060A3EE /* WorksheetProtectionExample.h */,
+				822A54551C60D61C0060A3EE /* WorksheetProtectionExample.m */,
+				822A545C1C60D61C0060A3EE /* DocPropertiesExample.h */,
+				822A54561C60D61C0060A3EE /* DocPropertiesExample.m */,
+				822A545D1C60D61C0060A3EE /* HideSheetExample.h */,
+				822A54571C60D61C0060A3EE /* HideSheetExample.m */,
+				822A545E1C60D61C0060A3EE /* TabColorsExample.h */,
+				822A54581C60D61C0060A3EE /* TabColorsExample.m */,
 			);
 			path = Examples;
 			sourceTree = "<group>";
@@ -373,18 +403,24 @@
 				8294E3571BF617CA00F14982 /* UTF8Example.m in Sources */,
 				8294E3481BF617CA00F14982 /* ConstantMemoryExample.m in Sources */,
 				8294E3441BF617CA00F14982 /* DefaultExamples.m in Sources */,
+				822A54611C60D61C0060A3EE /* WorksheetProtectionExample.m in Sources */,
 				8294E3561BF617CA00F14982 /* Tutorial3Example.m in Sources */,
 				8294E3581BF617CA00F14982 /* Example.m in Sources */,
 				8294E3551BF617CA00F14982 /* Tutorial2Example.m in Sources */,
 				8294E34E1BF617CA00F14982 /* FormatFontExample.m in Sources */,
+				822A54631C60D61C0060A3EE /* HideSheetExample.m in Sources */,
+				822A54621C60D61C0060A3EE /* DocPropertiesExample.m in Sources */,
 				8294E3511BF617CA00F14982 /* HelloExample.m in Sources */,
 				8294E34F1BF617CA00F14982 /* FormatNumFormatExample.m in Sources */,
+				822A545F1C60D61C0060A3EE /* PanesExample.m in Sources */,
+				822A54601C60D61C0060A3EE /* HideRowColExample.m in Sources */,
 				8294E3461BF617CA00F14982 /* ArrayFormulaExample.m in Sources */,
 				8294E30B1BF617BF00F14982 /* ViewController.m in Sources */,
 				8294E3081BF617BF00F14982 /* main.m in Sources */,
 				8294E3051BF617BF00F14982 /* AppDelegate.m in Sources */,
 				8294E3451BF617CA00F14982 /* AnatomyExample.m in Sources */,
 				8294E34D1BF617CA00F14982 /* DemoExample.m in Sources */,
+				822A54641C60D61C0060A3EE /* TabColorsExample.m in Sources */,
 				8294E3501BF617CA00F14982 /* HeadersFootersExample.m in Sources */,
 				8294E34A1BF617CA00F14982 /* DatesAndTimes2Example.m in Sources */,
 				8294E3491BF617CA00F14982 /* DatesAndTimes1Example.m in Sources */,

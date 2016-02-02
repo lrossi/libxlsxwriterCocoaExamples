@@ -29,6 +29,12 @@
 		8227CF261BF4F27D003202E4 /* Tutorial3Example.m in Sources */ = {isa = PBXBuildFile; fileRef = 8227CF0F1BF4F27D003202E4 /* Tutorial3Example.m */; };
 		8227CF271BF4F27D003202E4 /* UTF8Example.m in Sources */ = {isa = PBXBuildFile; fileRef = 8227CF111BF4F27D003202E4 /* UTF8Example.m */; };
 		8227CF281BF4F27D003202E4 /* Example.m in Sources */ = {isa = PBXBuildFile; fileRef = 8227CF131BF4F27D003202E4 /* Example.m */; };
+		822A54311C60CFFE0060A3EE /* TabColorsExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 822A54301C60CFFE0060A3EE /* TabColorsExample.m */; };
+		822A54341C60D00F0060A3EE /* HideSheetExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 822A54331C60D00F0060A3EE /* HideSheetExample.m */; };
+		822A54371C60D01D0060A3EE /* DocPropertiesExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 822A54361C60D01D0060A3EE /* DocPropertiesExample.m */; };
+		822A543A1C60D02E0060A3EE /* WorksheetProtectionExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 822A54391C60D02E0060A3EE /* WorksheetProtectionExample.m */; };
+		822A543D1C60D03C0060A3EE /* HideRowColExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 822A543C1C60D03C0060A3EE /* HideRowColExample.m */; };
+		822A54401C60D04C0060A3EE /* PanesExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 822A543F1C60D04C0060A3EE /* PanesExample.m */; };
 		82B62ABF1BF34AC000FE079F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 82B62ABE1BF34AC000FE079F /* main.m */; };
 		82B62AC21BF34AC000FE079F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 82B62AC11BF34AC000FE079F /* AppDelegate.m */; };
 		82B62AC81BF34AC000FE079F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 82B62AC61BF34AC000FE079F /* Main.storyboard */; };
@@ -83,6 +89,18 @@
 		8227CF111BF4F27D003202E4 /* UTF8Example.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UTF8Example.m; sourceTree = "<group>"; };
 		8227CF121BF4F27D003202E4 /* Example.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Example.h; sourceTree = "<group>"; };
 		8227CF131BF4F27D003202E4 /* Example.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Example.m; sourceTree = "<group>"; };
+		822A542F1C60CFFE0060A3EE /* TabColorsExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabColorsExample.h; sourceTree = "<group>"; };
+		822A54301C60CFFE0060A3EE /* TabColorsExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabColorsExample.m; sourceTree = "<group>"; };
+		822A54321C60D00F0060A3EE /* HideSheetExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HideSheetExample.h; sourceTree = "<group>"; };
+		822A54331C60D00F0060A3EE /* HideSheetExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HideSheetExample.m; sourceTree = "<group>"; };
+		822A54351C60D01D0060A3EE /* DocPropertiesExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DocPropertiesExample.h; sourceTree = "<group>"; };
+		822A54361C60D01D0060A3EE /* DocPropertiesExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DocPropertiesExample.m; sourceTree = "<group>"; };
+		822A54381C60D02E0060A3EE /* WorksheetProtectionExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorksheetProtectionExample.h; sourceTree = "<group>"; };
+		822A54391C60D02E0060A3EE /* WorksheetProtectionExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorksheetProtectionExample.m; sourceTree = "<group>"; };
+		822A543B1C60D03C0060A3EE /* HideRowColExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HideRowColExample.h; sourceTree = "<group>"; };
+		822A543C1C60D03C0060A3EE /* HideRowColExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HideRowColExample.m; sourceTree = "<group>"; };
+		822A543E1C60D04C0060A3EE /* PanesExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PanesExample.h; sourceTree = "<group>"; };
+		822A543F1C60D04C0060A3EE /* PanesExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PanesExample.m; sourceTree = "<group>"; };
 		82B62ABA1BF34AC000FE079F /* libxlsxwriter-ObjC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "libxlsxwriter-ObjC.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		82B62ABE1BF34AC000FE079F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		82B62AC01BF34AC000FE079F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -172,6 +190,18 @@
 				8227CF031BF4F27D003202E4 /* HeadersFootersExample.m */,
 				8227CEFA1BF4F27D003202E4 /* DefinedNameExample.h */,
 				8227CEFB1BF4F27D003202E4 /* DefinedNameExample.m */,
+				822A542F1C60CFFE0060A3EE /* TabColorsExample.h */,
+				822A54301C60CFFE0060A3EE /* TabColorsExample.m */,
+				822A54321C60D00F0060A3EE /* HideSheetExample.h */,
+				822A54331C60D00F0060A3EE /* HideSheetExample.m */,
+				822A54351C60D01D0060A3EE /* DocPropertiesExample.h */,
+				822A54361C60D01D0060A3EE /* DocPropertiesExample.m */,
+				822A54381C60D02E0060A3EE /* WorksheetProtectionExample.h */,
+				822A54391C60D02E0060A3EE /* WorksheetProtectionExample.m */,
+				822A543B1C60D03C0060A3EE /* HideRowColExample.h */,
+				822A543C1C60D03C0060A3EE /* HideRowColExample.m */,
+				822A543E1C60D04C0060A3EE /* PanesExample.h */,
+				822A543F1C60D04C0060A3EE /* PanesExample.m */,
 			);
 			path = Examples;
 			sourceTree = "<group>";
@@ -385,6 +415,7 @@
 			files = (
 				8227CF1F1BF4F27D003202E4 /* FormatNumFormatExample.m in Sources */,
 				8227CF191BF4F27D003202E4 /* DatesAndTimes1Example.m in Sources */,
+				822A54311C60CFFE0060A3EE /* TabColorsExample.m in Sources */,
 				8227CF251BF4F27D003202E4 /* Tutorial2Example.m in Sources */,
 				8227CF1E1BF4F27D003202E4 /* FormatFontExample.m in Sources */,
 				8227CF271BF4F27D003202E4 /* UTF8Example.m in Sources */,
@@ -394,13 +425,18 @@
 				8227CF281BF4F27D003202E4 /* Example.m in Sources */,
 				8227CF201BF4F27D003202E4 /* HeadersFootersExample.m in Sources */,
 				82B62AD71BF34B9300FE079F /* ExamplePickerTableViewController.m in Sources */,
+				822A54371C60D01D0060A3EE /* DocPropertiesExample.m in Sources */,
 				8227CF1B1BF4F27D003202E4 /* DatesAndTimes3Example.m in Sources */,
+				822A54401C60D04C0060A3EE /* PanesExample.m in Sources */,
 				82B62ADB1BF34BB500FE079F /* ExampleViewerViewController.m in Sources */,
 				8227CF241BF4F27D003202E4 /* Tutorial1Example.m in Sources */,
 				8227CF1C1BF4F27D003202E4 /* DefinedNameExample.m in Sources */,
 				8227CF211BF4F27D003202E4 /* HelloExample.m in Sources */,
+				822A543A1C60D02E0060A3EE /* WorksheetProtectionExample.m in Sources */,
+				822A54341C60D00F0060A3EE /* HideSheetExample.m in Sources */,
 				8227CF261BF4F27D003202E4 /* Tutorial3Example.m in Sources */,
 				8227CF1D1BF4F27D003202E4 /* DemoExample.m in Sources */,
+				822A543D1C60D03C0060A3EE /* HideRowColExample.m in Sources */,
 				8227CF231BF4F27D003202E4 /* MergeRangeExample.m in Sources */,
 				8227CF1A1BF4F27D003202E4 /* DatesAndTimes2Example.m in Sources */,
 				82B62AC21BF34AC000FE079F /* AppDelegate.m in Sources */,

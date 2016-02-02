@@ -26,7 +26,12 @@
 #import "AutofilterExample.h"
 #import "HeadersFootersExample.h"
 #import "DefinedNameExample.h"
-
+#import "TabColorsExample.h"
+#import "HideSheetExample.h"
+#import "DocPropertiesExample.h"
+#import "WorksheetProtectionExample.h"
+#import "HideRowColExample.h"
+#import "PanesExample.h"
 
 @implementation DefaultExamples
 
@@ -49,7 +54,13 @@
              [MergeRangeExample new],
              [AutofilterExample new],
              [HeadersFootersExample new],
-             [DefinedNameExample new]];
+             [DefinedNameExample new],
+			 [TabColorsExample new],
+			 [HideSheetExample new],
+			 [DocPropertiesExample new],
+			 [WorksheetProtectionExample new],
+			 [HideRowColExample new],
+			 [PanesExample new]];
 }
 
 @end
