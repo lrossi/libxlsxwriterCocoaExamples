@@ -3,7 +3,7 @@
  *
  * Used in conjunction with the libxlsxwriter library.
  *
- * Copyright 2014-2015, John McNamara, jmcnamara@cpan.org. See LICENSE.txt.
+ * Copyright 2014-2016, John McNamara, jmcnamara@cpan.org. See LICENSE.txt.
  *
  */
 
@@ -27,7 +27,7 @@
  * Create a new app object.
  */
 lxw_app *
-_new_app()
+lxw_app_new()
 {
     lxw_app *app = calloc(1, sizeof(lxw_app));
     GOTO_LABEL_ON_MEM_ERROR(app, mem_error);
@@ -43,7 +43,7 @@ _new_app()
     return app;
 
 mem_error:
-    _free_app(app);
+    lxw_app_free(app);
     return NULL;
 }
 
@@ -51,7 +51,7 @@ mem_error:
  * Free a app object.
  */
 void
-_free_app(lxw_app *app)
+lxw_app_free(lxw_app *app)
 {
     lxw_heading_pair *heading_pair;
     lxw_part_name *part_name;
@@ -92,7 +92,7 @@ _free_app(lxw_app *app)
 STATIC void
 _app_xml_declaration(lxw_app *self)
 {
-    _xml_declaration(self->file);
+    lxw_xml_declaration(self->file);
 }
 
 /*
@@ -106,13 +106,13 @@ _write_properties(lxw_app *self)
     char xmlns[] = APP_SCHEMA "/extended-properties";
     char xmlns_vt[] = APP_SCHEMA "/docPropsVTypes";
 
-    _INIT_ATTRIBUTES();
-    _PUSH_ATTRIBUTES_STR("xmlns", xmlns);
-    _PUSH_ATTRIBUTES_STR("xmlns:vt", xmlns_vt);
+    LXW_INIT_ATTRIBUTES();
+    LXW_PUSH_ATTRIBUTES_STR("xmlns", xmlns);
+    LXW_PUSH_ATTRIBUTES_STR("xmlns:vt", xmlns_vt);
 
-    _xml_start_tag(self->file, "Properties", &attributes);
+    lxw_xml_start_tag(self->file, "Properties", &attributes);
 
-    _FREE_ATTRIBUTES();
+    LXW_FREE_ATTRIBUTES();
 }
 
 /*
@@ -121,7 +121,7 @@ _write_properties(lxw_app *self)
 STATIC void
 _write_application(lxw_app *self)
 {
-    _xml_data_element(self->file, "Application", "Microsoft Excel", NULL);
+    lxw_xml_data_element(self->file, "Application", "Microsoft Excel", NULL);
 }
 
 /*
@@ -130,7 +130,7 @@ _write_application(lxw_app *self)
 STATIC void
 _write_doc_security(lxw_app *self)
 {
-    _xml_data_element(self->file, "DocSecurity", "0", NULL);
+    lxw_xml_data_element(self->file, "DocSecurity", "0", NULL);
 }
 
 /*
@@ -139,7 +139,7 @@ _write_doc_security(lxw_app *self)
 STATIC void
 _write_scale_crop(lxw_app *self)
 {
-    _xml_data_element(self->file, "ScaleCrop", "false", NULL);
+    lxw_xml_data_element(self->file, "ScaleCrop", "false", NULL);
 }
 
 /*
@@ -148,7 +148,7 @@ _write_scale_crop(lxw_app *self)
 STATIC void
 _write_vt_lpstr(lxw_app *self, const char *str)
 {
-    _xml_data_element(self->file, "vt:lpstr", str, NULL);
+    lxw_xml_data_element(self->file, "vt:lpstr", str, NULL);
 }
 
 /*
@@ -157,7 +157,7 @@ _write_vt_lpstr(lxw_app *self, const char *str)
 STATIC void
 _write_vt_i4(lxw_app *self, const char *value)
 {
-    _xml_data_element(self->file, "vt:i4", value, NULL);
+    lxw_xml_data_element(self->file, "vt:i4", value, NULL);
 }
 
 /*
@@ -167,14 +167,14 @@ STATIC void
 _write_vt_variant(lxw_app *self, const char *key, const char *value)
 {
     /* Write the vt:lpstr element. */
-    _xml_start_tag(self->file, "vt:variant", NULL);
+    lxw_xml_start_tag(self->file, "vt:variant", NULL);
     _write_vt_lpstr(self, key);
-    _xml_end_tag(self->file, "vt:variant");
+    lxw_xml_end_tag(self->file, "vt:variant");
 
     /* Write the vt:i4 element. */
-    _xml_start_tag(self->file, "vt:variant", NULL);
+    lxw_xml_start_tag(self->file, "vt:variant", NULL);
     _write_vt_i4(self, value);
-    _xml_end_tag(self->file, "vt:variant");
+    lxw_xml_end_tag(self->file, "vt:variant");
 }
 
 /*
@@ -187,19 +187,19 @@ _write_vt_vector_heading_pairs(lxw_app *self)
     struct xml_attribute *attribute;
     lxw_heading_pair *heading_pair;
 
-    _INIT_ATTRIBUTES();
-    _PUSH_ATTRIBUTES_INT("size", self->num_heading_pairs * 2);
-    _PUSH_ATTRIBUTES_STR("baseType", "variant");
+    LXW_INIT_ATTRIBUTES();
+    LXW_PUSH_ATTRIBUTES_INT("size", self->num_heading_pairs * 2);
+    LXW_PUSH_ATTRIBUTES_STR("baseType", "variant");
 
-    _xml_start_tag(self->file, "vt:vector", &attributes);
+    lxw_xml_start_tag(self->file, "vt:vector", &attributes);
 
     STAILQ_FOREACH(heading_pair, self->heading_pairs, list_pointers) {
         _write_vt_variant(self, heading_pair->key, heading_pair->value);
     }
 
-    _xml_end_tag(self->file, "vt:vector");
+    lxw_xml_end_tag(self->file, "vt:vector");
 
-    _FREE_ATTRIBUTES();
+    LXW_FREE_ATTRIBUTES();
 }
 
 /*
@@ -212,19 +212,19 @@ _write_vt_vector_lpstr_named_parts(lxw_app *self)
     struct xml_attribute *attribute;
     lxw_part_name *part_name;
 
-    _INIT_ATTRIBUTES();
-    _PUSH_ATTRIBUTES_INT("size", self->num_part_names);
-    _PUSH_ATTRIBUTES_STR("baseType", "lpstr");
+    LXW_INIT_ATTRIBUTES();
+    LXW_PUSH_ATTRIBUTES_INT("size", self->num_part_names);
+    LXW_PUSH_ATTRIBUTES_STR("baseType", "lpstr");
 
-    _xml_start_tag(self->file, "vt:vector", &attributes);
+    lxw_xml_start_tag(self->file, "vt:vector", &attributes);
 
     STAILQ_FOREACH(part_name, self->part_names, list_pointers) {
         _write_vt_lpstr(self, part_name->name);
     }
 
-    _xml_end_tag(self->file, "vt:vector");
+    lxw_xml_end_tag(self->file, "vt:vector");
 
-    _FREE_ATTRIBUTES();
+    LXW_FREE_ATTRIBUTES();
 }
 
 /*
@@ -233,12 +233,12 @@ _write_vt_vector_lpstr_named_parts(lxw_app *self)
 STATIC void
 _write_heading_pairs(lxw_app *self)
 {
-    _xml_start_tag(self->file, "HeadingPairs", NULL);
+    lxw_xml_start_tag(self->file, "HeadingPairs", NULL);
 
     /* Write the vt:vector element. */
     _write_vt_vector_heading_pairs(self);
 
-    _xml_end_tag(self->file, "HeadingPairs");
+    lxw_xml_end_tag(self->file, "HeadingPairs");
 }
 
 /*
@@ -247,12 +247,12 @@ _write_heading_pairs(lxw_app *self)
 STATIC void
 _write_titles_of_parts(lxw_app *self)
 {
-    _xml_start_tag(self->file, "TitlesOfParts", NULL);
+    lxw_xml_start_tag(self->file, "TitlesOfParts", NULL);
 
     /* Write the vt:vector element. */
     _write_vt_vector_lpstr_named_parts(self);
 
-    _xml_end_tag(self->file, "TitlesOfParts");
+    lxw_xml_end_tag(self->file, "TitlesOfParts");
 }
 
 /*
@@ -267,7 +267,8 @@ _write_manager(lxw_app *self)
         return;
 
     if (properties->manager)
-        _xml_data_element(self->file, "Manager", properties->manager, NULL);
+        lxw_xml_data_element(self->file, "Manager", properties->manager,
+                             NULL);
 }
 
 /*
@@ -279,9 +280,10 @@ _write_company(lxw_app *self)
     lxw_doc_properties *properties = self->properties;
 
     if (properties && properties->company)
-        _xml_data_element(self->file, "Company", properties->company, NULL);
+        lxw_xml_data_element(self->file, "Company", properties->company,
+                             NULL);
     else
-        _xml_data_element(self->file, "Company", "", NULL);
+        lxw_xml_data_element(self->file, "Company", "", NULL);
 }
 
 /*
@@ -290,7 +292,7 @@ _write_company(lxw_app *self)
 STATIC void
 _write_links_up_to_date(lxw_app *self)
 {
-    _xml_data_element(self->file, "LinksUpToDate", "false", NULL);
+    lxw_xml_data_element(self->file, "LinksUpToDate", "false", NULL);
 }
 
 /*
@@ -299,7 +301,23 @@ _write_links_up_to_date(lxw_app *self)
 STATIC void
 _write_shared_doc(lxw_app *self)
 {
-    _xml_data_element(self->file, "SharedDoc", "false", NULL);
+    lxw_xml_data_element(self->file, "SharedDoc", "false", NULL);
+}
+
+/*
+ * Write the <HyperlinkBase> element.
+ */
+STATIC void
+_write_hyperlink_base(lxw_app *self)
+{
+    lxw_doc_properties *properties = self->properties;
+
+    if (!properties)
+        return;
+
+    if (properties->hyperlink_base)
+        lxw_xml_data_element(self->file, "HyperlinkBase",
+                             properties->hyperlink_base, NULL);
 }
 
 /*
@@ -308,7 +326,7 @@ _write_shared_doc(lxw_app *self)
 STATIC void
 _write_hyperlinks_changed(lxw_app *self)
 {
-    _xml_data_element(self->file, "HyperlinksChanged", "false", NULL);
+    lxw_xml_data_element(self->file, "HyperlinksChanged", "false", NULL);
 }
 
 /*
@@ -317,7 +335,7 @@ _write_hyperlinks_changed(lxw_app *self)
 STATIC void
 _write_app_version(lxw_app *self)
 {
-    _xml_data_element(self->file, "AppVersion", "12.0000", NULL);
+    lxw_xml_data_element(self->file, "AppVersion", "12.0000", NULL);
 }
 
 /*****************************************************************************
@@ -330,7 +348,7 @@ _write_app_version(lxw_app *self)
  * Assemble and write the XML file.
  */
 void
-_app_assemble_xml_file(lxw_app *self)
+lxw_app_assemble_xml_file(lxw_app *self)
 {
 
     /* Write the XML declaration. */
@@ -346,10 +364,11 @@ _app_assemble_xml_file(lxw_app *self)
     _write_company(self);
     _write_links_up_to_date(self);
     _write_shared_doc(self);
+    _write_hyperlink_base(self);
     _write_hyperlinks_changed(self);
     _write_app_version(self);
 
-    _xml_end_tag(self->file, "Properties");
+    lxw_xml_end_tag(self->file, "Properties");
 }
 
 /*****************************************************************************
@@ -362,7 +381,7 @@ _app_assemble_xml_file(lxw_app *self)
  * Add the name of a workbook Part such as 'Sheet1' or 'Print_Titles'.
  */
 void
-_add_part_name(lxw_app *self, const char *name)
+lxw_app_add_part_name(lxw_app *self, const char *name)
 {
     lxw_part_name *part_name;
 
@@ -392,7 +411,7 @@ mem_error:
  * 'Named Ranges'.
  */
 void
-_add_heading_pair(lxw_app *self, const char *key, const char *value)
+lxw_app_add_heading_pair(lxw_app *self, const char *key, const char *value)
 {
     lxw_heading_pair *heading_pair;
 
