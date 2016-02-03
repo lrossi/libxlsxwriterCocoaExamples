@@ -1,6 +1,8 @@
 platform :ios, '8.0'
 
+use_frameworks!
+
 target 'libxlsxwriter-Swift' do
-    pod 'libxlsxwriter', '~> 0.3.1'
+    pod 'libxlsxwriter/Framework', :git => 'https://github.com/lrossi/libxlsxwriter.git', :branch => 'cocoapods-1.0.0'
 end
 

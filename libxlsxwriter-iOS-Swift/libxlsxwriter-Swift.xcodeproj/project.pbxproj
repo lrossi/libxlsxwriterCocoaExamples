@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2E1DE145EBF7205FA72513DC /* Pods_libxlsxwriter_Swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA179E7A7F3BB75DDCB2D505 /* Pods_libxlsxwriter_Swift.framework */; };
 		821D41CC1BF4B8F9006A0F95 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821D41CB1BF4B8F9006A0F95 /* AppDelegate.swift */; };
 		821D41D31BF4B8F9006A0F95 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 821D41D21BF4B8F9006A0F95 /* Assets.xcassets */; };
 		821D41D61BF4B8F9006A0F95 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 821D41D41BF4B8F9006A0F95 /* LaunchScreen.storyboard */; };
@@ -41,7 +42,6 @@
 		82C86CD61BF4F35100587090 /* Tutorial3Example.m in Sources */ = {isa = PBXBuildFile; fileRef = 82C86CBF1BF4F35100587090 /* Tutorial3Example.m */; };
 		82C86CD71BF4F35100587090 /* UTF8Example.m in Sources */ = {isa = PBXBuildFile; fileRef = 82C86CC11BF4F35100587090 /* UTF8Example.m */; };
 		82C86CD81BF4F35100587090 /* Example.m in Sources */ = {isa = PBXBuildFile; fileRef = 82C86CC31BF4F35100587090 /* Example.m */; };
-		EB022595804E67C908444075 /* libPods-libxlsxwriter-Swift.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BA372E8C3B34AD16676828A1 /* libPods-libxlsxwriter-Swift.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -110,7 +110,7 @@
 		82C86CC11BF4F35100587090 /* UTF8Example.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UTF8Example.m; sourceTree = "<group>"; };
 		82C86CC21BF4F35100587090 /* Example.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Example.h; sourceTree = "<group>"; };
 		82C86CC31BF4F35100587090 /* Example.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Example.m; sourceTree = "<group>"; };
-		BA372E8C3B34AD16676828A1 /* libPods-libxlsxwriter-Swift.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-libxlsxwriter-Swift.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EA179E7A7F3BB75DDCB2D505 /* Pods_libxlsxwriter_Swift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_libxlsxwriter_Swift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8E80C7DB696D4CABB903B82 /* Pods-libxlsxwriter-Swift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-libxlsxwriter-Swift.debug.xcconfig"; path = "Pods/Target Support Files/Pods-libxlsxwriter-Swift/Pods-libxlsxwriter-Swift.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -119,7 +119,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EB022595804E67C908444075 /* libPods-libxlsxwriter-Swift.a in Frameworks */,
+				2E1DE145EBF7205FA72513DC /* Pods_libxlsxwriter_Swift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -275,7 +275,7 @@
 		FE25E53405F47BAE0E71B0CC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				BA372E8C3B34AD16676828A1 /* libPods-libxlsxwriter-Swift.a */,
+				EA179E7A7F3BB75DDCB2D505 /* Pods_libxlsxwriter_Swift.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -487,6 +487,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
+					"USE_FRAMEWORKS=1",
 				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -527,6 +528,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = "USE_FRAMEWORKS=1";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;

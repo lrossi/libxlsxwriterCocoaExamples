@@ -1,12 +1,24 @@
 PODS:
-  - libxlsxwriter (0.3.1)
+  - libxlsxwriter (0.3.1):
+    - libxlsxwriter/Default (= 0.3.1)
+  - libxlsxwriter/Default (0.3.1)
 
 DEPENDENCIES:
-  - libxlsxwriter (~> 0.3.1)
+  - libxlsxwriter (from `https://github.com/lrossi/libxlsxwriter.git`, branch `cocoapods-1.0.0`)
+
+EXTERNAL SOURCES:
+  libxlsxwriter:
+    :branch: cocoapods-1.0.0
+    :git: https://github.com/lrossi/libxlsxwriter.git
+
+CHECKOUT OPTIONS:
+  libxlsxwriter:
+    :commit: 6631db08ea86df01e93d44e9393b85b8689feabb
+    :git: https://github.com/lrossi/libxlsxwriter.git
 
 SPEC CHECKSUMS:
-  libxlsxwriter: 4b1a3133ddb273cf49b3541a04567f647697c3ed
+  libxlsxwriter: 9a92e1e501b933bde2f21050c5653fa249020372
 
-PODFILE CHECKSUM: 277c6a4c23a7818211de78c6bde0f02fe26dd557
+PODFILE CHECKSUM: 0d3d157c9d752fc3e74ae23c570508a31745e36b
 
 COCOAPODS: 1.0.0.beta.2
