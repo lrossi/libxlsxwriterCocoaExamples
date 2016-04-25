@@ -36,7 +36,7 @@
 	int col;
 
 	/* Create a new workbook and add some worksheets. */
-	lxw_workbook  *workbook   = workbook_new([self.outputFilePath cStringUsingEncoding:NSUTF8StringEncoding]);
+	lxw_workbook  *workbook   = workbook_new([self.outputFilePath fileSystemRepresentation]);
 
 	lxw_worksheet *worksheet1 = workbook_add_worksheet(workbook, "Panes 1");
 	lxw_worksheet *worksheet2 = workbook_add_worksheet(workbook, "Panes 2");

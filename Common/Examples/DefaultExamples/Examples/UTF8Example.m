@@ -33,7 +33,7 @@
      *
      */
     
-    lxw_workbook  *workbook  = new_workbook([self.outputFilePath cStringUsingEncoding:NSUTF8StringEncoding]);
+    lxw_workbook  *workbook  = new_workbook([self.outputFilePath fileSystemRepresentation]);
     lxw_worksheet *worksheet = workbook_add_worksheet(workbook, NULL);
     
     worksheet_write_string(worksheet, 2, 1, "Это фраза на русском!", NULL);

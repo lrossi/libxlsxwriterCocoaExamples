@@ -56,7 +56,7 @@
      *
      */
     
-    lxw_workbook *workbook  = new_workbook([self.outputFilePath cStringUsingEncoding:NSUTF8StringEncoding]);
+    lxw_workbook *workbook  = new_workbook([self.outputFilePath fileSystemRepresentation]);
     
     char preview[] = "Select Print Preview to see the header and footer";
     

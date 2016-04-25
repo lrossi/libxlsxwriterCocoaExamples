@@ -33,7 +33,7 @@
      */
     
     /* Create a new workbook and add a worksheet. */
-    lxw_workbook  *workbook  = new_workbook([self.outputFilePath cStringUsingEncoding:NSUTF8StringEncoding]);
+    lxw_workbook  *workbook  = new_workbook([self.outputFilePath fileSystemRepresentation]);
     lxw_worksheet *worksheet = workbook_add_worksheet(workbook, NULL);
     
     /* Widen the first column to make the text clearer. */
