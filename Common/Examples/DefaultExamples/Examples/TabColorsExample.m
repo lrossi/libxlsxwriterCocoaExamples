@@ -31,7 +31,7 @@
 	 *
 	 */
 
-	lxw_workbook  *workbook   = workbook_new([self.outputFilePath cStringUsingEncoding:NSUTF8StringEncoding]);
+	lxw_workbook  *workbook   = workbook_new([self.outputFilePath fileSystemRepresentation]);
 
 	/* Set up some worksheets. */
 	lxw_worksheet *worksheet1 = workbook_add_worksheet(workbook, NULL);

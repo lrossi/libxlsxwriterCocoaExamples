@@ -34,7 +34,7 @@
     options.constant_memory = 1;
     
     /* Create a new workbook with options. */
-    lxw_workbook  *workbook  = new_workbook_opt([self.outputFilePath cStringUsingEncoding:NSUTF8StringEncoding], &options);
+    lxw_workbook  *workbook  = new_workbook_opt([self.outputFilePath fileSystemRepresentation], &options);
     lxw_worksheet *worksheet = workbook_add_worksheet(workbook, NULL);
     
     for (row = 0; row < max_row; row++) {

@@ -30,7 +30,7 @@ class SwiftAnatomyExample: Example {
         */
         
         // Create a new workbook.
-        let workbook = new_workbook((outputFilePath as NSString).UTF8String)
+        let workbook = new_workbook((outputFilePath as NSString).fileSystemRepresentation)
         
         // Add a worksheet with a user defined sheet name.
         let worksheet1 = workbook_add_worksheet(workbook, "Demo")

@@ -33,7 +33,7 @@
      *
      */
     
-    lxw_workbook  *workbook   = new_workbook([self.outputFilePath cStringUsingEncoding:NSUTF8StringEncoding]);
+    lxw_workbook  *workbook   = new_workbook([self.outputFilePath fileSystemRepresentation]);
     lxw_worksheet *worksheet;
     
     /* We don't use the returned worksheets in this example and use a generic

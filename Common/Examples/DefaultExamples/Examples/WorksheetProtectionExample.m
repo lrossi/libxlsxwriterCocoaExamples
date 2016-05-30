@@ -32,7 +32,7 @@
 	 *
 	 */
 
-	lxw_workbook  *workbook  = workbook_new([self.outputFilePath cStringUsingEncoding:NSUTF8StringEncoding]);
+	lxw_workbook  *workbook  = workbook_new([self.outputFilePath fileSystemRepresentation]);
 	lxw_worksheet *worksheet = workbook_add_worksheet(workbook, NULL);
 
 	lxw_format *unlocked = workbook_add_format(workbook);
