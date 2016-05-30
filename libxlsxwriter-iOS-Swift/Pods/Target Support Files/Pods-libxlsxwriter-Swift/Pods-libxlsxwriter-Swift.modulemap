@@ -1,0 +1,6 @@
+framework module Pods_libxlsxwriter_Swift {
+  umbrella header "Pods-libxlsxwriter-Swift-umbrella.h"
+
+  export *
+  module * { export * }
+}

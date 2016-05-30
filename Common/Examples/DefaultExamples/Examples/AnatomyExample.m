@@ -6,7 +6,12 @@
 //  Copyright © 2015 Ludovico Rossi. All rights reserved.
 //
 
-#import <libxlsxwriter/xlsxwriter.h>
+#if USE_FRAMEWORKS
+	@import xlsxwriter;
+#else
+	#import <libxlsxwriter/xlsxwriter.h>
+#endif
+
 #import "AnatomyExample.h"
 
 @implementation AnatomyExample
