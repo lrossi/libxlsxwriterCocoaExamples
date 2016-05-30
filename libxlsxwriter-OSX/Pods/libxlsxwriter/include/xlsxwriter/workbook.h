@@ -46,15 +46,41 @@
 #include <errno.h>
 
 #include "worksheet.h"
+#include "chart.h"
 #include "shared_strings.h"
 #include "hash_table.h"
 #include "common.h"
 
+#define LXW_DEFINED_NAME_LENGTH 128
+
+/* Define the tree.h RB structs for the red-black head types. */
+RB_HEAD(lxw_worksheet_names, lxw_worksheet_name);
+
 /* Define the queue.h structs for the workbook lists. */
 STAILQ_HEAD(lxw_worksheets, lxw_worksheet);
+STAILQ_HEAD(lxw_charts, lxw_chart);
 TAILQ_HEAD(lxw_defined_names, lxw_defined_name);
 
-#define LXW_DEFINED_NAME_LENGTH 128
+/* Struct to represent a worksheet name/pointer pair. */
+typedef struct lxw_worksheet_name {
+    char *name;
+    lxw_worksheet *worksheet;
+
+    RB_ENTRY (lxw_worksheet_name) tree_pointers;
+} lxw_worksheet_name;
+
+/* Wrapper around RB_GENERATE_STATIC from tree.h to avoid unused function
+ * warnings and to avoid portability issues with the _unused attribute. */
+#define LXW_RB_GENERATE_NAMES(name, type, field, cmp)     \
+    RB_GENERATE_INSERT_COLOR(name, type, field, static)   \
+    RB_GENERATE_REMOVE_COLOR(name, type, field, static)   \
+    RB_GENERATE_INSERT(name, type, field, cmp, static)    \
+    RB_GENERATE_REMOVE(name, type, field, static)         \
+    RB_GENERATE_FIND(name, type, field, cmp, static)      \
+    RB_GENERATE_NEXT(name, type, field, static)           \
+    RB_GENERATE_MINMAX(name, type, field, static)         \
+    /* Add unused struct to allow adding a semicolon */   \
+    struct lxw_rb_generate_names{int unused;}
 
 /**
  * @brief Macro to loop over all the worksheets in a workbook.
@@ -108,6 +134,9 @@ enum lxw_workbook_error {
 
     /** Error encountered when creating a packager object */
     LXW_ERROR_WORKBOOK_PACKAGER,
+
+    /** Error encountered when creating tmpfile */
+    LXW_ERROR_WORKBOOK_TMPFILE,
 
     /** Error encountered when creating file zip container */
     LXW_ERROR_WORKBOOK_ZIP,
@@ -180,6 +209,9 @@ typedef struct lxw_workbook {
 
     FILE *file;
     struct lxw_worksheets *worksheets;
+    struct lxw_worksheet_names *worksheet_names;
+    struct lxw_charts *charts;
+    struct lxw_charts *ordered_charts;
     struct lxw_formats *formats;
     struct lxw_defined_names *defined_names;
     lxw_sst *sst;
@@ -275,9 +307,9 @@ lxw_workbook *new_workbook_opt(const char *filename,
  * @param workbook  Pointer to a lxw_workbook instance.
  * @param sheetname Optional worksheet name, defaults to Sheet1, etc.
  *
- * @return A lxw_worksheet instance.
+ * @return A lxw_worksheet object.
  *
- * The `%workbook_add_worksheet()` method adds a new worksheet to a workbook:
+ * The `%workbook_add_worksheet()` function adds a new worksheet to a workbook:
  *
  * At least one worksheet should be added to a new workbook: The @ref
  * worksheet.h "Worksheet" object is used to write data and configure a
@@ -336,6 +368,62 @@ lxw_worksheet *workbook_add_worksheet(lxw_workbook *workbook,
  *
  */
 lxw_format *workbook_add_format(lxw_workbook *workbook);
+
+/**
+ * @brief Create a new chart to be added to a worksheet:
+ *
+ * @param workbook   Pointer to a lxw_workbook instance.
+ * @param chart_type The type of chart to be created. See #lxw_chart_types.
+ *
+ * @return A lxw_chart object.
+ *
+ * The `%workbook_add_chart()` function creates a new chart object that can
+ * be added to a worksheet:
+ *
+ * @code
+ *     // Create a chart object.
+ *     lxw_chart *chart = workbook_add_chart(workbook, LXW_CHART_COLUMN);
+ *
+ *     // Add data series to the chart.
+ *     chart_add_series(chart, NULL, "Sheet1!$A$1:$A$5");
+ *     chart_add_series(chart, NULL, "Sheet1!$B$1:$B$5");
+ *     chart_add_series(chart, NULL, "Sheet1!$C$1:$C$5");
+ *
+ *     // Insert the chart into the worksheet
+ *     worksheet_insert_chart(worksheet, CELL("B7"), chart);
+ * @endcode
+ *
+ * The available chart types are defined in #lxw_chart_types. The types of
+ * charts that are supported are:
+ *
+ * | Chart type                               | Description                            |
+ * | :--------------------------------------- | :------------------------------------  |
+ * | #LXW_CHART_AREA                          | Area chart.                            |
+ * | #LXW_CHART_AREA_STACKED                  | Area chart - stacked.                  |
+ * | #LXW_CHART_AREA_STACKED_PERCENT          | Area chart - percentage stacked.       |
+ * | #LXW_CHART_BAR                           | Bar chart.                             |
+ * | #LXW_CHART_BAR_STACKED                   | Bar chart - stacked.                   |
+ * | #LXW_CHART_BAR_STACKED_PERCENT           | Bar chart - percentage stacked.        |
+ * | #LXW_CHART_COLUMN                        | Column chart.                          |
+ * | #LXW_CHART_COLUMN_STACKED                | Column chart - stacked.                |
+ * | #LXW_CHART_COLUMN_STACKED_PERCENT        | Column chart - percentage stacked.     |
+ * | #LXW_CHART_DOUGHNUT                      | Doughnut chart.                        |
+ * | #LXW_CHART_LINE                          | Line chart.                            |
+ * | #LXW_CHART_PIE                           | Pie chart.                             |
+ * | #LXW_CHART_SCATTER                       | Scatter chart.                         |
+ * | #LXW_CHART_SCATTER_STRAIGHT              | Scatter chart - straight.              |
+ * | #LXW_CHART_SCATTER_STRAIGHT_WITH_MARKERS | Scatter chart - straight with markers. |
+ * | #LXW_CHART_SCATTER_SMOOTH                | Scatter chart - smooth.                |
+ * | #LXW_CHART_SCATTER_SMOOTH_WITH_MARKERS   | Scatter chart - smooth with markers.   |
+ * | #LXW_CHART_RADAR                         | Radar chart.                           |
+ * | #LXW_CHART_RADAR_WITH_MARKERS            | Radar chart - with markers.            |
+ * | #LXW_CHART_RADAR_FILLED                  | Radar chart - filled.                  |
+ *
+ *
+ *
+ * See @ref chart.h for details.
+ */
+lxw_chart *workbook_add_chart(lxw_workbook *workbook, uint8_t chart_type);
 
 /**
  * @brief Close the Workbook object and write the XLSX file.
@@ -467,6 +555,9 @@ documentation](http://office.microsoft.com/en-001/excel-help/define-and-use-name
  */
 uint8_t workbook_define_name(lxw_workbook *workbook, const char *name,
                              const char *formula);
+
+lxw_worksheet *workbook_get_worksheet_by_name(lxw_workbook *workbook,
+                                              char *name);
 
 void lxw_workbook_free(lxw_workbook *workbook);
 void lxw_workbook_assemble_xml_file(lxw_workbook *workbook);

@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2D14851AA7797FF1A88711AB /* libPods-libxlsxwriter-ObjC.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 67D138B705324FE20DBDA6F6 /* libPods-libxlsxwriter-ObjC.a */; };
 		8227CF141BF4F27D003202E4 /* DefaultExamples.m in Sources */ = {isa = PBXBuildFile; fileRef = 8227CEEA1BF4F27D003202E4 /* DefaultExamples.m */; };
 		8227CF151BF4F27D003202E4 /* AnatomyExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 8227CEED1BF4F27D003202E4 /* AnatomyExample.m */; };
 		8227CF161BF4F27D003202E4 /* ArrayFormulaExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 8227CEEF1BF4F27D003202E4 /* ArrayFormulaExample.m */; };
@@ -42,11 +41,11 @@
 		82B62ACD1BF34AC000FE079F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 82B62ACB1BF34AC000FE079F /* LaunchScreen.storyboard */; };
 		82B62AD71BF34B9300FE079F /* ExamplePickerTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82B62AD61BF34B9300FE079F /* ExamplePickerTableViewController.m */; };
 		82B62ADB1BF34BB500FE079F /* ExampleViewerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82B62ADA1BF34BB500FE079F /* ExampleViewerViewController.m */; };
+		9A08D792BBF424132AA070F7 /* libPods-libxlsxwriter-ObjC.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 747305A75CA74C629F04491D /* libPods-libxlsxwriter-ObjC.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		3577EFE29DD9956EC03D1E8C /* Pods-libxlsxwriter-ObjC.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-libxlsxwriter-ObjC.debug.xcconfig"; path = "Pods/Target Support Files/Pods-libxlsxwriter-ObjC/Pods-libxlsxwriter-ObjC.debug.xcconfig"; sourceTree = "<group>"; };
-		67D138B705324FE20DBDA6F6 /* libPods-libxlsxwriter-ObjC.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-libxlsxwriter-ObjC.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		747305A75CA74C629F04491D /* libPods-libxlsxwriter-ObjC.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-libxlsxwriter-ObjC.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8227CEE91BF4F27D003202E4 /* DefaultExamples.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefaultExamples.h; sourceTree = "<group>"; };
 		8227CEEA1BF4F27D003202E4 /* DefaultExamples.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefaultExamples.m; sourceTree = "<group>"; };
 		8227CEEC1BF4F27D003202E4 /* AnatomyExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnatomyExample.h; sourceTree = "<group>"; };
@@ -113,7 +112,8 @@
 		82B62AD61BF34B9300FE079F /* ExamplePickerTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExamplePickerTableViewController.m; sourceTree = "<group>"; };
 		82B62AD91BF34BB500FE079F /* ExampleViewerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleViewerViewController.h; sourceTree = "<group>"; };
 		82B62ADA1BF34BB500FE079F /* ExampleViewerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleViewerViewController.m; sourceTree = "<group>"; };
-		8DA81696948AEFD6D506AFDE /* Pods-libxlsxwriter-ObjC.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-libxlsxwriter-ObjC.release.xcconfig"; path = "Pods/Target Support Files/Pods-libxlsxwriter-ObjC/Pods-libxlsxwriter-ObjC.release.xcconfig"; sourceTree = "<group>"; };
+		91EDE78B63EF58738E668C8B /* Pods-libxlsxwriter-ObjC.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-libxlsxwriter-ObjC.release.xcconfig"; path = "Pods/Target Support Files/Pods-libxlsxwriter-ObjC/Pods-libxlsxwriter-ObjC.release.xcconfig"; sourceTree = "<group>"; };
+		D3DB351AD9025DABD54218AE /* Pods-libxlsxwriter-ObjC.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-libxlsxwriter-ObjC.debug.xcconfig"; path = "Pods/Target Support Files/Pods-libxlsxwriter-ObjC/Pods-libxlsxwriter-ObjC.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,13 +121,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2D14851AA7797FF1A88711AB /* libPods-libxlsxwriter-ObjC.a in Frameworks */,
+				9A08D792BBF424132AA070F7 /* libPods-libxlsxwriter-ObjC.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1849D3097CC420AEF37AA473 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				747305A75CA74C629F04491D /* libPods-libxlsxwriter-ObjC.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		29AF2E52069BE201989350B6 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D3DB351AD9025DABD54218AE /* Pods-libxlsxwriter-ObjC.debug.xcconfig */,
+				91EDE78B63EF58738E668C8B /* Pods-libxlsxwriter-ObjC.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		8227CEE71BF4F27D003202E4 /* Examples */ = {
 			isa = PBXGroup;
 			children = (
@@ -211,8 +228,8 @@
 			children = (
 				82B62ABC1BF34AC000FE079F /* libxlsxwriter-ObjC */,
 				82B62ABB1BF34AC000FE079F /* Products */,
-				9EC0E4BB0A079564E1641F97 /* Pods */,
-				D0ED4036B48A68F668A78DA7 /* Frameworks */,
+				29AF2E52069BE201989350B6 /* Pods */,
+				1849D3097CC420AEF37AA473 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -275,23 +292,6 @@
 			name = "Example Viewer";
 			sourceTree = "<group>";
 		};
-		9EC0E4BB0A079564E1641F97 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				3577EFE29DD9956EC03D1E8C /* Pods-libxlsxwriter-ObjC.debug.xcconfig */,
-				8DA81696948AEFD6D506AFDE /* Pods-libxlsxwriter-ObjC.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
-		D0ED4036B48A68F668A78DA7 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				67D138B705324FE20DBDA6F6 /* libPods-libxlsxwriter-ObjC.a */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -299,12 +299,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 82B62AD11BF34AC000FE079F /* Build configuration list for PBXNativeTarget "libxlsxwriter-ObjC" */;
 			buildPhases = (
-				BFBF8FB4B61D7B3EAE4A2BAC /* Check Pods Manifest.lock */,
+				33BDFB2E878E14B06620AE69 /* 📦 Check Pods Manifest.lock */,
 				82B62AB61BF34AC000FE079F /* Sources */,
 				82B62AB71BF34AC000FE079F /* Frameworks */,
 				82B62AB81BF34AC000FE079F /* Resources */,
-				B9006B6C2559F9F9B3EE4A98 /* Embed Pods Frameworks */,
-				FC9F040CEA67799884FD5AA9 /* Copy Pods Resources */,
+				6817AE5F16286E55882AAB47 /* 📦 Embed Pods Frameworks */,
+				1AE2E4B8CAB24CBCC131D4D3 /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -361,29 +361,29 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		B9006B6C2559F9F9B3EE4A98 /* Embed Pods Frameworks */ = {
+		1AE2E4B8CAB24CBCC131D4D3 /* 📦 Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "📦 Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-libxlsxwriter-ObjC/Pods-libxlsxwriter-ObjC-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-libxlsxwriter-ObjC/Pods-libxlsxwriter-ObjC-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		BFBF8FB4B61D7B3EAE4A2BAC /* Check Pods Manifest.lock */ = {
+		33BDFB2E878E14B06620AE69 /* 📦 Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "📦 Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -391,19 +391,19 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		FC9F040CEA67799884FD5AA9 /* Copy Pods Resources */ = {
+		6817AE5F16286E55882AAB47 /* 📦 Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "📦 Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-libxlsxwriter-ObjC/Pods-libxlsxwriter-ObjC-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-libxlsxwriter-ObjC/Pods-libxlsxwriter-ObjC-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -553,7 +553,7 @@
 		};
 		82B62AD21BF34AC000FE079F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3577EFE29DD9956EC03D1E8C /* Pods-libxlsxwriter-ObjC.debug.xcconfig */;
+			baseConfigurationReference = D3DB351AD9025DABD54218AE /* Pods-libxlsxwriter-ObjC.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "libxlsxwriter-ObjC/Info.plist";
@@ -566,7 +566,7 @@
 		};
 		82B62AD31BF34AC000FE079F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8DA81696948AEFD6D506AFDE /* Pods-libxlsxwriter-ObjC.release.xcconfig */;
+			baseConfigurationReference = 91EDE78B63EF58738E668C8B /* Pods-libxlsxwriter-ObjC.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "libxlsxwriter-ObjC/Info.plist";

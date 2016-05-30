@@ -90,10 +90,10 @@ _write_relationship(lxw_relationships *self, const char *type,
 {
     struct xml_attribute_list attributes;
     struct xml_attribute *attribute;
-    char r_id[MAX_ATTRIBUTE_LENGTH] = { 0 };
+    char r_id[LXW_MAX_ATTRIBUTE_LENGTH] = { 0 };
 
     self->rel_id++;
-    lxw_snprintf(r_id, ATTR_32, "rId%d", self->rel_id);
+    lxw_snprintf(r_id, LXW_ATTR_32, "rId%d", self->rel_id);
 
     LXW_INIT_ATTRIBUTES();
     LXW_PUSH_ATTRIBUTES_STR("Id", r_id);
@@ -119,7 +119,7 @@ _write_relationships(lxw_relationships *self)
     lxw_rel_tuple *rel;
 
     LXW_INIT_ATTRIBUTES();
-    LXW_PUSH_ATTRIBUTES_STR("xmlns", LXW_PACKAGE_SCHEMA);
+    LXW_PUSH_ATTRIBUTES_STR("xmlns", LXW_SCHEMA_PACKAGE);
 
     lxw_xml_start_tag(self->file, "Relationships", &attributes);
 
@@ -167,11 +167,11 @@ _add_relationship(lxw_relationships *self, const char *schema,
     relationship = calloc(1, sizeof(lxw_rel_tuple));
     GOTO_LABEL_ON_MEM_ERROR(relationship, mem_error);
 
-    relationship->type = calloc(1, MAX_ATTRIBUTE_LENGTH);
+    relationship->type = calloc(1, LXW_MAX_ATTRIBUTE_LENGTH);
     GOTO_LABEL_ON_MEM_ERROR(relationship->type, mem_error);
 
     /* Add the schema to the relationship type. */
-    lxw_snprintf(relationship->type, MAX_ATTRIBUTE_LENGTH, "%s%s",
+    lxw_snprintf(relationship->type, LXW_MAX_ATTRIBUTE_LENGTH, "%s%s",
                  schema, type);
 
     relationship->target = lxw_strdup(target);
@@ -208,7 +208,7 @@ void
 lxw_add_document_relationship(lxw_relationships *self, const char *type,
                               const char *target)
 {
-    _add_relationship(self, LXW_DOCUMENT_SCHEMA, type, target, NULL);
+    _add_relationship(self, LXW_SCHEMA_DOCUMENT, type, target, NULL);
 }
 
 /*
@@ -218,7 +218,7 @@ void
 lxw_add_package_relationship(lxw_relationships *self, const char *type,
                              const char *target)
 {
-    _add_relationship(self, LXW_PACKAGE_SCHEMA, type, target, NULL);
+    _add_relationship(self, LXW_SCHEMA_PACKAGE, type, target, NULL);
 }
 
 /*
@@ -228,7 +228,7 @@ void
 lxw_add_ms_package_relationship(lxw_relationships *self, const char *type,
                                 const char *target)
 {
-    _add_relationship(self, LXW_MS_SCHEMA, type, target, NULL);
+    _add_relationship(self, LXW_SCHEMA_MS, type, target, NULL);
 }
 
 /*
@@ -238,5 +238,5 @@ void
 lxw_add_worksheet_relationship(lxw_relationships *self, const char *type,
                                const char *target, const char *target_mode)
 {
-    _add_relationship(self, LXW_DOCUMENT_SCHEMA, type, target, target_mode);
+    _add_relationship(self, LXW_SCHEMA_DOCUMENT, type, target, target_mode);
 }

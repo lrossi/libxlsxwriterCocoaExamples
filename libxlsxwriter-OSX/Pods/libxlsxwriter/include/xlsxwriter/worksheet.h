@@ -47,9 +47,9 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include <string.h>
-#include <libgen.h>
 
 #include "shared_strings.h"
+#include "chart.h"
 #include "drawing.h"
 #include "common.h"
 #include "format.h"
@@ -108,18 +108,6 @@ enum lxw_gridlines {
     LXW_SHOW_ALL_GRIDLINES
 };
 
-/** Data type to represent a row value.
- *
- * The maximum row in Excel is 1,048,576.
- */
-typedef uint32_t lxw_row_t;
-
-/** Data type to represent a column value.
- *
- * The maximum column in Excel is 16,384.
- */
-typedef uint16_t lxw_col_t;
-
 enum cell_types {
     NUMBER_CELL = 1,
     STRING_CELL,
@@ -127,6 +115,7 @@ enum cell_types {
     FORMULA_CELL,
     ARRAY_FORMULA_CELL,
     BLANK_CELL,
+    BOOLEAN_CELL,
     HYPERLINK_URL,
     HYPERLINK_INTERNAL,
     HYPERLINK_EXTERNAL
@@ -167,6 +156,7 @@ struct lxw_table_rows {
     RB_GENERATE_REMOVE_COLOR(name, type, field, static)   \
     RB_GENERATE_INSERT(name, type, field, cmp, static)    \
     RB_GENERATE_REMOVE(name, type, field, static)         \
+    RB_GENERATE_FIND(name, type, field, cmp, static)      \
     RB_GENERATE_NEXT(name, type, field, static)           \
     RB_GENERATE_MINMAX(name, type, field, static)         \
     /* Add unused struct to allow adding a semicolon */   \
@@ -174,7 +164,8 @@ struct lxw_table_rows {
 
 STAILQ_HEAD(lxw_merged_ranges, lxw_merged_range);
 STAILQ_HEAD(lxw_selections, lxw_selection);
-STAILQ_HEAD(lxw_images, lxw_image_options);
+STAILQ_HEAD(lxw_image_data, lxw_image_options);
+STAILQ_HEAD(lxw_chart_data, lxw_image_options);
 
 /**
  * @brief Options for rows and columns.
@@ -255,8 +246,8 @@ typedef struct lxw_panes {
 
 typedef struct lxw_selection {
     char pane[LXW_PANE_NAME_LENGTH];
-    char active_cell[MAX_CELL_RANGE_LENGTH];
-    char sqref[MAX_CELL_RANGE_LENGTH];
+    char active_cell[LXW_MAX_CELL_RANGE_LENGTH];
+    char sqref[LXW_MAX_CELL_RANGE_LENGTH];
 
     STAILQ_ENTRY (lxw_selection) list_pointers;
 
@@ -298,6 +289,7 @@ typedef struct lxw_image_options {
     char *extension;
     double x_dpi;
     double y_dpi;
+    lxw_chart *chart;
 
     STAILQ_ENTRY (lxw_image_options) list_pointers;
 
@@ -386,7 +378,8 @@ typedef struct lxw_worksheet {
     struct lxw_cell **array;
     struct lxw_merged_ranges *merged_ranges;
     struct lxw_selections *selections;
-    struct lxw_images *images;
+    struct lxw_image_data *image_data;
+    struct lxw_chart_data *chart_data;
 
     lxw_row_t dim_rowmin;
     lxw_row_t dim_rowmax;
@@ -538,6 +531,7 @@ typedef struct lxw_cell {
     double formula_result;
     char *user_data1;
     char *user_data2;
+    char *sst_string;
 
     /* List pointers for tree.h. */
     RB_ENTRY (lxw_cell) tree_pointers;
@@ -922,6 +916,28 @@ int8_t worksheet_write_url(lxw_worksheet *worksheet,
                            lxw_format *format);
 
 /**
+ * @brief Write a formatted boolean worksheet cell.
+ *
+ * @param worksheet pointer to a lxw_worksheet instance to be updated.
+ * @param row       The zero indexed row number.
+ * @param col       The zero indexed column number.
+ * @param value     The boolean value to write to the cell.
+ * @param format    A pointer to a Format instance or NULL.
+ *
+ * @return A #lxw_worksheet_error code.
+ *
+ * Write an Excel boolean to the cell specified by `row` and `column`:
+ *
+ * @code
+ *     worksheet_write_boolean(worksheet, 2, 2, 0, my_format);
+ * @endcode
+ *
+ */
+int8_t worksheet_write_boolean(lxw_worksheet *worksheet,
+                               lxw_row_t row, lxw_col_t col,
+                               int value, lxw_format *format);
+
+/**
  * @brief Write a formatted blank worksheet cell.
  *
  * @param worksheet pointer to a lxw_worksheet instance to be updated.
@@ -1275,7 +1291,7 @@ int worksheet_insert_image(lxw_worksheet *worksheet,
  * #lxw_image_options struct to scale and position the image:
  *
  * @code
- *    lxw_image_options options = {.x_offset = 30,   .y_offset = 10,
+ *    lxw_image_options options = {.x_offset = 30,  .y_offset = 10,
  *                                 .x_scale  = 0.5, .y_scale  = 0.5};
  *
  *    worksheet_insert_image_opt(worksheet, 2, 1, "logo.png", &options);
@@ -1291,6 +1307,78 @@ int worksheet_insert_image_opt(lxw_worksheet *worksheet,
                                lxw_row_t row, lxw_col_t col,
                                const char *filename,
                                lxw_image_options *options);
+/**
+ * @brief Insert a chart object into a worksheet.
+ *
+ * @param worksheet Pointer to a lxw_worksheet instance to be updated.
+ * @param row       The zero indexed row number.
+ * @param col       The zero indexed column number.
+ * @param chart     A #lxw_chart object created via workbook_add_chart().
+ *
+ * @return 0 for success, non-zero on error.
+ *
+ * The `%worksheet_insert_chart()` can be used to insert a chart into a
+ * worksheet. The chart object must be created first using the
+ * `workbook_add_chart()` function and configured using the @ref chart.h
+ * functions.
+ *
+ * @code
+ *     // Create a chart object.
+ *     lxw_chart *chart = workbook_add_chart(workbook, LXW_CHART_LINE);
+ *
+ *     // Add a data series to the chart.
+ *     chart_add_series(chart, NULL, "=Sheet1!$A$1:$A$6");
+ *
+ *     // Insert the chart into the worksheet
+ *     worksheet_insert_chart(worksheet, 0, 2, chart);
+ * @endcode
+ *
+ * @image html chart_working.png
+ *
+ *
+ * **Note:**
+ *
+ * A chart may only be inserted into a worksheet once. If several similar
+ * charts are required then each one must be created separately with
+ * `%worksheet_insert_chart()`.
+ *
+ */
+int worksheet_insert_chart(lxw_worksheet *worksheet,
+                           lxw_row_t row, lxw_col_t col, lxw_chart *chart);
+
+/**
+ * @brief Insert a chart object into a worksheet, with options.
+ *
+ * @param worksheet    Pointer to a lxw_worksheet instance to be updated.
+ * @param row          The zero indexed row number.
+ * @param col          The zero indexed column number.
+ * @param chart        A #lxw_chart object created via workbook_add_chart().
+ * @param user_options Optional chart parameters.
+ *
+ * @return 0 for success, non-zero on error.
+ *
+ * The `%worksheet_insert_chart_opt()` function is like
+ * `worksheet_insert_chart()` function except that it takes an optional
+ * #lxw_image_options struct to scale and position the image of the chart:
+ *
+ * @code
+ *    lxw_image_options options = {.x_offset = 30,  .y_offset = 10,
+ *                                 .x_scale  = 0.5, .y_scale  = 0.75};
+ *
+ *    worksheet_insert_chart_opt(worksheet, 0, 2, chart, &options);
+ *
+ * @endcode
+ *
+ * @image html chart_line_opt.png
+ *
+ * The #lxw_image_options struct is the same struct used in
+ * `worksheet_insert_image_opt()` to position and scale images.
+ *
+ */
+int worksheet_insert_chart_opt(lxw_worksheet *worksheet,
+                               lxw_row_t row, lxw_col_t col,
+                               lxw_chart *chart,
+                               lxw_image_options *user_options);
 
 /**
  * @brief Merge a range of cells.
@@ -2503,7 +2591,14 @@ void lxw_worksheet_write_single_row(lxw_worksheet *worksheet);
 
 void lxw_worksheet_prepare_image(lxw_worksheet *worksheet,
                                  uint16_t image_ref_id, uint16_t drawing_id,
-                                 lxw_image_options *image);
+                                 lxw_image_options *image_data);
+
+void lxw_worksheet_prepare_chart(lxw_worksheet *worksheet,
+                                 uint16_t chart_ref_id, uint16_t drawing_id,
+                                 lxw_image_options *image_data);
+
+lxw_row *lxw_worksheet_find_row(lxw_worksheet *worksheet, lxw_row_t row_num);
+lxw_cell *lxw_worksheet_find_cell(lxw_row *row, lxw_col_t col_num);
 
 /* Declarations required for unit testing. */
 #ifdef TESTING

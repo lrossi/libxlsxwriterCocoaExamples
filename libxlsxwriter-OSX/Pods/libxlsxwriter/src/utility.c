@@ -18,10 +18,10 @@
  * Convert Excel A-XFD style column name to zero based number.
  */
 void
-lxw_col_to_name(char col_name[], int col_num, uint8_t absolute)
+lxw_col_to_name(char col_name[], lxw_col_t col_num, uint8_t absolute)
 {
     uint8_t pos = 0;
-    uint8_t len;
+    size_t len;
     uint8_t i;
 
     /* Change from 0 index to 1 index. */
@@ -62,9 +62,9 @@ lxw_col_to_name(char col_name[], int col_num, uint8_t absolute)
  * Convert zero indexed row and column to an Excel style A1 cell reference.
  */
 void
-lxw_rowcol_to_cell(char *cell_name, int row, int col)
+lxw_rowcol_to_cell(char *cell_name, lxw_row_t row, lxw_col_t col)
 {
-    uint8_t pos;
+    size_t pos;
 
     /* Add the column to the cell. */
     lxw_col_to_name(cell_name, col, 0);
@@ -81,10 +81,10 @@ lxw_rowcol_to_cell(char *cell_name, int row, int col)
  * an absolute reference.
  */
 void
-lxw_rowcol_to_cell_abs(char *cell_name,
-                       int row, int col, uint8_t abs_row, uint8_t abs_col)
+lxw_rowcol_to_cell_abs(char *cell_name, lxw_row_t row, lxw_col_t col,
+                       uint8_t abs_row, uint8_t abs_col)
 {
-    uint8_t pos;
+    size_t pos;
 
     /* Add the column to the cell. */
     lxw_col_to_name(cell_name, col, abs_col);
@@ -104,10 +104,11 @@ lxw_rowcol_to_cell_abs(char *cell_name,
  * range reference.
  */
 void
-lxw_range(char *range,
-          int first_row, int first_col, int last_row, int last_col)
+lxw_rowcol_to_range(char *range,
+                    lxw_row_t first_row, lxw_col_t first_col,
+                    lxw_row_t last_row, lxw_col_t last_col)
 {
-    uint8_t pos;
+    size_t pos;
 
     /* Add the first cell to the range. */
     lxw_rowcol_to_cell(range, first_row, first_col);
@@ -127,14 +128,15 @@ lxw_range(char *range,
 }
 
 /*
- * Convert zero indexed row and column pair to an Excel style $A$1:$C$5
+ * Convert zero indexed row and column pairs to an Excel style $A$1:$C$5
  * range reference with absolute values.
  */
 void
-lxw_range_abs(char *range,
-              int first_row, int first_col, int last_row, int last_col)
+lxw_rowcol_to_range_abs(char *range,
+                        lxw_row_t first_row, lxw_col_t first_col,
+                        lxw_row_t last_row, lxw_col_t last_col)
 {
-    uint8_t pos;
+    size_t pos;
 
     /* Add the first cell to the range. */
     lxw_rowcol_to_cell_abs(range, first_row, first_col, 1, 1);
@@ -154,16 +156,54 @@ lxw_range_abs(char *range,
 }
 
 /*
+ * Convert sheetname and zero indexed row and column pairs to an Excel style
+ * Sheet1!$A$1:$C$5 formula reference with absolute values.
+ */
+void
+lxw_rowcol_to_formula_abs(char *formula, char *sheetname,
+                          lxw_row_t first_row, lxw_col_t first_col,
+                          lxw_row_t last_row, lxw_col_t last_col)
+{
+    size_t pos;
+    char *quoted_name = lxw_quote_sheetname(sheetname);
+
+    strcpy(formula, quoted_name);
+    free(quoted_name);
+
+    /* Get the end of the sheetname. */
+    pos = strlen(formula);
+
+    /* Add the range separator. */
+    formula[pos++] = '!';
+
+    /* Add the first cell to the range. */
+    lxw_rowcol_to_cell_abs(&formula[pos], first_row, first_col, 1, 1);
+
+    /* If the start and end cells are the same just return a single cell. */
+    if (first_row == last_row && first_col == last_col)
+        return;
+
+    /* Get the end of the cell. */
+    pos = strlen(formula);
+
+    /* Add the range separator. */
+    formula[pos++] = ':';
+
+    /* Add the first cell to the range. */
+    lxw_rowcol_to_cell_abs(&formula[pos], last_row, last_col, 1, 1);
+}
+
+/*
  * Convert an Excel style A1 cell reference to a zero indexed row number.
  */
-uint32_t
-lxw_get_row(const char *row_str)
+lxw_row_t
+lxw_name_to_row(const char *row_str)
 {
-    int row_num = 0;
+    lxw_row_t row_num = 0;
     const char *p = row_str;
 
-    /* Skip the column letters of the A1 cell. */
-    while (p && isalpha((unsigned char) *p))
+    /* Skip the column letters and absolute symbol of the A1 cell. */
+    while (p && !isdigit((unsigned char) *p))
         p++;
 
     /* Convert the row part of the A1 cell to a number. */
@@ -176,15 +216,16 @@ lxw_get_row(const char *row_str)
 /*
  * Convert an Excel style A1 cell reference to a zero indexed column number.
  */
-uint16_t
-lxw_get_col(const char *col_str)
+lxw_col_t
+lxw_name_to_col(const char *col_str)
 {
-    int col_num = 0;
+    lxw_col_t col_num = 0;
     const char *p = col_str;
 
-    /* Convert the leading column letters of the A1 cell. */
-    while (p && isupper((unsigned char) *p)) {
-        col_num = (col_num * 26) + (*p - 'A' + 1);
+    /* Convert leading column letters of A1 cell. Ignore absolute $ marker. */
+    while (p && (isupper((unsigned char) *p) || *p == '$')) {
+        if (*p != '$')
+            col_num = (col_num * 26) + (*p - 'A' + 1);
         p++;
     }
 
@@ -195,7 +236,7 @@ lxw_get_col(const char *col_str)
  * Convert the second row of an Excel range ref to a zero indexed number.
  */
 uint32_t
-lxw_get_row_2(const char *row_str)
+lxw_name_to_row_2(const char *row_str)
 {
     const char *p = row_str;
 
@@ -204,7 +245,7 @@ lxw_get_row_2(const char *row_str)
         p++;
 
     if (p)
-        return lxw_get_row(++p);
+        return lxw_name_to_row(++p);
     else
         return -1;
 }
@@ -213,7 +254,7 @@ lxw_get_row_2(const char *row_str)
  * Convert the second column of an Excel range ref to a zero indexed number.
  */
 uint16_t
-lxw_get_col_2(const char *col_str)
+lxw_name_to_col_2(const char *col_str)
 {
     const char *p = col_str;
 
@@ -222,7 +263,7 @@ lxw_get_col_2(const char *col_str)
         p++;
 
     if (p)
-        return lxw_get_col(++p);
+        return lxw_name_to_col(++p);
     else
         return -1;
 }
