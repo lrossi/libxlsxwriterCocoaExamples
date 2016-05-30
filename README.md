@@ -14,7 +14,7 @@ This repository contains four sub-folders:
 
 - `libxlsxwriter-iOS-ObjC`: contains an iOS project written in Objective-C that runs the examples implemented by the files in the `Common` folder. 
 
-- `libxlsxwriter-iOS-Swift`: contains an iOS project written in Swift that runs the examples implemented by the files in the `Common` folder. Furthermore, this project provides an additional implementation of the [*Anatomy*](http://libxlsxwriter.github.io/anatomy_8c-example.html) example rewritten in Swift (i.e. by calling functions of libxlsxwriter directly from Swift instead of using an Objective-C wrapper).
+- `libxlsxwriter-iOS-Swift`: contains an iOS project written in Swift that runs the examples implemented by the files in the `Common` folder. Furthermore, this project provides an additional implementation of the [*Anatomy*](http://libxlsxwriter.github.io/anatomy_8c-example.html) example rewritten in Swift (i.e. by calling functions of libxlsxwriter directly from Swift instead of using an Objective-C wrapper). The Swift project imports the `libxlsxwriter` pod with the `use_frameworks!` directive.
 
 - `libxlsxwriter-OSX`: contains a Mac example written in Objective-C that runs the examples implemented by the files in the `Common` folder.
 
